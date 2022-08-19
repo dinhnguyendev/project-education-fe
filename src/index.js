@@ -6,6 +6,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { persistor, store } from './redux/store';
 import './i18n';
+import 'antd/dist/antd.css';
 import RootRouter from './routers/RootRouter';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -5,7 +5,18 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+html {
+  font-size: 17px;
+}
+.ant-drawer-header-title {
+  justify-content: end !important;
+}
+.span.ant-select-selection-item {
+  display: flex;
+  align-items: center;
+}
+@media only screen and (max-width: 400px) {
+  .ant-drawer-content-wrapper {
+    width: 90% !important;
+  }
 }
