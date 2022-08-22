@@ -4,6 +4,7 @@ import '../login/login.css';
 import { LockOutlined, LoginOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { type } from '@testing-library/user-event/dist/type';
+import logo from '../../assets/image/logologin.svg';
 const onFinish = (values) => {
   console.log('Success:', values);
 };
@@ -16,6 +17,9 @@ const Register = () => {
   return (
     <div className="login">
       <div className="login__form">
+        <div className="login__logo">
+          <img src={logo} className="login__logo__image" />
+        </div>
         <h2 className="login__heading">{t('register.heading')}</h2>
         <div className="login__form__item">
           <Form
