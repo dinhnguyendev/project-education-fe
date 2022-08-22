@@ -1,6 +1,7 @@
 import { Menu } from 'antd';
 export const ROUTER = {
-  HOME: '/',
+  AUTHORIZATION: '/',
+  HOME: '',
   LOGIN: 'login',
   REGISTER: 'register',
   AUTHENTICATION: '/auth',
@@ -36,3 +37,6 @@ export const MENUACCOUNT = (
     ]}
   />
 );
+export const CONFIG_GFAMES={
+  QUANTITY_SQUARES:20
+}

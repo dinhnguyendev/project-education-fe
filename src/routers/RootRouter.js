@@ -7,12 +7,15 @@ import socket from './../socket.io/socket.io';
 import Login from './../pages/login/Login';
 import Register from './../pages/register/Register';
 import Authentication from '../layout/auth/Authentication';
+import Authorization from './Authorization';
 const RootRouter = () => {
   return (
     <Suspense fallback={<LoadingPage />}>
       <BrowserRouter>
         <Routes>
+        <Route path={ROUTER.AUTHORIZATION} element={<Authorization />}>
           <Route path={ROUTER.HOME} element={<Home />} />
+        </Route>
           <Route path={ROUTER.AUTHENTICATION} element={<Authentication />}>
             <Route path={ROUTER.LOGIN} element={<Login />} />
             <Route path={ROUTER.REGISTER} element={<Register />} />

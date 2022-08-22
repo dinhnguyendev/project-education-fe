@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { CONFIG_GFAMES } from '../../constants/constants';
 import Matrix from './components/matrix/Matrix';
 import './gameCaro.css';
 const GameCaro = () => {
   const handlecurrent = () =>
-    Array(20)
+    Array(CONFIG_GFAMES.QUANTITY_SQUARES)
       .fill(null)
       .map(() => {
-        return Array(20).fill(null);
+        return Array(CONFIG_GFAMES.QUANTITY_SQUARES).fill(null);
       });
   const [current, setCurrent] = useState(handlecurrent());
 

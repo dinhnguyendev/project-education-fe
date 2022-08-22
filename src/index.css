@@ -1,3 +1,7 @@
+*{
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: Averta Black, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji,
@@ -22,4 +26,10 @@ html {
 }
 .login-form-submit {
   width: 50% !important;
+}
+.ant-col.ant-col-6.gutter-row.gird-item{
+  padding: 8px !important;
+}
+.ant-card.ant-card-bordered{
+  border:none !important;
 }
