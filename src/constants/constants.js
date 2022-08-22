@@ -3,6 +3,7 @@ export const ROUTER = {
   HOME: '/',
   LOGIN: 'login',
   REGISTER: 'register',
+  AUTHENTICATION: '/auth',
   NOTFOUND: '*',
 };
 export const MENUACCOUNT = (

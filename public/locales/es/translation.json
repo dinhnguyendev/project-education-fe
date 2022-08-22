@@ -1,0 +1,12 @@
+{
+  "login": {
+    "heading": "acceso",
+    "username": "nombre de usuario",
+    "password": "clave",
+    "email": "Email",
+    "confirmpassword": "Confirmar Contraseña"
+  },
+  "register": {
+    "heading": "Registrarse"
+  }
+}

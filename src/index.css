@@ -20,3 +20,6 @@ html {
     width: 90% !important;
   }
 }
+.login-form-submit {
+  width: 50% !important;
+}

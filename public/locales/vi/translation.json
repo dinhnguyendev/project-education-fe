@@ -1,0 +1,12 @@
+{
+  "login": {
+    "heading": "Đăng Nhập",
+    "username": "Tên Đăng nhập",
+    "password": "Mật Khẩu",
+    "email": "Email",
+    "confirmpassword": "Xác nhận mật khẩu"
+  },
+  "register": {
+    "heading": "Đăng Ký"
+  }
+}

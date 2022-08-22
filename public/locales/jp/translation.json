@@ -1,0 +1,12 @@
+{
+  "login": {
+    "heading": "ログイン",
+    "username": "ユーザー名",
+    "password": "パスワード",
+    "email": "郵便物",
+    "confirmpassword": "パスワードを認証する"
+  },
+  "register": {
+    "heading": "登録"
+  }
+}

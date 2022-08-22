@@ -1,0 +1,12 @@
+{
+  "login": {
+    "heading": "Login",
+    "username": "Username",
+    "password": "Password",
+    "email": "Email",
+    "confirmpassword": "Conform Password"
+  },
+  "register": {
+    "heading": "Register"
+  }
+}
