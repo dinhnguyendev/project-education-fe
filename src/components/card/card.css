@@ -1,30 +1,97 @@
-.cards{
-    position: relative;
-    border-radius: 50px !important;
-    /* border :1px solid rgba(1, 1, 1, 0.8); */
-    box-shadow: 3px 6px 10px rgb(1 1 1 / 53%);
+.cards {
+  position: relative;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid rgba(1, 1, 1, 0.8);
+  box-shadow: 0px 4px 8px rgb(1 1 1 / 23%);
+  transform: all 0.25s;
+  transform-origin: center;
 }
-.cards__content{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.cards:hover .cards__hover {
+  display: block;
 }
-.ant-card-body{
-    display: none !important;
+.cards:hover {
+  transform: scale(1.03);
+  transform-origin: center;
+  transition: all 0.2s;
+  box-shadow: 0px 4px 8px rgb(1 1 1 / 63%);
 }
-.cards__content__heading{
-    font-size: 20px;
-    font-weight: 600;
-    color: white;
-    text-transform: uppercase;
+@keyframes hienlen {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
-.cards__content__title{
-    font-size: 15px;
-    font-weight: 500;
-    color: white;
-    text-transform: capitalize;
-    text-align: center;
+
+.cards__hover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  inset: 0;
+  background-color: rgba(1, 1, 1, 0.4);
+  transition: all 0.2s;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  display: none;
+  text-transform: capitalize;
+  animation: hienlen ease-in 0.1s;
+  transform-origin: center;
+}
+
+.cards__hover__heading {
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.cards__hover__icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.cards__hover__name {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.cards__item {
+  width: 100%;
+  height: 100%;
+}
+.cards__image {
+  width: 100%;
+  height: 200px;
+}
+.cards__content {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ant-card-body {
+  display: none !important;
+}
+.cards__content__heading {
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+  text-transform: uppercase;
+}
+.cards__content__title {
+  font-size: 15px;
+  font-weight: 500;
+  color: white;
+  text-transform: capitalize;
+  text-align: center;
 }

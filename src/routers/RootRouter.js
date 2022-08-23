@@ -13,9 +13,8 @@ const RootRouter = () => {
     <Suspense fallback={<LoadingPage />}>
       <BrowserRouter>
         <Routes>
-        <Route path={ROUTER.AUTHORIZATION} element={<Authorization />}>
           <Route path={ROUTER.HOME} element={<Home />} />
-        </Route>
+          <Route path={ROUTER.AUTHORIZATION} element={<Authorization />}></Route>
           <Route path={ROUTER.AUTHENTICATION} element={<Authentication />}>
             <Route path={ROUTER.LOGIN} element={<Login />} />
             <Route path={ROUTER.REGISTER} element={<Register />} />
