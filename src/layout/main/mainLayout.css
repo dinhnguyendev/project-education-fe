@@ -1,0 +1,9 @@
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 0px;
+}
+.body {
+  background-color: #cbc7ba;
+  min-height: 100vh;
+}

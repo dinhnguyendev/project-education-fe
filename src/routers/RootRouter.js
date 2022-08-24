@@ -8,12 +8,20 @@ import Login from './../pages/login/Login';
 import Register from './../pages/register/Register';
 import Authentication from '../layout/auth/Authentication';
 import Authorization from './Authorization';
+import Games from './../pages/games/Games';
+import GameCaro from '../pages/gameCaro/GameCaro';
+import MainLayout from '../layout/main/MainLayout';
 const RootRouter = () => {
   return (
     <Suspense fallback={<LoadingPage />}>
       <BrowserRouter>
         <Routes>
-          <Route path={ROUTER.HOME} element={<Home />} />
+          <Route element={<MainLayout />}>
+            <Route path={ROUTER.HOME} element={<Home />} />
+            <Route path={ROUTER.GAME} element={<Games />}>
+              <Route path={ROUTER.GAMECARO} element={<GameCaro />} />
+            </Route>
+          </Route>
           <Route path={ROUTER.AUTHORIZATION} element={<Authorization />}></Route>
           <Route path={ROUTER.AUTHENTICATION} element={<Authentication />}>
             <Route path={ROUTER.LOGIN} element={<Login />} />

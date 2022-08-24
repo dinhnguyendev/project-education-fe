@@ -5,6 +5,8 @@ export const ROUTER = {
   LOGIN: 'login',
   REGISTER: 'register',
   AUTHENTICATION: '/auth',
+  GAME: '/games',
+  GAMECARO: 'caro',
   NOTFOUND: '*',
 };
 export const MENUACCOUNT = (
@@ -37,6 +39,6 @@ export const MENUACCOUNT = (
     ]}
   />
 );
-export const CONFIG_GFAMES={
-  QUANTITY_SQUARES:20
-}
+export const CONFIG_GFAMES = {
+  QUANTITY_SQUARES: 20,
+};

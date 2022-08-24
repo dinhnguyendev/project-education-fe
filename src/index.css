@@ -1,5 +1,6 @@
-*{
+* {
   box-sizing: border-box;
+ 
 }
 
 body {
@@ -27,9 +28,9 @@ html {
 .login-form-submit {
   width: 50% !important;
 }
-.ant-col.ant-col-6.gutter-row.gird-item{
+.ant-col.ant-col-6.gutter-row.gird-item {
   padding: 8px !important;
 }
-.ant-card.ant-card-bordered{
-  border:none !important;
+.ant-card.ant-card-bordered {
+  border: none !important;
 }
