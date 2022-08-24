@@ -61,6 +61,16 @@
 .header__wallet {
   margin-right: 25px;
 }
+.button__wallet {
+  display: flex;
+  align-items: center;
+  padding: 6px 15px;
+  border-radius: 5px;
+  background-color: white;
+  border: 1px solid #999;
+  color: black;
+  cursor: pointer;
+}
 .header__flex {
   display: flex;
   justify-content: center;

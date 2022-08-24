@@ -1,14 +1,14 @@
+@import url("http://fonts.cdnfonts.com/css/drummon");
 * {
   box-sizing: border-box;
- 
+  font-family: "Drummon", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  /* font-family: "Drummon 3D", sans-serif; */
 }
 
 body {
   margin: 0;
-  font-family: Averta Black, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji,
-    Segoe UI Emoji, Segoe UI Symbol, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 html {
   font-size: 17px;

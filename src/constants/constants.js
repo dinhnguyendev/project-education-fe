@@ -42,3 +42,6 @@ export const MENUACCOUNT = (
 export const CONFIG_GFAMES = {
   QUANTITY_SQUARES: 20,
 };
+export const LINKTO={
+  GAMECARO: '/games/caro'
+}

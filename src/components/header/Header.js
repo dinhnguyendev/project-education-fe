@@ -1,15 +1,15 @@
-import { useState } from 'react';
-import './header.css';
-import IconGame from '../../assets/image/game.svg';
-import LogoGame from '../../assets/image/logo.svg';
-import { Avatar, Button, Space, Dropdown, Image, Drawer, Select, Col, Row } from 'antd';
-import IconWallet from '../iconWallet/IconWallet';
-import { CloseCircleOutlined, MenuOutlined, WalletOutlined } from '@ant-design/icons';
-import { MENUACCOUNT } from '../../constants/constants';
+import { useState } from "react";
+import "./header.css";
+import IconGame from "../../assets/image/game.svg";
+import LogoGame from "../../assets/image/logo.svg";
+import { Avatar, Button, Space, Dropdown, Image, Drawer, Select, Col, Row } from "antd";
+import iconwallet from "../../assets/image/IconWallet.svg";
+import { CloseCircleOutlined, MenuOutlined } from "@ant-design/icons";
+import { MENUACCOUNT } from "../../constants/constants";
 const { Option } = Select;
 const Header = () => {
   const [visible, setVisible] = useState(false);
-  const [placement, setPlacement] = useState('left');
+  const [placement, setPlacement] = useState("left");
   const showDrawer = () => {
     setVisible(true);
   };
@@ -41,10 +41,10 @@ const Header = () => {
                   onClose={onClose}
                   visible={visible}
                   key={placement}
-                  closeIcon={<CloseCircleOutlined style={{ justifyContent: 'end' }} />}
+                  closeIcon={<CloseCircleOutlined style={{ justifyContent: "end" }} />}
                 >
                   <div className="header__flex">
-                    <Select defaultValue="1" style={{ width: '50%' }} onChange={handleChange}>
+                    <Select defaultValue="1" style={{ width: "50%" }} onChange={handleChange}>
                       <Option value="1">
                         <img
                           src="https://peergame.com/assets/images/english-9560c9c1db78921b92b64e8c150f35e6.png"
@@ -112,9 +112,10 @@ const Header = () => {
         <Col xl={{ span: 8 }} md={{ span: 12 }} xs={{ span: 0 }} lg={{ span: 8 }}>
           <div className="header__right">
             <div className="header__wallet">
-              <Button type="primary" icon={<WalletOutlined />}>
-                Connect Wallet
-              </Button>
+              <button className="button__wallet">
+                <img src={iconwallet} alt="" />
+                <span>Connect Wallet</span>
+              </button>
             </div>
 
             <div className="header__account">
@@ -124,7 +125,7 @@ const Header = () => {
                     src="https://joeschmoe.io/api/v1/random"
                     style={{
                       width: 32,
-                      backgroundColor: '#fff',
+                      backgroundColor: "#fff",
                     }}
                   />
                 }

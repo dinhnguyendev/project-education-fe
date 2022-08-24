@@ -1,11 +1,20 @@
 .container {
 }
 .container__flex {
+  display: flex;
+ 
 }
-.container__left {
+.container__flex__item {
+  padding: 10px;
 }
+/* .ant-col.container__left {
+  padding: 0px 15px !important;
+}
+.ant-col.container__right.ant-col-lg-0.ant-col-xl-10 {
+  padding-left: 5px !important;
+} */
 .container__left__top {
-  background: url('https://peergame.com/assets/images/races-banner-background-87a5939cd56b2b6d49880761173f60d8.png')
+  background: url("https://peergame.com/assets/images/races-banner-background-87a5939cd56b2b6d49880761173f60d8.png")
     50% / cover;
   padding: 40px;
   border-radius: 50px;

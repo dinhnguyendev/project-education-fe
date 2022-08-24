@@ -1,6 +1,6 @@
-import React from 'react';
-import { Col, Row, Avatar } from 'antd';
-import './containerHome.css';
+import React from "react";
+import { Col, Row, Avatar } from "antd";
+import "./containerHome.css";
 const ContainerHome = () => {
   return (
     <div className="container">
