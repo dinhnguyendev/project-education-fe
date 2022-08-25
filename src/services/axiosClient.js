@@ -1,15 +1,15 @@
-import axios from 'axios';
-import Cookies from 'universal-cookie';
+import axios from "axios";
+import Cookies from "universal-cookie";
 const cookies = new Cookies();
 export const configFile = {
-  'content-type': 'multipart/form-data',
+  "content-type": "multipart/form-data",
 };
 export const config = {
-  'content-type': 'application/json',
+  "content-type": "application/json",
 };
 
 const axiosClient = axios.create({
-  baseURL: 'http://10.0.106.37:3001/api/v1/',
+  baseURL: "http://localhost:5000/",
 });
 axiosClient.interceptors.request.use(
   async function (config) {

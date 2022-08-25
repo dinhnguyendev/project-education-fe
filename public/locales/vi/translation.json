@@ -4,6 +4,7 @@
     "username": "Tên Đăng nhập",
     "password": "Mật Khẩu",
     "email": "Email",
+    "phone": "Điện Thoại",
     "confirmpassword": "Xác nhận mật khẩu"
   },
   "register": {

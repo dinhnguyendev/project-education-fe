@@ -1,32 +1,30 @@
-import React from 'react';
+import React from "react";
 import "./gird.css";
-import { Col, Row } from 'antd';
-import Cards from '../card/Cards';
-import { Link } from 'react-router-dom';
-import { LINKTO } from '../../constants/constants';
+import { Col, Row } from "antd";
+import Cards from "../card/Cards";
+import { Link } from "react-router-dom";
+import { LINKTO } from "../../constants/constants";
 const Gird = () => {
   return (
     <div className="gird">
-    <Row gutter={16}>
+      <Row gutter={16}>
         <Col className="gutter-row gird-item" span={6}>
-            <Link to={LINKTO.GAMECARO}>
-                <Cards/>
-            </Link>
+          <Link to={LINKTO.STARTCARO}>
+            <Cards />
+          </Link>
         </Col>
         <Col className="gutter-row gird-item" span={6}>
-            <Cards/>
+          <Cards />
         </Col>
         <Col className="gutter-row gird-item" span={6}>
-            <Cards/>
+          <Cards />
         </Col>
         <Col className="gutter-row gird-item" span={6}>
-            <Cards/>
+          <Cards />
         </Col>
-       
+      </Row>
+    </div>
+  );
+};
 
-    </Row>
-  </div>
-  )
-}
-
-export default Gird
+export default Gird;

@@ -45,5 +45,9 @@ export const CONFIG_GFAMES = {
   QUANTITY_SQUARES: 20,
 };
 export const LINKTO = {
-  GAMECARO: "/games/caro",
+  STARTCARO: "/games/caro/start",
+};
+export const API = {
+  REGISTER: "/auth/register",
+  LOGIN: "/auth/login",
 };

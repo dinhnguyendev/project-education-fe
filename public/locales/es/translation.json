@@ -4,6 +4,7 @@
     "username": "nombre de usuario",
     "password": "clave",
     "email": "Email",
+    "phone": "teléfono",
     "confirmpassword": "Confirmar Contraseña"
   },
   "register": {

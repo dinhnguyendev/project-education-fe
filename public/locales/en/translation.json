@@ -3,6 +3,7 @@
     "heading": "Login",
     "username": "Username",
     "password": "Password",
+    "phone": "Phone",
     "email": "Email",
     "confirmpassword": "Conform Password"
   },
