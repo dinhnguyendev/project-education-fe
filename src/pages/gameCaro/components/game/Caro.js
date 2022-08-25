@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { CONFIG_GFAMES } from '../../constants/constants';
-import Matrix from './components/matrix/Matrix';
-import './gameCaro.css';
+import React, { useEffect, useState } from "react";
+import { CONFIG_GFAMES } from "../../../../constants/constants";
+import Matrix from "../matrix/Matrix";
+import "./Caro.css";
 const GameCaro = () => {
   const handlecurrent = () =>
     Array(CONFIG_GFAMES.QUANTITY_SQUARES)
@@ -13,13 +13,13 @@ const GameCaro = () => {
 
   const userCheck = (row, col) => {
     let newSquares = current;
-    newSquares[row][col] = 'x';
+    newSquares[row][col] = "x";
     setCurrent([...newSquares]);
   };
   useEffect(() => {
-    console.log('hello');
+    console.log("hello");
   }, [current]);
-  console.log('current');
+  console.log("current");
   console.log(current);
   console.log(current);
   return (
@@ -28,7 +28,7 @@ const GameCaro = () => {
       <div className="game__gird">
         <Matrix
           handleClick={(i, j) => {
-            console.log('i' + i + '; ' + 'j' + j);
+            console.log("i" + i + "; " + "j" + j);
             return userCheck(i, j);
           }}
         />
