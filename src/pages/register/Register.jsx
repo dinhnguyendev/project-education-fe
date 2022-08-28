@@ -9,22 +9,23 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
-import { type } from "@testing-library/user-event/dist/type";
 import logo from "../../assets/image/logologin.svg";
-import { handleRegister } from "../../services/authService";
+import { handleRegister } from "../../actions/auth/authActions";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+import { LINKTO } from "../../constants/constants";
 const Register = () => {
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const onFinish = async (values) => {
     console.log(values);
-    const respon = await handleRegister(values, setLoading);
-    console.log("respon");
-    console.log(respon);
+    await handleRegister(values, setLoading, t, navigate);
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-  const { t } = useTranslation();
   return (
     <div className="login">
       <div className="login__form">
@@ -118,6 +119,14 @@ const Register = () => {
                   required: true,
                   message: "Please input your Password!",
                 },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    if (!value || getFieldValue("password") === value) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject("The two passwords that you entered does not match.");
+                  },
+                }),
               ]}
               hasFeedback
             >
@@ -129,7 +138,10 @@ const Register = () => {
                 allowClear
               />
             </Form.Item>
-
+            <div className="register__title">
+              <span className="register__question"> {t("register.title")} ?</span>
+              <Link to={LINKTO.LOGIN}>{t("login.heading")}</Link>
+            </div>
             <Form.Item className="form__item">
               <Button
                 type="primary"

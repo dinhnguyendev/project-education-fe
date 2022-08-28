@@ -8,6 +8,22 @@
     "confirmpassword": "Conform Password"
   },
   "register": {
-    "heading": "Register"
+    "heading": "Register",
+    "title": "Do you already have an account"
+  },
+  "error": {
+    "BatchRequest": "BatchRequest",
+    "ErrorServerSaveDatabase": "Server not save on database",
+    "PhoneNumberExit": "Phone number does not exist ",
+    "WrongPassWorng": "Incorrect password",
+    "TokenIsNotValue": "You are not logged in",
+    "TokenIsNotError": "Please log in again",
+    "PhoneIsExist": "Registered phone number",
+    "EmailNotFotmat": "Email is not in the correct format",
+    "LoginSuccessfully": "Login in successfully",
+    "RegisterSuccessfully": "Register successfully"
+  },
+  "success": {
+    "LogoutSuccessfully": "Logout Successfully"
   }
 }

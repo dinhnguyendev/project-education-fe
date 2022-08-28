@@ -8,6 +8,22 @@
     "confirmpassword": "Xác nhận mật khẩu"
   },
   "register": {
-    "heading": "Đăng Ký"
+    "heading": "Đăng Ký",
+    "title": "Bạn đã có tài khoản "
+  },
+  "error": {
+    "BatchRequest": "BatchRequest",
+    "ErrorServerSaveDatabase": "Server not save on database",
+    "PhoneNumberExit": "số điện thoại không tồn tại",
+    "WrongPassWorng": "mật khẩu không đúng",
+    "TokenIsNotValue": "Bạn chưa đăng nhập",
+    "TokenIsNotError": "vui lòng đăng nhập lại",
+    "PhoneIsExist": "Số điện thoại đã được đăng ký",
+    "EmailNotFotmat": "email không đúng dịnh dạng",
+    "LoginSuccessfully": "Đăng nhập thành công",
+    "RegisterSuccessfully": "Đăng ký thành công"
+  },
+  "success": {
+    "LogoutSuccessfully": "Đăng xuất thành công"
   }
 }

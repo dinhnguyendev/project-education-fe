@@ -3,10 +3,17 @@ import React from "react";
 import "./startCaro.css";
 import iconStart from "../../../../assets/image/start-caro.png";
 import iconName from "../../../../assets/image/name-game.png";
+import socket from "../../../../socket.io/socket.io";
+import { useSelector } from "react-redux";
 const StartCaro = () => {
-  const handleSearch=()=>{
-    
-  }
+  const user = useSelector((state) => state.user.login?.data);
+  const handleSearch = () => {
+    if (user) {
+      console.log("bat dau tom doi thu");
+      console.log(user);
+      socket.emit("join-room", user);
+    }
+  };
   return (
     <>
       <div className="game">

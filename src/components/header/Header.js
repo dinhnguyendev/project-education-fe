@@ -5,9 +5,22 @@ import LogoGame from "../../assets/image/logo.svg";
 import { Avatar, Button, Space, Dropdown, Image, Drawer, Select, Col, Row } from "antd";
 import iconwallet from "../../assets/image/IconWallet.svg";
 import { CloseCircleOutlined, MenuOutlined } from "@ant-design/icons";
-import { MENUACCOUNT } from "../../constants/constants";
+import { KEY, LINKTO, MENUACCOUNT } from "../../constants/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import _ from "lodash";
+import { useTranslation } from "react-i18next";
+import socket from "../../socket.io/socket.io";
+import MenuAccount from "../menu/MenuAccount";
+import { hadleLogout } from "../../actions/auth/authActions";
+import { useNavigate } from "react-router-dom";
+
 const { Option } = Select;
 const Header = () => {
+  const { t } = useTranslation();
+  let navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.login?.data);
   const [visible, setVisible] = useState(false);
   const [placement, setPlacement] = useState("left");
   const showDrawer = () => {
@@ -18,11 +31,23 @@ const Header = () => {
     setVisible(false);
   };
 
+  const handleConnectWallet = () => {
+    socket.emit("client", "helloword hihi !!!");
+  };
+  socket.on("server", (data) => {
+    console.log(data);
+  });
   const onChange = (e) => {
     setPlacement(e.target.value);
   };
   const handleChange = (value) => {
     console.log(`selected ${value}`);
+  };
+
+  const handleAccount = async (e) => {
+    if (e && e.key === KEY.LOOUT) {
+      await hadleLogout(t, navigate, dispatch);
+    }
   };
   return (
     <Row>
@@ -112,28 +137,42 @@ const Header = () => {
         <Col xl={{ span: 8 }} md={{ span: 12 }} xs={{ span: 0 }} lg={{ span: 8 }}>
           <div className="header__right">
             <div className="header__wallet">
-              <button className="button__wallet">
+              <button onClick={handleConnectWallet} className="button__wallet">
                 <img src={iconwallet} alt="" />
                 <span>Connect Wallet</span>
               </button>
             </div>
-
-            <div className="header__account">
-              <Avatar
-                src={
-                  <Image
-                    src="https://joeschmoe.io/api/v1/random"
-                    style={{
-                      width: 32,
-                      backgroundColor: "#fff",
-                    }}
-                  />
-                }
-              />
-              <Dropdown overlay={MENUACCOUNT} placement="bottomRight" arrow>
-                <div className="header__account__name">dinh nguyen</div>
-              </Dropdown>
-            </div>
+            {_.isEmpty(user) ? (
+              <div className="header__account">
+                <Link to={LINKTO.REGISTER}>
+                  <div className="heading__link__register">{t("register.heading")}</div>
+                </Link>
+                <Link to={LINKTO.LOGIN}>
+                  <div className="heading__link__login">{t("login.heading")}</div>
+                </Link>
+              </div>
+            ) : (
+              <div className="header__account">
+                <Avatar
+                  src={
+                    <Image
+                      src={user.avatar}
+                      style={{
+                        width: 32,
+                        backgroundColor: "#fff",
+                      }}
+                    />
+                  }
+                />
+                <Dropdown
+                  overlay={<MenuAccount handleAccount={handleAccount} />}
+                  placement="bottomRight"
+                  arrow
+                >
+                  <div className="header__account__name">{user.username}</div>
+                </Dropdown>
+              </div>
+            )}
           </div>
         </Col>
       </div>

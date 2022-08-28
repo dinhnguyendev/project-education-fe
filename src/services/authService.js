@@ -1,24 +1,30 @@
-import { API } from "../constants/constants";
+import { message } from "antd";
+import { API, LINKTO } from "../constants/constants";
 import axiosClient from "./axiosClient";
 
-export const handleRegister = async (values, setLoading) => {
-  console.log(values);
+export const register = async (value, t) => {
   try {
-    setLoading(true);
-    const { phone, email, password, username } = values;
-    const user = {
-      phone: phone.trim(),
-      email: email.trim(),
-      password: password.trim(),
-      username: username.trim(),
-    };
-    console.log(phone, email, password, username);
-    const data = await axiosClient.post(API.REGISTER, user);
-    console.log(data);
-    setLoading(false);
+    const data = await axiosClient.post(API.REGISTER, value);
     return data;
-  } catch (err) {
-    console.log(err.message);
-    setLoading(false);
+  } catch (error) {
+    console.log(error);
+    message.error(t(`error.${error?.response?.data?.message}`));
+  }
+};
+export const login = async (value, t) => {
+  try {
+    const data = await axiosClient.post(API.LOGIN, value);
+    return data;
+  } catch (error) {
+    console.log(error);
+    message.error(t(`error.${error?.response?.data?.message}`));
+  }
+};
+export const logout = async (navigate) => {
+  try {
+    const data = await axiosClient.get(API.LOGOUT);
+    return data;
+  } catch (error) {
+    navigate(LINKTO.LOGIN);
   }
 };

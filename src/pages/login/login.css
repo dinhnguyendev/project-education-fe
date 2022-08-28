@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('https://cutewallpaper.org/21/playstation-4-controller-wallpaper/Best-63-PS4-Wallpaper-on-HipWallpaper-PS4-Wallpaper-.jpg');
+  background-image: url("https://cutewallpaper.org/21/playstation-4-controller-wallpaper/Best-63-PS4-Wallpaper-on-HipWallpaper-PS4-Wallpaper-.jpg");
   background-repeat: no-repeat;
   background-size: 100%;
   width: 100%;
@@ -54,4 +54,12 @@ button.ant-btn.ant-btn-primary.login-form-button {
   height: 50px;
   padding: 10px 25px;
   border-radius: 3px;
+}
+.register__title {
+  color: white;
+  font-size: 14px !important;
+  padding-bottom: 8px;
+}
+.register__question {
+  margin-right: 8px;
 }

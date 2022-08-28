@@ -10,11 +10,12 @@ export const config = {
 
 const axiosClient = axios.create({
   baseURL: "http://localhost:5000/",
+  withCredentials: true,
 });
 axiosClient.interceptors.request.use(
   async function (config) {
-    // const token = (await cookies.get('accessToken')) ? cookies.get('accessToken') : null;
-    // config.headers.Authorization = token;
+    const token = (await cookies.get("accessToken")) ? cookies.get("accessToken") : null;
+    config.headers.authorization = `Bearer ${token}`;
     return config;
   },
   function (error) {

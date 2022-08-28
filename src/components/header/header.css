@@ -93,3 +93,9 @@
   height: 20px;
   margin-right: 5px;
 }
+.heading__link__register {
+  margin-right: 5px;
+}
+.heading__link__login {
+  margin-left: 5px;
+}

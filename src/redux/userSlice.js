@@ -1,20 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState: {
     login: {
       isFetching: false,
-      data: {},
+      data: null,
       error: false,
     },
   },
   reducers: {
-    login: (state, action) => {
+    loginActionRedux: (state, action) => {
       state.login.data = action.payload;
+    },
+    logoutActionRedux: (state) => {
+      state.login.data = null;
     },
   },
 });
-export const { login } = userSlice.actions;
+export const { loginActionRedux, logoutActionRedux } = userSlice.actions;
 export default userSlice.reducer;
 
 //redux thunk : createAsyncThunk

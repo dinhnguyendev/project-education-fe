@@ -8,6 +8,22 @@
     "confirmpassword": "パスワードを認証する"
   },
   "register": {
-    "heading": "登録"
+    "heading": "登録",
+    "title": "すでにアカウントをお持ちですか"
+  },
+  "error": {
+    "BatchRequest": "BatchRequest",
+    "ErrorServerSaveDatabase": "Server not save on database",
+    "PhoneNumberExit": "電話番号が存在しません",
+    "WrongPassWorng": "パスワードが正しくありません",
+    "TokenIsNotValue": "ログインしていません",
+    "TokenIsNotError": "もう一度ログインしてください",
+    "PhoneIsExist": "登録電話番号",
+    "EmailNotFotmat": "メールの無効化",
+    "LoginSuccessfully": "ログイン成功",
+    "RegisterSuccessfully": "登録完了"
+  },
+  "success": {
+    "LogoutSuccessfully": "ログアウト成功"
   }
 }

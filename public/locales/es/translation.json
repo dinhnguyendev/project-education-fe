@@ -8,6 +8,22 @@
     "confirmpassword": "Confirmar Contraseña"
   },
   "register": {
-    "heading": "Registrarse"
+    "heading": "Registrarse",
+    "title": "Ya tienes una cuenta"
+  },
+  "error": {
+    "BatchRequest": "BatchRequest",
+    "ErrorServerSaveDatabase": "Server not save on database",
+    "PhoneNumberExit": "el numero de telefono no existe",
+    "WrongPassWorng": "Contraseña incorrecta",
+    "TokenIsNotValue": "Usted no se ha identificado",
+    "TokenIsNotError": "Inicie sesión de nuevo",
+    "PhoneIsExist": "Número de teléfono registrado",
+    "EmailNotFotmat": "El correo electrónico no está en el formato correcto",
+    "LoginSuccessfully": "Iniciar sesión con éxito",
+    "RegisterSuccessfully": "Regístrese con éxito"
+  },
+  "success": {
+    "LogoutSuccessfully": "Cerrar sesión con éxito"
   }
 }
