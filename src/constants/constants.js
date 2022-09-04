@@ -12,13 +12,14 @@ export const ROUTER = {
 };
 
 export const CONFIG_GFAMES = {
-  QUANTITY_SQUARES: 20,
+  QUANTITY_SQUARES: 50,
 };
 export const LINKTO = {
   STARTCARO: "/games/caro/start",
   LOGIN: "/auth/login",
   REGISTER: "/auth/register",
   HOME: "/",
+  PLAYCARO: "/games/caro/play",
 };
 export const API = {
   REGISTER: "/auth/register",

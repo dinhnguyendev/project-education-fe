@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CONFIG_GFAMES } from "../../../../constants/constants";
 import Matrix from "../matrix/Matrix";
+import User from "../user/User";
 import "./Caro.css";
 const GameCaro = () => {
   const handlecurrent = () =>
@@ -25,6 +26,7 @@ const GameCaro = () => {
   return (
     <div className="game">
       <div className="game__header">game caro</div>
+      <User />
       <div className="game__gird">
         <Matrix
           handleClick={(i, j) => {

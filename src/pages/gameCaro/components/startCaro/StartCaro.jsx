@@ -5,8 +5,12 @@ import iconStart from "../../../../assets/image/start-caro.png";
 import iconName from "../../../../assets/image/name-game.png";
 import socket from "../../../../socket.io/socket.io";
 import { useSelector } from "react-redux";
+import { useLayoutEffect } from "react";
+import { useNavigate } from "react-router";
+import { LINKTO } from "../../../../constants/constants";
 const StartCaro = () => {
   const user = useSelector((state) => state.user.login?.data);
+  const navigate = useNavigate();
   const handleSearch = () => {
     if (user) {
       console.log("bat dau tom doi thu");
@@ -14,6 +18,14 @@ const StartCaro = () => {
       socket.emit("join-room", user);
     }
   };
+  useLayoutEffect(() => {
+    socket.on("server--rooms--sucessfylly", (data) => {
+      if (data) {
+        navigate(LINKTO.PLAYCARO, { state: { data } });
+      }
+    });
+  }, []);
+
   return (
     <>
       <div className="game">
