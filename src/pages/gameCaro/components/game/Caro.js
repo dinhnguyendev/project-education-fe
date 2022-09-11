@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { CONFIG_GFAMES } from "../../../../constants/constants";
 import Matrix from "../matrix/Matrix";
+import Squares from "../square/Squares";
 import User from "../user/User";
 import "./Caro.css";
 const GameCaro = () => {
@@ -24,21 +25,16 @@ const GameCaro = () => {
   useEffect(() => {
     console.log("hello");
   }, [current]);
-  console.log("current");
-  console.log(current);
-  console.log(current);
   return (
     <div className="game">
       <div className="game__header">game caro</div>
       <User player={location.state.data} />
-      <div className="game__gird">
-        <Matrix
-          handleClick={(i, j) => {
-            console.log("i" + i + "; " + "j" + j);
-            return userCheck(i, j);
-          }}
-        />
-      </div>
+      <Squares
+        dataLocation={location.state.data}
+        width={20}
+        height={20}
+        // location={location.state.data}
+      />
     </div>
   );
 };

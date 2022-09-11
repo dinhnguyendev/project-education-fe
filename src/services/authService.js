@@ -28,3 +28,9 @@ export const logout = async (navigate) => {
     navigate(LINKTO.LOGIN);
   }
 };
+export const getUser = async (id) => {
+  try {
+    const data = await axiosClient.get(`${API.GETBYID}/${id}`);
+    return data;
+  } catch (error) {}
+};

@@ -1,5 +1,5 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import storage from 'redux-persist/lib/storage';
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import storage from "redux-persist/lib/storage";
 import {
   persistStore,
   persistReducer,
@@ -9,17 +9,19 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from 'redux-persist';
-import userSlice from './userSlice';
+} from "redux-persist";
+import userSlice from "./userSlice";
+import gameCaroSlice from "./gameCaroSlice";
 const rootReducer = combineReducers({
   user: userSlice,
+  gamecaro: gameCaroSlice,
 });
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
   version: 1,
   storage,
-  whitelist: ['user'],
+  whitelist: ["user"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -7,7 +7,7 @@ export const ROUTER = {
   GAME: "/games",
   GAMECARO: "caro",
   START: "start",
-  PLAYCARO: "play",
+  PLAYCARO: "play/:id",
   NOTFOUND: "*",
 };
 
@@ -25,6 +25,7 @@ export const API = {
   REGISTER: "/auth/register",
   LOGIN: "/auth/login",
   LOGOUT: "/auth/logout",
+  GETBYID: "/auth/get",
 };
 export const KEY = {
   LOOUT: "logout",

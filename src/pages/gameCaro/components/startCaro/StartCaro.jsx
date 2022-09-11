@@ -21,7 +21,8 @@ const StartCaro = () => {
   useLayoutEffect(() => {
     socket.on("server--rooms--sucessfylly", (data) => {
       if (data) {
-        navigate(LINKTO.PLAYCARO, { state: { data } });
+        const idRooms = data.idRooms;
+        navigate(`${LINKTO.PLAYCARO}/${idRooms}`, { state: { data } });
       }
     });
   }, []);

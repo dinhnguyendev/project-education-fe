@@ -1,11 +1,23 @@
 import { Avatar } from "antd";
 import React, { useEffect } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
+import { getUserById } from "../../../../actions/auth/authActions";
 import "./user.css";
 const User = ({ player }) => {
   const me = useSelector((state) => state.user.login?.data);
+  const [players, setPlayers] = useState({});
   useEffect(() => {
     const id = player?.opponentName?.id;
+    if (id) {
+      getUserById(id)
+        .then((data) => {
+          console.log("user>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+          console.log(data);
+          setPlayers(data?.data);
+        })
+        .catch((err) => {});
+    }
   }, [player]);
   console.log("me");
   console.log(me);
@@ -19,6 +31,7 @@ const User = ({ player }) => {
             <Avatar src={me?.avatar} />
           </div>
           <div className="user__name user__center">{me?.username}</div>
+          <div className="user__name user__center">{me?.phone}</div>
           <div className="user__token user__center">300 Peer</div>
           <div className="user__position user__center">Quan co: X</div>
         </div>
@@ -32,9 +45,10 @@ const User = ({ player }) => {
       <div className="user__profile">
         <div className="user__profile__item">
           <div className="user__image user__center">
-            <Avatar src="https://joeschmoe.io/api/v1/random" />
+            <Avatar src={players?.avatar} />
           </div>
-          <div className="user__name user__center">nguyen ngoc dinh</div>
+          <div className="user__name user__center">{players?.username}</div>
+          <div className="user__name user__center">{players?.phone}</div>
           <div className="user__token user__center">300 Peer</div>
           <div className="user__position user__center"> Quan co: O</div>
         </div>
