@@ -22,7 +22,9 @@ const StartCaro = () => {
     socket.on("server--rooms--sucessfylly", (data) => {
       if (data) {
         const idRooms = data.idRooms;
-        navigate(`${LINKTO.PLAYCARO}/${idRooms}`, { state: { data } });
+        console.log("navigate");
+        console.log(navigate);
+        navigate(`${LINKTO.PLAYCARO}/${idRooms}`, { state: { data }, replace: true });
       }
     });
   }, []);

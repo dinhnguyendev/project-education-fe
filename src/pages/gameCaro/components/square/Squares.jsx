@@ -1,12 +1,17 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import { createBoardDataAction } from "../../../../redux/gameCaroSlice";
+import socket from "../../../../socket.io/socket.io";
 import Row from "../row/Row";
 
 const Squares = (props) => {
-  const { height, width, dataLocation } = props;
+  const { height, width } = props;
+  const location = useLocation();
+  console.log("location>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>1111111");
+  const dataLocation = location.state.data;
+  console.log(dataLocation);
   const dispatch = useDispatch();
   const createEmptyArray = (height, width) => {
     let data = [];
@@ -44,8 +49,7 @@ const Squares = (props) => {
     isX: dataLocation?.isX,
     holdingX: false,
     // oppID: "",
-    boardData: initBoardData(height, width),
-    // endpoint: "localhost:5001",
+    // boardData: initBoardData(height, width),
     height: height,
     width: width,
     modalShow: false,
@@ -55,17 +59,27 @@ const Squares = (props) => {
     lose: false,
     emoji: false,
   });
-  // console.log("game.boardData");
-  // console.log("game.boardData");
-  // console.log("game.boardData");
-  // console.log(game.boardData);
+  const [boardData, setBoarData] = useState(initBoardData(height, width));
   const updateInput = (event) => {
     SetGame({ playerName: event.target.value });
   };
   const handleSubmitName = () => {
     SetGame({ nameOK: true });
   };
+  socket.on("server--update-check", (data) => {
+    console.log("data server--update-check");
+    let updateGameBoardData = boardData;
+    updateGameBoardData[data.y][data.x].isClicked = true;
+    console.log(updateGameBoardData);
+    // setBoarData(updateGameBoardData);
+  });
 
+  // socket.on("server--update-check--player", (data) => {
+  //   console.log("data server--update-check--players");
+  //   console.log(data);
+  //   SetGame({ room: data.room, isMyTurn: data.isMyTurn, isX: data.isX });
+  // });
+  // console.log(game.boardData);
   const renderBoard = (data) => {
     let arr = [];
     for (let i = 0; i < data.length; i++) {
@@ -95,7 +109,7 @@ const Squares = (props) => {
       return !game.holdingX ? "❌" : "⭕";
     }
   };
-  return <div className="squares">{renderBoard(game.boardData)}</div>;
+  return <div className="squares">{renderBoard(boardData)}</div>;
 };
 
 export default Squares;

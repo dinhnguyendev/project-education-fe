@@ -6,6 +6,7 @@ const Row = (props) => {
   const getRow = () => {
     let RowList = [];
     for (let i = 0; i < row.length; i++) {
+      // console.log(row[i]);
       RowList.push(
         <Cells
           value={row[i]}
@@ -23,6 +24,8 @@ const Row = (props) => {
     }
     return RowList;
   };
+  // console.log("getRow()");
+  // console.log(getRow());
   return <div className="row">{getRow()}</div>;
 };
 
