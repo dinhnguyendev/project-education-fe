@@ -7,11 +7,12 @@ import socket from "../../../../socket.io/socket.io";
 import Row from "../row/Row";
 import "./squares.css";
 const Squares = (props) => {
-  const { height, width } = props;
+  const { height, width, user } = props;
   const location = useLocation();
   console.log("location>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>1111111");
   const dataLocation = location.state.data;
   console.log(dataLocation);
+  console.log(user);
   const dispatch = useDispatch();
   const createEmptyArray = (height, width) => {
     let data = [];
@@ -55,7 +56,7 @@ const Squares = (props) => {
     lose: false,
     emoji: false,
   });
-  // const [boardData, setBoarData] = useState(initBoardData(height, width));
+
   const updateInput = (event) => {
     SetGame({ playerName: event.target.value });
   };
@@ -73,42 +74,37 @@ const Squares = (props) => {
     //     updateGameBoardData[i][j].isMyTurn = data.isMyTurn;
     //   }
     // }
-    SetGame({ boardData: updateGameBoardData });
+    let isMyTurn = false;
+    if (user.phone == data.phone) {
+      isMyTurn = true;
+    }
+
+    console.log(isMyTurn);
+    SetGame({ boardData: updateGameBoardData, isMyTurn });
   });
-  // socket.on("server--watting--check", (data) => {
-  //   console.log("datasadasdasdsadasd server--update-data");
-  //   console.log(data);
-  //   SetGame({ isMyTurn: dataLocation.isMyTurn });
-  // });
-  // socket.on("server--update-check--player", (data) => {
-  //   console.log("data server--update-check--players");
-  //   console.log(data);
-  //   SetGame({ room: data.room, isMyTurn: data.isMyTurn, isX: data.isX });
-  // });
-  // console.log(game.boardData);
-  // const renderBoard = (data) => {
-  //   let arr = [];
-
-  //   for (let i = 0; i < data.length; i++) {
-  //     arr.push(
-  //       <Row
-  //         id={game.id}
-  //         row={data[i]}
-  //         key={i}
-  //         y={i}
-  //         isMyTurn={game.isMyTurn}
-  //         isX={game.isX}
-  //         oppID={game.oppID}
-  //         room={game.room}
-  //       />
-  //     );
-  //   }
-
-  //   return <div>{arr}</div>;
-  // };
   const getPlayerName = () => {
     if (game.response) {
       return game.holdingX ? "❌" : "⭕";
+    }
+  };
+  const handleClick = (x, y) => {
+    console.log("handleClick");
+    if (game.isMyTurn) {
+      return alert("doi doi thu");
+    } else {
+      let req = {
+        id: dataLocation.id,
+        x,
+        y,
+        isMyTurn: game.isMyTurn,
+        isX: dataLocation.isX,
+        oppID: dataLocation.oppID,
+        room: dataLocation.idRooms,
+        phone: user.phone,
+      };
+      console.log("req");
+      console.log(req);
+      socket.emit("update--check--caro", req);
     }
   };
   const getOpp = () => {
@@ -131,6 +127,7 @@ const Squares = (props) => {
               isX={game.isX}
               oppID={game.oppID}
               room={game.room}
+              handleClick={handleClick}
             />
           );
         })}

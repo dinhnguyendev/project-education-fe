@@ -2,7 +2,7 @@ import React from "react";
 import Cells from "../cell/Cells";
 import "./row.css";
 const Row = (props) => {
-  const { id, room, isMyTurn, isX, oppID, row, y } = props;
+  const { id, room, isMyTurn, isX, oppID, row, y, handleClick } = props;
   const getRow = () => {
     let RowList = [];
     for (let i = 0; i < row.length; i++) {
@@ -20,6 +20,7 @@ const Row = (props) => {
           room={room}
           isClicked={row[i].isClicked}
           Ischeck={row[i].Ischeck}
+          handleClick={handleClick}
         />
       );
     }

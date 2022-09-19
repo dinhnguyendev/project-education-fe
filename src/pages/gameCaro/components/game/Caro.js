@@ -1,4 +1,6 @@
+import useSelection from "antd/lib/table/hooks/useSelection";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { CONFIG_GFAMES } from "../../../../constants/constants";
 import Matrix from "../matrix/Matrix";
@@ -9,6 +11,7 @@ const GameCaro = () => {
   const location = useLocation();
   console.log("location>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
   console.log(location);
+  const user = useSelector((state) => state.user.login?.data);
   const handlecurrent = () =>
     Array(CONFIG_GFAMES.QUANTITY_SQUARES)
       .fill(null)
@@ -33,6 +36,7 @@ const GameCaro = () => {
         dataLocation={location.state.data}
         width={20}
         height={20}
+        user={user}
         // location={location.state.data}
       />
     </div>
