@@ -1,7 +1,12 @@
-.squares {
-  width: 100%;
+.squares__flex {
   display: flex;
+  align-items: center;
   justify-content: center;
+}
+.squares {
+  /* width: 100%; */
+  /* display: flex; */
+  /* justify-content: center; */
   /* display: flex;
   justify-content: center;
   align-items: center;

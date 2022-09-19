@@ -4,32 +4,36 @@ import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import socket from "../../../../socket.io/socket.io";
 import "./cells.css";
-const Cells = ({ id, x, y, isMyTurn, isX, oppID, room, isClicked }) => {
+const Cells = ({ id, x, y, isMyTurn, isX, oppID, room, isClicked, Ischeck }) => {
   const [inState, setInState] = useState("");
+  const [isMyTurnWatting, setIsMyTurn] = useState(isMyTurn);
   const boardData = useSelector((state) => state.gamecaro.boardData);
   const location = useLocation();
   const dataLocation = location.state.data;
-  // console.log("locationzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
-  // console.log(location);
   const handleClick = () => {
-    let req = {
-      id: dataLocation.id,
-      in: inState,
-      x,
-      y,
-      isMyTurn,
-      isX: dataLocation.isX,
-      oppID,
-      room: dataLocation.idRooms,
-    };
-    console.log("req");
-    console.log(req);
-    // req["header"] = "update-check";
-    socket.emit("update--check--caro", req);
+    if (isMyTurn) {
+      return alert("doi doi thu");
+    } else {
+      let req = {
+        id: dataLocation.id,
+        in: inState,
+        x,
+        y,
+        isMyTurn,
+        isX: dataLocation.isX,
+        oppID,
+        room: dataLocation.idRooms,
+      };
+      console.log("req");
+      console.log(req);
+      socket.emit("update--check--caro", req);
+    }
   };
+
   const getValueInCell = () => {
+    console.log("re-render");
     if (isClicked) {
-      return isX ? "❌" : "⭕";
+      return Ischeck ? "❌" : "⭕";
     } else {
       return "";
     }

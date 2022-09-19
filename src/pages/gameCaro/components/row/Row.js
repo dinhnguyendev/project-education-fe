@@ -19,13 +19,12 @@ const Row = (props) => {
           oppID={oppID}
           room={room}
           isClicked={row[i].isClicked}
+          Ischeck={row[i].Ischeck}
         />
       );
     }
     return RowList;
   };
-  // console.log("getRow()");
-  // console.log(getRow());
   return <div className="row">{getRow()}</div>;
 };
 

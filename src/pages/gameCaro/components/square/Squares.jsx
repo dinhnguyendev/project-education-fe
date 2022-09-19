@@ -5,7 +5,7 @@ import { useLocation, useParams } from "react-router";
 import { createBoardDataAction } from "../../../../redux/gameCaroSlice";
 import socket from "../../../../socket.io/socket.io";
 import Row from "../row/Row";
-
+import "./squares.css";
 const Squares = (props) => {
   const { height, width } = props;
   const location = useLocation();
@@ -25,6 +25,7 @@ const Squares = (props) => {
           isX: true,
           isClicked: false,
           isMyTurn: true,
+          Ischeck: null,
         };
       }
     }
@@ -35,21 +36,16 @@ const Squares = (props) => {
     // dispatch(createBoardDataAction(data));
     return data;
   };
-
-  // console.log("createEmptyArray >>>>>>>>>>>>>>>>>>>>");
-  // console.log(createEmptyArray());
-  // console.log("initBoardData >>>>>>>>>>>>>>>>>>>>");
-  // console.log(initBoardData());
   const [game, SetGame] = useState({
     id: dataLocation?.id,
     room: dataLocation?.idRooms,
     opponent: "",
     response: false,
-    isMyTurn: true,
+    isMyTurn: dataLocation?.isMyTurn,
     isX: dataLocation?.isX,
     holdingX: false,
     // oppID: "",
-    // boardData: initBoardData(height, width),
+    boardData: initBoardData(height, width),
     height: height,
     width: width,
     modalShow: false,
@@ -59,7 +55,7 @@ const Squares = (props) => {
     lose: false,
     emoji: false,
   });
-  const [boardData, setBoarData] = useState(initBoardData(height, width));
+  // const [boardData, setBoarData] = useState(initBoardData(height, width));
   const updateInput = (event) => {
     SetGame({ playerName: event.target.value });
   };
@@ -68,37 +64,48 @@ const Squares = (props) => {
   };
   socket.on("server--update-check", (data) => {
     console.log("data server--update-check");
-    let updateGameBoardData = boardData;
+    let updateGameBoardData = game.boardData;
     updateGameBoardData[data.y][data.x].isClicked = true;
-    console.log(updateGameBoardData);
-    // setBoarData(updateGameBoardData);
+    updateGameBoardData[data.y][data.x].isX = data.isX;
+    updateGameBoardData[data.y][data.x].Ischeck = data.isX;
+    // for (let i = 0; i < height; i++) {
+    //   for (let j = 0; j < width; j++) {
+    //     updateGameBoardData[i][j].isMyTurn = data.isMyTurn;
+    //   }
+    // }
+    SetGame({ boardData: updateGameBoardData });
   });
-
+  // socket.on("server--watting--check", (data) => {
+  //   console.log("datasadasdasdsadasd server--update-data");
+  //   console.log(data);
+  //   SetGame({ isMyTurn: dataLocation.isMyTurn });
+  // });
   // socket.on("server--update-check--player", (data) => {
   //   console.log("data server--update-check--players");
   //   console.log(data);
   //   SetGame({ room: data.room, isMyTurn: data.isMyTurn, isX: data.isX });
   // });
   // console.log(game.boardData);
-  const renderBoard = (data) => {
-    let arr = [];
-    for (let i = 0; i < data.length; i++) {
-      arr.push(
-        <Row
-          id={game.id}
-          row={data[i]}
-          key={i}
-          y={i}
-          isMyTurn={game.isMyTurn}
-          isX={game.isX}
-          oppID={game.oppID}
-          room={game.room}
-        />
-      );
-    }
+  // const renderBoard = (data) => {
+  //   let arr = [];
 
-    return <div>{arr}</div>;
-  };
+  //   for (let i = 0; i < data.length; i++) {
+  //     arr.push(
+  //       <Row
+  //         id={game.id}
+  //         row={data[i]}
+  //         key={i}
+  //         y={i}
+  //         isMyTurn={game.isMyTurn}
+  //         isX={game.isX}
+  //         oppID={game.oppID}
+  //         room={game.room}
+  //       />
+  //     );
+  //   }
+
+  //   return <div>{arr}</div>;
+  // };
   const getPlayerName = () => {
     if (game.response) {
       return game.holdingX ? "❌" : "⭕";
@@ -109,7 +116,27 @@ const Squares = (props) => {
       return !game.holdingX ? "❌" : "⭕";
     }
   };
-  return <div className="squares">{renderBoard(boardData)}</div>;
+
+  return (
+    <div className="squares__flex">
+      <div className="squares">
+        {game?.boardData?.map((item, i) => {
+          return (
+            <Row
+              id={game.id}
+              row={item}
+              key={i}
+              y={i}
+              isMyTurn={game.isMyTurn}
+              isX={game.isX}
+              oppID={game.oppID}
+              room={game.room}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
 };
 
 export default Squares;
