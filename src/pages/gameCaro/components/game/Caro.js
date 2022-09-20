@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { CONFIG_GFAMES } from "../../../../constants/constants";
+import ChatRoom from "../chat/ChatRoom";
 import Matrix from "../matrix/Matrix";
 import Squares from "../square/Squares";
 import User from "../user/User";
@@ -31,14 +32,11 @@ const GameCaro = () => {
   return (
     <div className="game">
       <div className="game__header">game caro</div>
-      <User player={location.state.data} />
-      <Squares
-        dataLocation={location.state.data}
-        width={20}
-        height={20}
-        user={user}
-        // location={location.state.data}
-      />
+      <div className="game__header__container">
+        <User player={location.state.data} />
+        <Squares dataLocation={location.state.data} width={20} height={20} user={user} />
+        <ChatRoom />
+      </div>
     </div>
   );
 };

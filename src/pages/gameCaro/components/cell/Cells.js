@@ -32,7 +32,7 @@ const Cells = ({ id, x, y, isMyTurn, isX, oppID, room, isClicked, Ischeck, handl
   const getValueInCell = () => {
     console.log("re-render");
     if (isClicked) {
-      return Ischeck ? "❌" : "⭕";
+      return Ischeck ? "✖️" : "⭕";
     } else {
       return "";
     }

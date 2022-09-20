@@ -1,3 +1,4 @@
+import { message } from "antd";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -90,7 +91,7 @@ const Squares = (props) => {
   const handleClick = (x, y) => {
     console.log("handleClick");
     if (game.isMyTurn) {
-      return alert("doi doi thu");
+      return message.warning("đợi đối thủ");
     } else {
       let req = {
         id: dataLocation.id,
