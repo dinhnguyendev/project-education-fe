@@ -5,7 +5,7 @@
 }
 .game {
   position: relative;
-  height: 180px;
+  /* height: 180px; */
 }
 .profile__margin {
   display: flex;

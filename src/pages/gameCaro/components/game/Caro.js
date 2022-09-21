@@ -30,12 +30,14 @@ const GameCaro = () => {
     console.log("hello");
   }, [current]);
   return (
-    <div className="game">
-      <div className="game__header">game caro</div>
-      <div className="game__header__container">
-        <User player={location.state.data} />
-        <Squares dataLocation={location.state.data} width={20} height={20} user={user} />
-        <ChatRoom />
+    <div className="game__caro">
+      <div className="game">
+        <div className="game__header">game caro</div>
+        <div className="game__header__container">
+          <User player={location.state.data} />
+          <Squares dataLocation={location.state.data} width={20} height={20} user={user} />
+          <ChatRoom />
+        </div>
       </div>
     </div>
   );

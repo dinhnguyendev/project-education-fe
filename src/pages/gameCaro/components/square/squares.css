@@ -1,4 +1,5 @@
 .squares__flex {
+  /* flex: 4; */
   display: flex;
   align-items: center;
   justify-content: center;

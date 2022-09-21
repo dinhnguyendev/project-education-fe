@@ -83,11 +83,7 @@ const Squares = (props) => {
     console.log(isMyTurn);
     SetGame({ boardData: updateGameBoardData, isMyTurn });
   });
-  const getPlayerName = () => {
-    if (game.response) {
-      return game.holdingX ? "❌" : "⭕";
-    }
-  };
+
   const handleClick = (x, y) => {
     console.log("handleClick");
     if (game.isMyTurn) {

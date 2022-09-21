@@ -1,3 +1,11 @@
+.game__caro {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
 .game__gird {
   display: flex;
   justify-content: center;
@@ -5,4 +13,6 @@
 }
 .game__header__container {
   display: flex;
+  align-items: flex-start;
+  /* justify-content: space-between; */
 }
