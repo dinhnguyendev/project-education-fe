@@ -36,7 +36,7 @@ const GameCaro = () => {
         <div className="game__header__container">
           <User player={location.state.data} />
           <Squares dataLocation={location.state.data} width={20} height={20} user={user} />
-          <ChatRoom />
+          <ChatRoom user={user} dataLocation={location.state.data} />
         </div>
       </div>
     </div>

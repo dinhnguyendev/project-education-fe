@@ -4,21 +4,37 @@
 }
 .chat__controller {
   border-radius: 10px;
+  background-color: white;
 }
 .chat__box {
-  background-color: white;
   height: 500px;
-  width: 500px;
+  width: 400px;
+  min-height: 300px;
+  min-width: 200px;
   word-wrap: break-word;
   overflow-y: scroll;
+}
+.chat__box::-webkit-scrollbar {
+  width: 2px;
+  background-color: #666;
+  border-radius: 2px;
 }
 .chat__box__message {
   margin: 5px;
 }
 .chat__input {
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+}
+.chat__input__item {
+  flex: 1 !important;
+  margin-right: 0px !important;
+}
+.chat__input__button {
+  height: 100%;
+  margin-right: 0px !important;
 }
 .chat__content {
   width: 100%;
@@ -40,4 +56,5 @@
   padding: 3px 5px;
   border-radius: 4px;
   text-align: left;
+  word-wrap: break-word;
 }
