@@ -23,13 +23,7 @@ const User = ({ player }) => {
   console.log(me);
   console.log("player");
   console.log(player);
-  const getPlayerIsX = () => {
-    if (player.isX) {
-      return "❌";
-    } else {
-      return "⭕";
-    }
-  };
+
   return (
     <div className="user">
       <div className="user__profile">
@@ -40,7 +34,7 @@ const User = ({ player }) => {
           <div className="user__name user__center">{me?.username}</div>
           <div className="user__name user__center">{me?.phone}</div>
           <div className="user__token user__center">300 Peer</div>
-          <div className="user__position user__center">Quan co: ...</div>
+          <div className="user__position user__center">Quan co:{player.isX ? "✖️" : "⭕"} </div>
         </div>
       </div>
       <div className="user__sum">
@@ -57,7 +51,7 @@ const User = ({ player }) => {
           <div className="user__name user__center">{players?.username}</div>
           <div className="user__name user__center">{players?.phone}</div>
           <div className="user__token user__center">300 Peer</div>
-          <div className="user__position user__center"> Quan co: {getPlayerIsX()}</div>
+          <div className="user__position user__center"> Quan co: {player.isX ? "⭕" : "✖️"}</div>
         </div>
       </div>
     </div>
