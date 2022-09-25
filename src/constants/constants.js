@@ -30,3 +30,11 @@ export const API = {
 export const KEY = {
   LOOUT: "logout",
 };
+export const NOTIFICATION = {
+  TIMER__END: ["warning", "Tiếc thật! Bạn đã mất lượt chơi", "Bạn chỉ có 60s để suy nghỉ thôi nhá"],
+  TIMER__START: [
+    "success",
+    "Chúc mừng bạn! Bạn được đánh tiếp",
+    "Bạn được đánh tiếp do đối thủ hết thời gian",
+  ],
+};

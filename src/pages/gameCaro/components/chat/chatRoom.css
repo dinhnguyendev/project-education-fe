@@ -15,9 +15,9 @@
   overflow-y: scroll;
 }
 .chat__box::-webkit-scrollbar {
-  width: 2px;
-  background-color: #666;
-  border-radius: 2px;
+  width: 0px;
+  /* background-color: #666;
+  border-radius: 2px; */
 }
 .chat__box__message {
   margin: 5px;

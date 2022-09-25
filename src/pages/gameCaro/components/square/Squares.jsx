@@ -2,88 +2,64 @@ import { message } from "antd";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation, useParams } from "react-router";
-import { createBoardDataAction } from "../../../../redux/gameCaroSlice";
+import { useLocation } from "react-router";
+import { NOTIFICATION } from "../../../../constants/constants";
 import socket from "../../../../socket.io/socket.io";
+import { initBoardData } from "../../../../utils/caro";
+import { handleNotification } from "../../../../utils/notification";
 import Row from "../row/Row";
 import "./squares.css";
 const Squares = (props) => {
-  const { height, width, user } = props;
-  const location = useLocation();
-  console.log("location>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>1111111");
-  const dataLocation = location.state.data;
+  const { user, dataLocation, boardData } = props;
   console.log(dataLocation);
   console.log(user);
-  const dispatch = useDispatch();
-  const createEmptyArray = (height, width) => {
-    let data = [];
-
-    for (let i = 0; i < height; i++) {
-      data.push([]);
-      for (let j = 0; j < width; j++) {
-        data[i][j] = {
-          x: i,
-          y: j,
-          isX: true,
-          isClicked: false,
-          isMyTurn: true,
-          Ischeck: null,
-        };
-      }
-    }
-    return data;
-  };
-  var initBoardData = (height, width) => {
-    let data = createEmptyArray(height, width);
-    // dispatch(createBoardDataAction(data));
-    return data;
-  };
   const [game, SetGame] = useState({
     id: dataLocation?.id,
     room: dataLocation?.idRooms,
-    opponent: "",
-    response: false,
     isMyTurn: dataLocation?.isMyTurn,
     isX: dataLocation?.isX,
-    holdingX: false,
-    // oppID: "",
-    boardData: initBoardData(height, width),
-    height: height,
-    width: width,
-    modalShow: false,
-    modalLoseShow: false,
-    modalEmoShow: false,
-    win: false,
-    lose: false,
-    emoji: false,
+    boardData: boardData,
+    showNotification: false,
+    textNotification: [],
   });
-
-  const updateInput = (event) => {
-    SetGame({ playerName: event.target.value });
-  };
-  const handleSubmitName = () => {
-    SetGame({ nameOK: true });
-  };
+  console.log(game.boardData);
   socket.on("server--update-check", (data) => {
     console.log("data server--update-check");
     let updateGameBoardData = game.boardData;
     updateGameBoardData[data.y][data.x].isClicked = true;
     updateGameBoardData[data.y][data.x].isX = data.isX;
     updateGameBoardData[data.y][data.x].Ischeck = data.isX;
-    // for (let i = 0; i < height; i++) {
-    //   for (let j = 0; j < width; j++) {
-    //     updateGameBoardData[i][j].isMyTurn = data.isMyTurn;
-    //   }
-    // }
     let isMyTurn = false;
     if (user.phone == data.phone) {
       isMyTurn = true;
     }
-
-    console.log(isMyTurn);
     SetGame({ boardData: updateGameBoardData, isMyTurn });
   });
 
+  socket.on("server--watting--end", (data) => {
+    if (data == user.phone) {
+      SetGame({
+        isMyTurn: false,
+        boardData: game.boardData,
+        showNotification: true,
+        textNotification: NOTIFICATION.TIMER__START,
+      });
+    } else {
+      const request = {
+        phone: user.phone,
+        room: dataLocation.idRooms,
+      };
+      // console.log("socket.emit('client--timer-update', request)");
+      // console.log(request);
+      socket.emit("client--timer-update", request);
+      SetGame({
+        isMyTurn: true,
+        boardData: game.boardData,
+        showNotification: true,
+        textNotification: NOTIFICATION.TIMER__END,
+      });
+    }
+  });
   const handleClick = (x, y) => {
     console.log("handleClick");
     if (game.isMyTurn) {
@@ -99,34 +75,16 @@ const Squares = (props) => {
         room: dataLocation.idRooms,
         phone: user.phone,
       };
-      console.log("req");
-      console.log(req);
       socket.emit("update--check--caro", req);
-    }
-  };
-  const getOpp = () => {
-    if (game.response) {
-      return !game.holdingX ? "❌" : "⭕";
     }
   };
 
   return (
     <div className="squares__flex">
+      {game.showNotification && handleNotification(...game.textNotification)}
       <div className="squares">
         {game?.boardData?.map((item, i) => {
-          return (
-            <Row
-              id={game.id}
-              row={item}
-              key={i}
-              y={i}
-              isMyTurn={game.isMyTurn}
-              isX={game.isX}
-              oppID={game.oppID}
-              room={game.room}
-              handleClick={handleClick}
-            />
-          );
+          return <Row row={item} key={i} y={i} handleClick={handleClick} />;
         })}
       </div>
     </div>

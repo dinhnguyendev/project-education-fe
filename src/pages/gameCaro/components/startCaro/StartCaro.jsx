@@ -8,6 +8,11 @@ import { useSelector } from "react-redux";
 import { useLayoutEffect } from "react";
 import { useNavigate } from "react-router";
 import { LINKTO } from "../../../../constants/constants";
+import PeerCoin from "../../../../components/peerGame/PeerCoin";
+import yellowCoin from "../../../../assets/image/yellowCoin.png";
+import redCoin from "../../../../assets/image/redCoin.png";
+import greenCoin from "../../../../assets/image/greenCoin.png";
+import blueCoin from "../../../../assets/image/blueCoin.png";
 const StartCaro = () => {
   const user = useSelector((state) => state.user.login?.data);
   const navigate = useNavigate();
@@ -30,7 +35,7 @@ const StartCaro = () => {
   }, []);
 
   return (
-    <>
+    <div className="game__box">
       <div className="game">
         <div className="game__name">
           <div className="game__content">
@@ -71,7 +76,13 @@ const StartCaro = () => {
           </button>
         </Col>
       </Row>
-    </>
+      <Row >
+        <PeerCoin image={yellowCoin} coin={"0.001"} />
+        <PeerCoin image={blueCoin} coin={"0.001"} />
+        <PeerCoin image={redCoin} coin={"0.001"} />
+        <PeerCoin image={greenCoin} coin={"0.001"} />
+      </Row>
+    </div>
   );
 };
 
