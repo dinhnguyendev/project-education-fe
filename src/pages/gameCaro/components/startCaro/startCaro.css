@@ -59,8 +59,25 @@
   border-radius: 15px;
   padding: 5px 10px;
   cursor: pointer;
+  height: auto !important;
 }
 .start__caro__image {
   width: 100px;
   height: 80px;
+}
+.peer {
+  padding: 0px 5px;
+}
+.peer__toggle {
+  padding: 2px;
+  border: 3px solid red;
+}
+.row__flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px 0px;
+}
+.peer__flex {
+  display: flex;
 }

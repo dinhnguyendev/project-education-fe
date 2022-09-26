@@ -1,5 +1,5 @@
-import { Col, Row, Avatar } from "antd";
-import React from "react";
+import { Col, Row, Avatar, Button, Modal } from "antd";
+import React, { useState } from "react";
 import "./startCaro.css";
 import iconStart from "../../../../assets/image/start-caro.png";
 import iconName from "../../../../assets/image/name-game.png";
@@ -13,15 +13,41 @@ import yellowCoin from "../../../../assets/image/yellowCoin.png";
 import redCoin from "../../../../assets/image/redCoin.png";
 import greenCoin from "../../../../assets/image/greenCoin.png";
 import blueCoin from "../../../../assets/image/blueCoin.png";
+import { handleMessage } from "../../../../utils/caro/message";
 const StartCaro = () => {
   const user = useSelector((state) => state.user.login?.data);
+  const [coin, setCoin] = useState(0);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const showModal = () => {
+    setLoading(true);
+  };
+
+  const hideModal = () => {
+    setLoading(false);
+  };
+  <Modal title="Modal" open={true} onOk={hideModal} onCancel={hideModal} cancelText="Hủy">
+    <p>Đang tìm kiếm đối thủ...</p>
+  </Modal>;
+
   const handleSearch = () => {
-    if (user) {
-      console.log("bat dau tom doi thu");
-      console.log(user);
-      socket.emit("join-room", user);
+    if (!user) {
+      handleMessage("warning", "vui lòng đăng nhập");
+      return navigate(LINKTO.LOGIN);
     }
+    if (coin == 0) {
+      return handleMessage("warning", "vui lòng chọn số peer cược");
+    }
+    setLoading(true);
+    console.log("bat dau tom doi thu");
+    console.log(user);
+    console.log(coin);
+    const data = {
+      ...user,
+      coin: coin,
+    };
+
+    socket.emit("join-room", data);
   };
   useLayoutEffect(() => {
     socket.on("server--rooms--sucessfylly", (data) => {
@@ -29,13 +55,23 @@ const StartCaro = () => {
         const idRooms = data.idRooms;
         console.log("navigate");
         console.log(navigate);
+        setLoading(false);
         navigate(`${LINKTO.PLAYCARO}/${idRooms}`, { state: { data }, replace: true });
       }
     });
   }, []);
+  const handleCoin = (e) => {
+    const tagCoin = document.querySelectorAll(".peer__coin");
+    tagCoin.forEach((item) => {
+      item.classList.remove("peer__toggle");
+    });
+    e.target.classList.add("peer__toggle");
+    setCoin(+e.target.id);
+  };
 
   return (
     <div className="game__box">
+      {loading && <p>Đang tìm kiếm đối thủ...</p>}
       <div className="game">
         <div className="game__name">
           <div className="game__content">
@@ -63,25 +99,29 @@ const StartCaro = () => {
           <div className="profile__loading">Dang tim doi thu...</div>
         </Col>
       </Row>
-      <Row>
-        <Col span={18}>
-          <video width="320" height="240" autoPlay>
-            <source src="https://youtu.be/wC9UsnFiU4c" type="video/mp4" />
-          </video>
+      <Row className="row__flex">
+        <Col className="peer__flex">
+          <div className="peer">
+            <PeerCoin image={yellowCoin} handleCoin={handleCoin} coinNumber={0.01} />
+          </div>
+          <div className="peer">
+            <PeerCoin image={blueCoin} handleCoin={handleCoin} coinNumber={0.02} />
+          </div>
+          <div className="peer">
+            <PeerCoin image={redCoin} handleCoin={handleCoin} coinNumber={0.03} />
+          </div>
+          <div className="peer">
+            <PeerCoin image={greenCoin} handleCoin={handleCoin} coinNumber={0.04} />
+          </div>
         </Col>
-        <Col span={6}>
-          <button onClick={handleSearch} className="start__caro__button">
+        <Col>
+          <Button loading={loading} onClick={handleSearch} className="start__caro__button">
             <span>Bat dau tim doi thu</span>
             <img src={iconStart} alt="" className="start__caro__image" />
-          </button>
+          </Button>
         </Col>
       </Row>
-      <Row >
-        <PeerCoin image={yellowCoin} coin={"0.001"} />
-        <PeerCoin image={blueCoin} coin={"0.001"} />
-        <PeerCoin image={redCoin} coin={"0.001"} />
-        <PeerCoin image={greenCoin} coin={"0.001"} />
-      </Row>
+      <Row></Row>
     </div>
   );
 };
