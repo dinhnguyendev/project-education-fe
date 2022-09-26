@@ -3,7 +3,7 @@ import "./loadingPage.css";
 import { useEffect } from "react";
 import nProgress from "nprogress";
 import "nprogress/nprogress.css";
-import logo from "../../assets/image/logologin.svg";
+import logo from "../../assets/image/logo.svg";
 const LoadingPage = () => {
   useEffect(() => {
     nProgress.start();

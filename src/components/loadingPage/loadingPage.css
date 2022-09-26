@@ -12,12 +12,9 @@
   height: 100vh;
   inset: 0;
   z-index: 999;
-  background-image: url("../../assets/image/logologin.svg");
-  background-size: 50%;
+  background-color: #12033d;
 }
 .loading__image {
-  position: absolute;
-  inset: 0;
-  width: 20%;
-  height: 20%;
+  width: 100px;
+  height: 100px;
 }

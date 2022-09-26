@@ -27,6 +27,7 @@
 .header__logo {
   margin-left: 40px;
 }
+
 .header__navbar {
   display: flex;
   align-items: center;

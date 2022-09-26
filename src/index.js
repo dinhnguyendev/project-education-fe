@@ -9,6 +9,7 @@ import "./i18n";
 import "antd/dist/antd.css";
 import "./socket.io/index";
 import RootRouter from "./routers/RootRouter";
+import "https://cdn.lordicon.com/xdjxvujz.js";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>

@@ -1,18 +1,17 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoadingPage from "../components/loadingPage/LoadingPage";
 import { ROUTER } from "../constants/constants";
-import Home from "../pages/home/Home";
-import socket from "./../socket.io/socket.io";
-import Login from "./../pages/login/Login";
-import Register from "./../pages/register/Register";
-import Authentication from "../layout/auth/Authentication";
-import Authorization from "./Authorization";
-import Games from "./../pages/games/Games";
-import MainLayout from "../layout/main/MainLayout";
-import GameCaro from "./../pages/gameCaro/GameCaro";
-import Caro from "../pages/gameCaro/components/game/Caro";
-import StartCaro from "./../pages/gameCaro/components/startCaro/StartCaro";
+const Home = lazy(() => import("../pages/home/Home"));
+const Login = lazy(() => import("./../pages/login/Login"));
+const Register = lazy(() => import("./../pages/register/Register"));
+const Authentication = lazy(() => import("../layout/auth/Authentication"));
+const Authorization = lazy(() => import("./Authorization"));
+const Games = lazy(() => import("./../pages/games/Games"));
+const MainLayout = lazy(() => import("../layout/main/MainLayout"));
+const GameCaro = lazy(() => import("./../pages/gameCaro/GameCaro"));
+const Caro = lazy(() => import("../pages/gameCaro/components/game/Caro"));
+const StartCaro = lazy(() => import("./../pages/gameCaro/components/startCaro/StartCaro"));
 const RootRouter = () => {
   return (
     <Suspense fallback={<LoadingPage />}>

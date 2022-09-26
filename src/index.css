@@ -34,3 +34,6 @@ html {
 .ant-card.ant-card-bordered {
   border: none !important;
 }
+.ant-modal-header {
+  padding: 0px !important;
+}

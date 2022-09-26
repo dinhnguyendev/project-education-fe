@@ -14,6 +14,8 @@ import redCoin from "../../../../assets/image/redCoin.png";
 import greenCoin from "../../../../assets/image/greenCoin.png";
 import blueCoin from "../../../../assets/image/blueCoin.png";
 import { handleMessage } from "../../../../utils/caro/message";
+import Typewriter from "typewriter-effect";
+
 const StartCaro = () => {
   const user = useSelector((state) => state.user.login?.data);
   const [coin, setCoin] = useState(0);
@@ -26,9 +28,6 @@ const StartCaro = () => {
   const hideModal = () => {
     setLoading(false);
   };
-  <Modal title="Modal" open={true} onOk={hideModal} onCancel={hideModal} cancelText="Hủy">
-    <p>Đang tìm kiếm đối thủ...</p>
-  </Modal>;
 
   const handleSearch = () => {
     if (!user) {
@@ -38,7 +37,7 @@ const StartCaro = () => {
     if (coin == 0) {
       return handleMessage("warning", "vui lòng chọn số peer cược");
     }
-    setLoading(true);
+    showModal();
     console.log("bat dau tom doi thu");
     console.log(user);
     console.log(coin);
@@ -55,7 +54,7 @@ const StartCaro = () => {
         const idRooms = data.idRooms;
         console.log("navigate");
         console.log(navigate);
-        setLoading(false);
+        hideModal();
         navigate(`${LINKTO.PLAYCARO}/${idRooms}`, { state: { data }, replace: true });
       }
     });
@@ -68,10 +67,42 @@ const StartCaro = () => {
     e.target.classList.add("peer__toggle");
     setCoin(+e.target.id);
   };
-
+  const handleCancelSearchPlayer = () => {};
   return (
     <div className="game__box">
-      {loading && <p>Đang tìm kiếm đối thủ...</p>}
+      <Modal
+        title={
+          <>
+            <script src="https://cdn.lordicon.com/xdjxvujz.js"></script>
+            <lord-icon
+              src="https://cdn.lordicon.com/mgmiqlge.json"
+              trigger="loop"
+              delay="50"
+              colors="primary:#3a3347,secondary:#f24c00,tertiary:#4bb3fd,quaternary:#ebe6ef"
+              style={{ width: "50px", height: "50px" }}
+            ></lord-icon>
+          </>
+        }
+        footer={
+          <Button onClick={handleCancelSearchPlayer()} className="button__cancel" danger>
+            Huy tim doi thu
+          </Button>
+        }
+        visible={loading}
+        closeIcon
+        cancelText="Hủy"
+      >
+        <p>
+          <Typewriter
+            options={{
+              strings: ["Đang tìm đối thủ ..."],
+              autoStart: true,
+              loop: true,
+              deleteSpeed: "natural",
+            }}
+          />
+        </p>
+      </Modal>
       <div className="game">
         <div className="game__name">
           <div className="game__content">
@@ -115,7 +146,7 @@ const StartCaro = () => {
           </div>
         </Col>
         <Col>
-          <Button loading={loading} onClick={handleSearch} className="start__caro__button">
+          <Button onClick={handleSearch} className="start__caro__button">
             <span>Bat dau tim doi thu</span>
             <img src={iconStart} alt="" className="start__caro__image" />
           </Button>

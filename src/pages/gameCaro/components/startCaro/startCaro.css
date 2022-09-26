@@ -81,3 +81,8 @@
 .peer__flex {
   display: flex;
 }
+.button__cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+}

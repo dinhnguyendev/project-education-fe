@@ -1,6 +1,5 @@
 import React from "react";
 import "./timer.css";
-import "https://cdn.lordicon.com/xdjxvujz.js";
 import socket from "../../../../socket.io/socket.io";
 import { useState } from "react";
 const Timer = () => {
@@ -16,10 +15,9 @@ const Timer = () => {
         <div className="timer__icon">
           <script src="https://cdn.lordicon.com/xdjxvujz.js"></script>
           <lord-icon
-            src="https://cdn.lordicon.com/mgmiqlge.json"
+            src="https://cdn.lordicon.com/zfpphchw.json"
             trigger="loop"
-            delay="50"
-            colors="primary:#3a3347,secondary:#f24c00,tertiary:#4bb3fd,quaternary:#ebe6ef"
+            delay="2000"
             style={{ width: "50px", height: "50px" }}
           ></lord-icon>
         </div>

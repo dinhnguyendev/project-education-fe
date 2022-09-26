@@ -107,7 +107,7 @@ const Header = () => {
                 </Drawer>
 
                 <div className="header__logo">
-                  <img src={LogoGame} alt="" />
+                  <img className="header__logo__image" src={LogoGame} alt="" />
                 </div>
               </div>
             </Col>
