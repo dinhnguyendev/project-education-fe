@@ -38,3 +38,8 @@ export const NOTIFICATION = {
     "Bạn được đánh tiếp do đối thủ hết thời gian",
   ],
 };
+export const BLOCKCHAIN = {
+  ABI: [],
+  CURRENACCOUNT: "",
+  ADDRESSSM: "",
+};

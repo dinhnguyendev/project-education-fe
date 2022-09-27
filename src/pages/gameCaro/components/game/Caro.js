@@ -16,6 +16,7 @@ import "./Caro.css";
 const GameCaro = () => {
   const [boardDataGame, setboardDataGame] = useState(null);
   const [startClock, setStartClock] = useState(false);
+  const [show, setShow] = useState(false);
   const location = useLocation();
   const isFirstStartGameClock = useRef(true);
   console.log("location>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>1111111");
@@ -50,13 +51,13 @@ const GameCaro = () => {
     if (data.isBoolean) {
       socket.emit("client--timer-update", data);
       if (data.phone !== user.phone) {
-        handleMessage("success", "Đến lược bạn >");
+        setShow(true);
       }
     }
   });
   return (
     <div className="game__caro">
-      {console.log("game caro render again")}
+      {show && handleMessage("success", "Đến lược bạn >")}
       {boardDataGame && user && (
         <div className="game">
           <div className="game__header">game caro</div>

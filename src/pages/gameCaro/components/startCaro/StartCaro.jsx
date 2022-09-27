@@ -67,7 +67,13 @@ const StartCaro = () => {
     e.target.classList.add("peer__toggle");
     setCoin(+e.target.id);
   };
-  const handleCancelSearchPlayer = () => {};
+  const handleCancelSearchPlayer = () => {
+    if (coin) {
+      socket.emit("client--leave--room", coin);
+      hideModal();
+    }
+  };
+
   return (
     <div className="game__box">
       <Modal
@@ -84,8 +90,8 @@ const StartCaro = () => {
           </>
         }
         footer={
-          <Button onClick={handleCancelSearchPlayer()} className="button__cancel" danger>
-            Huy tim doi thu
+          <Button onClick={handleCancelSearchPlayer} className="button__cancel" danger>
+            Hủy tìm đối thủ
           </Button>
         }
         visible={loading}

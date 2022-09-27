@@ -32,7 +32,7 @@ const Header = () => {
   };
 
   const handleConnectWallet = () => {
-    socket.emit("client", "helloword hihi !!!");
+    console.log("conect wallet");
   };
   socket.on("server", (data) => {
     console.log(data);

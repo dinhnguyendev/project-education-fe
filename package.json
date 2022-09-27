@@ -31,7 +31,9 @@
     "socket.io-client": "^4.5.1",
     "typewriter-effect": "^2.19.0",
     "universal-cookie": "^4.0.4",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "web3": "^1.8.0",
+    "web3.js-browser": "^0.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
