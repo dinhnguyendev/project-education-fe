@@ -2,7 +2,7 @@ import { API, LINKTO } from "../../constants/constants";
 import axiosClient from "../../services/axiosClient";
 import { message } from "antd";
 import { getUser, login, logout, register } from "../../services/authService";
-import { logoutActionRedux } from "../../redux/userSlice";
+import { handlecurrentAddress, logoutActionRedux } from "../../redux/userSlice";
 export const handleRegister = async (values, setLoading, t, navigate) => {
   try {
     setLoading(true);
@@ -48,6 +48,7 @@ export const hadleLogout = async (t, navigate, dispatch) => {
       navigate(LINKTO.LOGIN);
       await dispatch(logoutActionRedux());
       message.success(t(`success.${respon?.data?.message}`));
+      dispatch(handlecurrentAddress(""));
     }
   } catch (err) {}
 };

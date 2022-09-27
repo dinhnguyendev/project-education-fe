@@ -40,6 +40,5 @@ export const NOTIFICATION = {
 };
 export const BLOCKCHAIN = {
   ABI: [],
-  CURRENACCOUNT: "",
   ADDRESSSM: "",
 };

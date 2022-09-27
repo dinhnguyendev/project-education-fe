@@ -15,9 +15,11 @@ import greenCoin from "../../../../assets/image/greenCoin.png";
 import blueCoin from "../../../../assets/image/blueCoin.png";
 import { handleMessage } from "../../../../utils/caro/message";
 import Typewriter from "typewriter-effect";
+import { handleNotification } from "./../../../../utils/notification";
 
 const StartCaro = () => {
   const user = useSelector((state) => state.user.login?.data);
+  const currentAddress = useSelector((state) => state.user.currentAddress);
   const [coin, setCoin] = useState(0);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -36,6 +38,13 @@ const StartCaro = () => {
     }
     if (coin == 0) {
       return handleMessage("warning", "vui lòng chọn số peer cược");
+    }
+    if (!currentAddress) {
+      return handleNotification(
+        "warning",
+        "Vui lòng kết nối với ví",
+        "kết nối với ví tiền nếu bạn muốn chơi"
+      );
     }
     showModal();
     console.log("bat dau tom doi thu");

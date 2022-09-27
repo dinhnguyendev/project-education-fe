@@ -37,3 +37,12 @@ html {
 .ant-modal-header {
   padding: 0px !important;
 }
+button.ant-btn.ant-btn-default {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+button.ant-btn.ant-btn-primary {
+  display: inline-flex !important;
+  align-items: center !important;
+}

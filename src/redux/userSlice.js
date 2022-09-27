@@ -7,6 +7,7 @@ const userSlice = createSlice({
       data: null,
       error: false,
     },
+    currentAddress: "",
   },
   reducers: {
     loginActionRedux: (state, action) => {
@@ -15,9 +16,12 @@ const userSlice = createSlice({
     logoutActionRedux: (state) => {
       state.login.data = null;
     },
+    handlecurrentAddress: (state, action) => {
+      state.currentAddress = action.payload;
+    },
   },
 });
-export const { loginActionRedux, logoutActionRedux } = userSlice.actions;
+export const { loginActionRedux, logoutActionRedux, handlecurrentAddress } = userSlice.actions;
 export default userSlice.reducer;
 
 //redux thunk : createAsyncThunk

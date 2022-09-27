@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./header.css";
 import IconGame from "../../assets/image/game.svg";
 import LogoGame from "../../assets/image/logo.svg";
 import { Avatar, Button, Space, Dropdown, Image, Drawer, Select, Col, Row } from "antd";
 import iconwallet from "../../assets/image/IconWallet.svg";
 import { CloseCircleOutlined, MenuOutlined } from "@ant-design/icons";
-import { KEY, LINKTO, MENUACCOUNT } from "../../constants/constants";
+import { BLOCKCHAIN, KEY, LINKTO, MENUACCOUNT } from "../../constants/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import _ from "lodash";
@@ -14,6 +14,14 @@ import socket from "../../socket.io/socket.io";
 import MenuAccount from "../menu/MenuAccount";
 import { hadleLogout } from "../../actions/auth/authActions";
 import { useNavigate } from "react-router-dom";
+import {
+  addWalletListener,
+  checkMN,
+  connectMn,
+  removeWalletListener,
+} from "../../utils/blockchain";
+import { handleNotification } from "./../../utils/notification";
+import { handlecurrentAddress } from "../../redux/userSlice";
 
 const { Option } = Select;
 const Header = () => {
@@ -23,16 +31,56 @@ const Header = () => {
   const user = useSelector((state) => state.user.login?.data);
   const [visible, setVisible] = useState(false);
   const [placement, setPlacement] = useState("left");
+  const [wallet, setWallet] = useState("");
+  const [loading, setLoading] = useState(false);
   const showDrawer = () => {
     setVisible(true);
   };
-
+  const handleOpenCloading = () => {
+    setLoading(true);
+  };
+  const handleCloseCloading = () => {
+    setLoading(false);
+  };
   const onClose = () => {
     setVisible(false);
   };
 
+  window.onbeforeunload = function (event) {
+    console.log("event");
+    console.log(event);
+    event.preventDefault();
+    return false;
+  };
+  useEffect(() => {
+    addWalletListener(setWallet, dispatch);
+    return () => removeWalletListener();
+  }, []);
   const handleConnectWallet = () => {
-    console.log("conect wallet");
+    const isCheck = checkMN();
+    if (isCheck) {
+      handleOpenCloading();
+      connectMn()
+        .then(async (data) => {
+          const addressWallet = await data[0];
+          setWallet(addressWallet);
+          dispatch(handlecurrentAddress(addressWallet));
+        })
+        .catch((error) => {
+          handleNotification(
+            "warning",
+            "Bạn đã từ chối kết nối với ví",
+            "Nếu bạn muốn tiếp tục. Vui lòng mở khóa ví của bạn và kết nối lại !"
+          );
+        });
+    } else {
+      handleNotification(
+        "warning",
+        "Vui lòng đăng cài Ví",
+        "Bạn phải cài ví vào trình duyệt trước để tiếp tục!"
+      );
+    }
+    handleCloseCloading();
   };
   socket.on("server", (data) => {
     console.log(data);
@@ -49,6 +97,8 @@ const Header = () => {
       await hadleLogout(t, navigate, dispatch);
     }
   };
+  console.log("BLOCKCHAIN.CURRENACCOUNT");
+  console.log(wallet);
   return (
     <Row>
       <div className="header">
@@ -137,10 +187,14 @@ const Header = () => {
         <Col xl={{ span: 8 }} md={{ span: 12 }} xs={{ span: 0 }} lg={{ span: 8 }}>
           <div className="header__right">
             <div className="header__wallet">
-              <button onClick={handleConnectWallet} className="button__wallet">
+              <Button
+                loading={loading}
+                onClick={() => handleConnectWallet()}
+                className="button__wallet"
+              >
                 <img src={iconwallet} alt="" />
                 <span>Connect Wallet</span>
-              </button>
+              </Button>
             </div>
             {_.isEmpty(user) ? (
               <div className="header__account">
