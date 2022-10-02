@@ -1,0 +1,31 @@
+.random {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lac__broad {
+  position: relative;
+  width: 50%;
+  height: 50vh;
+  border-radius: 50%;
+  background-color: white;
+}
+.lac__big {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.lac__flex {
+  display: flex;
+  align-items: center;
+}
+.lac__item {
+  width: 50%;
+  padding: 10px;
+}
+.lac__item__center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

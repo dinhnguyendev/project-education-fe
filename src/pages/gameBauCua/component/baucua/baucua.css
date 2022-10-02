@@ -1,0 +1,18 @@
+.baucua {
+  flex: 1;
+}
+.baucua__big {
+  overflow-x: scroll;
+  background-color: white;
+  padding: 24px;
+  border-radius: 5px;
+  width: 100%;
+}
+.baucua__card {
+  margin: 10px;
+}
+.baucua__item {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}

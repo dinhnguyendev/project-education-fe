@@ -30,14 +30,15 @@ export const addWalletListener = (setWallet, dispatch) => {
   if (window.ethereum) {
     window.ethereum.on("accountsChanged", (accounts) => {
       if (accounts.length > 0) {
-        Modal.confirm({
-          title: "Thông báo",
-          icon: <CheckCircleOutlined />,
-          content: "Bạn có muốn đổi địa chỉ ví của bạn không",
-          okText: "Đồng ý",
-          cancelText: "Không đồng ý",
-          onOk: () => handleChangeWallet(true, setWallet, accounts[0], dispatch),
-        });
+        handleChangeWallet(true, setWallet, accounts[0], dispatch);
+        // Modal.confirm({
+        //   title: "Thông báo",
+        //   icon: <CheckCircleOutlined />,
+        //   content: "Bạn có muốn đổi địa chỉ ví của bạn không",
+        //   okText: "Đồng ý",
+        //   cancelText: "Không đồng ý",
+        //   onOk: () => ,
+        // });
       } else {
       }
     });

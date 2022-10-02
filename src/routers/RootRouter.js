@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoadingPage from "../components/loadingPage/LoadingPage";
 import { ROUTER } from "../constants/constants";
 const Home = lazy(() => import("../pages/home/Home"));
+const GameBauCua = lazy(() => import("../pages/gameBauCua/GameBauCua"));
 const Login = lazy(() => import("./../pages/login/Login"));
 const Register = lazy(() => import("./../pages/register/Register"));
 const Authentication = lazy(() => import("../layout/auth/Authentication"));
@@ -24,6 +25,7 @@ const RootRouter = () => {
                 <Route path={ROUTER.START} element={<StartCaro />} />
                 <Route path={ROUTER.PLAYCARO} element={<Caro />} />
               </Route>
+              <Route path={ROUTER.BAUCUA} element={<GameBauCua />} />
             </Route>
           </Route>
           <Route path={ROUTER.AUTHORIZATION} element={<Authorization />}></Route>

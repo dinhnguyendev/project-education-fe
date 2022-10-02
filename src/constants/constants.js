@@ -8,6 +8,7 @@ export const ROUTER = {
   GAMECARO: "caro",
   START: "start",
   PLAYCARO: "play/:id",
+  BAUCUA: "gourd-crab-shrimp-fish",
   NOTFOUND: "*",
 };
 

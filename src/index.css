@@ -46,3 +46,6 @@ button.ant-btn.ant-btn-primary {
   display: inline-flex !important;
   align-items: center !important;
 }
+.ant-card-body {
+  padding: 0px !important;
+}

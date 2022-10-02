@@ -2,7 +2,19 @@ import { useEffect, useRef, useState } from "react";
 import "./header.css";
 import IconGame from "../../assets/image/game.svg";
 import LogoGame from "../../assets/image/logo.svg";
-import { Avatar, Button, Space, Dropdown, Image, Drawer, Select, Col, Row } from "antd";
+import {
+  Avatar,
+  Button,
+  Space,
+  Dropdown,
+  Image,
+  Drawer,
+  Select,
+  Col,
+  Row,
+  Tag,
+  message,
+} from "antd";
 import iconwallet from "../../assets/image/IconWallet.svg";
 import { CloseCircleOutlined, MenuOutlined } from "@ant-design/icons";
 import { BLOCKCHAIN, KEY, LINKTO, MENUACCOUNT } from "../../constants/constants";
@@ -14,6 +26,8 @@ import socket from "../../socket.io/socket.io";
 import MenuAccount from "../menu/MenuAccount";
 import { hadleLogout } from "../../actions/auth/authActions";
 import { useNavigate } from "react-router-dom";
+import { WalletOutlined } from "@ant-design/icons";
+
 import {
   addWalletListener,
   checkMN,
@@ -22,6 +36,7 @@ import {
 } from "../../utils/blockchain";
 import { handleNotification } from "./../../utils/notification";
 import { handlecurrentAddress } from "../../redux/userSlice";
+import { ConverAccoutWallet } from "../../utils/caro";
 
 const { Option } = Select;
 const Header = () => {
@@ -29,6 +44,7 @@ const Header = () => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.login?.data);
+  const walletSave = useSelector((state) => state.user.currentAddress);
   const [visible, setVisible] = useState(false);
   const [placement, setPlacement] = useState("left");
   const [wallet, setWallet] = useState("");
@@ -46,12 +62,12 @@ const Header = () => {
     setVisible(false);
   };
 
-  window.onbeforeunload = function (event) {
-    console.log("event");
-    console.log(event);
-    event.preventDefault();
-    return false;
-  };
+  // window.onbeforeunload = function (event) {
+  //   console.log("event");
+  //   console.log(event);
+  //   event.preventDefault();
+  //   return false;
+  // };
   useEffect(() => {
     addWalletListener(setWallet, dispatch);
     return () => removeWalletListener();
@@ -59,6 +75,9 @@ const Header = () => {
   const handleConnectWallet = () => {
     const isCheck = checkMN();
     if (isCheck) {
+      if (wallet || walletSave) {
+        return message.success("Bạn đã có ví");
+      }
       handleOpenCloading();
       connectMn()
         .then(async (data) => {
@@ -102,9 +121,9 @@ const Header = () => {
   return (
     <Row>
       <div className="header">
-        <Col xl={{ span: 16 }} lg={{ span: 16 }} md={{ span: 12 }} xs={{ span: 24 }}>
+        <Col>
           <div className="header__big">
-            <Col xl={{ span: 6 }} lg={{ span: 9 }} md={{ span: 18 }}>
+            <Col>
               <div className="header__left">
                 <Space>
                   <MenuOutlined onClick={showDrawer} style={{ fontSize: 20 }} />
@@ -161,7 +180,7 @@ const Header = () => {
                 </div>
               </div>
             </Col>
-            <Col
+            {/* <Col
               xl={{ span: 10 }}
               lg={{ span: 9 }}
               md={{ span: 0 }}
@@ -180,12 +199,19 @@ const Header = () => {
                   </div>
                 </div>
               </div>
-            </Col>
+            </Col> */}
           </div>
         </Col>
 
-        <Col xl={{ span: 8 }} md={{ span: 12 }} xs={{ span: 0 }} lg={{ span: 8 }}>
+        <Col>
           <div className="header__right">
+            <div className="header__account">
+              <Tag icon={<WalletOutlined />} color="#cd201f">
+                {(wallet && ConverAccoutWallet(wallet)) ||
+                  (walletSave && ConverAccoutWallet(walletSave)) ||
+                  "Ví"}
+              </Tag>
+            </div>
             <div className="header__wallet">
               <Button
                 loading={loading}

@@ -21,3 +21,9 @@ export const initBoardData = (height, width) => {
   let data = createEmptyArray(height, width);
   return data;
 };
+export const ConverAccoutWallet = (wallet) => {
+  const first = wallet.slice(0, 4);
+  const last = wallet.slice(-4);
+  const respon = `${first}...${last}`;
+  return respon;
+};
