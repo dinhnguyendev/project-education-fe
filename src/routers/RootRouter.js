@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoadingPage from "../components/loadingPage/LoadingPage";
 import { ROUTER } from "../constants/constants";
+import GameTurtle from "../pages/gameConRua/GameTurtle";
 const Home = lazy(() => import("../pages/home/Home"));
 const GameBauCua = lazy(() => import("../pages/gameBauCua/GameBauCua"));
 const Login = lazy(() => import("./../pages/login/Login"));
@@ -26,6 +27,7 @@ const RootRouter = () => {
                 <Route path={ROUTER.PLAYCARO} element={<Caro />} />
               </Route>
               <Route path={ROUTER.BAUCUA} element={<GameBauCua />} />
+              <Route path={ROUTER.CON_RUA} element={<GameTurtle />} />
             </Route>
           </Route>
           <Route path={ROUTER.AUTHORIZATION} element={<Authorization />}></Route>

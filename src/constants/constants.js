@@ -9,6 +9,7 @@ export const ROUTER = {
   START: "start",
   PLAYCARO: "play/:id",
   BAUCUA: "gourd-crab-shrimp-fish",
+  CON_RUA: "turtle",
   NOTFOUND: "*",
 };
 

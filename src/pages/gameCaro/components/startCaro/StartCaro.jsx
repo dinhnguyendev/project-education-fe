@@ -39,13 +39,13 @@ const StartCaro = () => {
     if (coin == 0) {
       return handleMessage("warning", "vui lòng chọn số peer cược");
     }
-    if (!currentAddress) {
-      return handleNotification(
-        "warning",
-        "Vui lòng kết nối với ví",
-        "kết nối với ví tiền nếu bạn muốn chơi"
-      );
-    }
+    // if (!currentAddress) {
+    //   return handleNotification(
+    //     "warning",
+    //     "Vui lòng kết nối với ví",
+    //     "kết nối với ví tiền nếu bạn muốn chơi"
+    //   );
+    // }
     showModal();
     console.log("bat dau tom doi thu");
     console.log(user);
