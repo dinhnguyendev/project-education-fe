@@ -32,10 +32,10 @@ const StartCaro = () => {
   };
 
   const handleSearch = () => {
-    if (!user) {
-      handleMessage("warning", "vui lòng đăng nhập");
-      return navigate(LINKTO.LOGIN);
-    }
+    // if (!user) {
+    //   handleMessage("warning", "vui lòng đăng nhập");
+    //   return navigate(LINKTO.LOGIN);
+    // }
     if (coin == 0) {
       return handleMessage("warning", "vui lòng chọn số peer cược");
     }

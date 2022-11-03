@@ -2,3 +2,46 @@
   width: 97px;
   height: 67px;
 }
+.game__turtle__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding: 10px 0px;
+  height: 80px;
+}
+.game__turtle__item__image {
+  position: relative;
+}
+.game__turtle__item__svg {
+  height: 100%;
+}
+.run__svg--yellow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+}
+.run__svg--pink {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+}
+.run__svg--blue {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+}
+.game__turtle__item__flag {
+  position: relative;
+}
+.game__turtle__item__flag__image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  height: 68px;
+  width: 33px;
+}
