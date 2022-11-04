@@ -8,4 +8,5 @@ var socket = io(DOMAIN, {
     token: token,
   },
 });
+
 export default socket;

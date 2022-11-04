@@ -13,7 +13,11 @@ const GameContainer = () => {
   const [yellowTurtleState, setYellowTurtle] = useState(yellowTurtle);
   const [blueTurtleState, setBlueTurtle] = useState(blueTurtle);
   const [pinkTurtleState, setPinkTurtle] = useState(pinkTurtle);
-  const minCurrent = 10;
+  let WIN_I;
+  let WIN_II;
+  let WIN_III;
+  const currentD = 1070;
+  const minCurrent = 5;
   const maxCurrent = 30;
   function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
@@ -32,55 +36,80 @@ const GameContainer = () => {
     return () => clearInterval(id);
   }, []);
   const handleRunByMillisecondsTutleYellow = () => {
-    const currentD = 1200;
     let responTotal = 0;
     const idInterval = setInterval(() => {
       const resRunBytimmer = getRandomInt(minCurrent, maxCurrent);
       responTotal = responTotal + resRunBytimmer;
-      console.log(responTotal);
       const elementYellow = document.querySelector(".run__svg--yellow");
       const currentLeft = elementYellow.id;
       const currentRun = +currentLeft + resRunBytimmer;
       elementYellow.setAttribute("id", `${currentRun}`);
       elementYellow.style.left = `${currentRun}px`;
       if (responTotal >= currentD) {
+        if (!WIN_I) {
+          WIN_I = 1;
+          console.log("nhat : " + WIN_I);
+        } else if (!WIN_II) {
+          WIN_II = 1;
+          console.log("nhi : " + WIN_II);
+        } else {
+          WIN_III = 1;
+          console.log("ba : " + WIN_III);
+        }
+
         clearInterval(idInterval);
       }
-    }, 1000);
+    }, 500);
   };
   const handleRunByMillisecondsTutlePink = () => {
-    const currentD = 1200;
     let responTotal = 0;
     const idInterval = setInterval(() => {
       const resRunBytimmer = getRandomInt(minCurrent, maxCurrent);
       responTotal = responTotal + resRunBytimmer;
-      console.log(responTotal);
       const elementYellow = document.querySelector(".run__svg--pink");
       const currentLeft = elementYellow.id;
       const currentRun = +currentLeft + resRunBytimmer;
       elementYellow.setAttribute("id", `${currentRun}`);
       elementYellow.style.left = `${currentRun}px`;
       if (responTotal >= currentD) {
+        if (!WIN_I) {
+          WIN_I = 2;
+          console.log("nhat : " + WIN_I);
+        } else if (!WIN_II) {
+          WIN_II = 2;
+          console.log("nhi : " + WIN_II);
+        } else {
+          WIN_III = 2;
+          console.log("ba : " + WIN_III);
+        }
         clearInterval(idInterval);
       }
-    }, 1000);
+    }, 500);
   };
   const handleRunByMillisecondsTutleBlue = () => {
-    const currentD = 1200;
     let responTotal = 0;
     const idInterval = setInterval(() => {
       const resRunBytimmer = getRandomInt(minCurrent, maxCurrent);
       responTotal = responTotal + resRunBytimmer;
-      console.log(responTotal);
       const elementYellow = document.querySelector(".run__svg--blue");
       const currentLeft = elementYellow.id;
       const currentRun = +currentLeft + resRunBytimmer;
       elementYellow.setAttribute("id", `${currentRun}`);
       elementYellow.style.left = `${currentRun}px`;
       if (responTotal >= currentD) {
+        if (!WIN_I) {
+          WIN_I = 3;
+          console.log("nhat : " + WIN_I);
+        } else if (!WIN_II) {
+          WIN_II = 3;
+          console.log("nhi : " + WIN_II);
+        } else {
+          WIN_III = 3;
+          console.log("ba : " + WIN_III);
+        }
         clearInterval(idInterval);
       }
-    }, 1000);
+    }, 500);
   };
   const handleRunByMilliseconds = () => {
     handleRunByMillisecondsTutleBlue();
