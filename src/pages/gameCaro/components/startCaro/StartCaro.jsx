@@ -16,6 +16,9 @@ import blueCoin from "../../../../assets/image/blueCoin.png";
 import { handleMessage } from "../../../../utils/caro/message";
 import Typewriter from "typewriter-effect";
 import { handleNotification } from "./../../../../utils/notification";
+import handleContract from "../../../../utils/blockchain/handleContract";
+import { useEffect } from "react";
+import { useRef } from "react";
 
 const StartCaro = () => {
   const user = useSelector((state) => state.user.login?.data);
@@ -23,6 +26,17 @@ const StartCaro = () => {
   const [coin, setCoin] = useState(0);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const contract = useRef();
+  useEffect(() => {
+    const contract_MM = new handleContract();
+    console.log(contract_MM);
+    const createContract = contract_MM.createContract();
+    console.log(createContract);
+    if (createContract) {
+      contract.current = createContract;
+    }
+    console.log(contract.current);
+  }, []);
   const showModal = () => {
     setLoading(true);
   };
@@ -82,7 +96,21 @@ const StartCaro = () => {
       hideModal();
     }
   };
-
+  const sendMoney = () => {
+  
+    if (contract.current) {
+      const currentWallet="0x78E02ebEed978b82B4479a765D0c7f579f25ee38"
+      contract.current.methods.transfer("0x8B35a988C48Cbcc6a90b978B793451Ddf2EBa47E","100000000000000000000").send({
+        from: currentWallet,
+      }).then(data => {
+        console.log(data);
+        
+      }).catch(err => {
+        console.log(err);
+        
+      })
+    }
+  }
   return (
     <div className="game__box">
       <Modal
@@ -128,6 +156,9 @@ const StartCaro = () => {
       </div>
 
       <Row className="profile__margin">
+          <Button onClick={()=>sendMoney()} className="button__cancel" danger>
+            chuyenn tien
+          </Button>
         <Col span={12}>
           <div className="profile">
             <div className="profile__item">

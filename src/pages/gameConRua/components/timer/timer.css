@@ -1,0 +1,27 @@
+.timer__flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.timer {
+  display: inline-flex;
+  align-items: center;
+  background-color: white;
+  width: auto;
+  padding: 20px;
+  border-radius: 10px;
+}
+.timer__heading {
+}
+.timer__flex {
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+.timer__icon {
+}
+.timer__count {
+}
+.timer__color {
+  color: red;
+}

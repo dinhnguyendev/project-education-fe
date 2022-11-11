@@ -1,0 +1,17 @@
+.timer__box {
+  width: 100%;
+  height: 100%;
+}
+.timer__start {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+.timer__heading__text {
+  font-family: "Abduction2002", sans-serif;
+  font-size: 100px;
+  color: red;
+}

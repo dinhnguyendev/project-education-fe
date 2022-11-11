@@ -47,3 +47,9 @@
   height: 68px;
   width: 33px;
 }
+.game__turtle__overflow {
+  overflow: hidden;
+}
+.game__turtle {
+  position: relative;
+}
