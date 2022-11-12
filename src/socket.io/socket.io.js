@@ -7,6 +7,10 @@ var socket = io(DOMAIN, {
   extraHeaders: {
     token: token,
   },
+  reconnection: true,
+  reconnectionDelay: 500,
+  reconnectionDelayMax: 1000,
+  reconnectionAttempts:5
 });
 
 export default socket;

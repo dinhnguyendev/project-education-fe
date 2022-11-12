@@ -1,0 +1,9 @@
+.bet__games{
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+.bet__game__flex{
+    display: flex;
+    align-items: center;
+}

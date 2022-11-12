@@ -467,11 +467,12 @@ class handleContract{
                 "type": "function"
             }
         ]
-        const addressSM = "0x10b8b5e17c97F48c4d0C549B9bfa5C18E7e3C63D"
+        const addressSM = "0x2e64390d4aF6d6c048280B3489B1cDf551029fAe"
         const web3 = new Web3(window.ethereum);
         window.ethereum.enable();
         const contract_MN = new web3.eth.Contract(abi, addressSM);
         return contract_MN;
     }
+    
 }
 export default handleContract;

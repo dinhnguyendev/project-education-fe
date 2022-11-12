@@ -24,8 +24,8 @@ const GameContainer = () => {
   const currentResult = useRef();
   const currentD = 1070;
   const currentDHidden = 1200;
-  const minCurrent = 80;
-  const maxCurrent = 100;
+  const minCurrent = 5;
+  const maxCurrent = 30;
   const currentStart = 40;
 
   function getRandomArbitrary(min, max) {

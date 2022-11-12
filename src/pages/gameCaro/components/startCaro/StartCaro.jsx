@@ -1,4 +1,4 @@
-import { Col, Row, Avatar, Button, Modal } from "antd";
+import { Col, Row, Avatar, Button, Modal, message } from "antd";
 import React, { useState } from "react";
 import "./startCaro.css";
 import iconStart from "../../../../assets/image/start-caro.png";
@@ -19,6 +19,8 @@ import { handleNotification } from "./../../../../utils/notification";
 import handleContract from "../../../../utils/blockchain/handleContract";
 import { useEffect } from "react";
 import { useRef } from "react";
+import { BLOCKCHAIN } from './../../../../constants/constants';
+
 
 const StartCaro = () => {
   const user = useSelector((state) => state.user.login?.data);
@@ -71,17 +73,42 @@ const StartCaro = () => {
 
     socket.emit("join-room", data);
   };
+  const sendToken = (contract, currentAddress, amount,data) => {
+    console.log(data);
+    const addreceive = BLOCKCHAIN.ADDRESS_CONTRACT_RECEIVE;
+    if (contract && currentAddress && addreceive) {
+      contract.methods.transfer(addreceive,`${amount}000000000000000000`).send({
+        from: currentAddress,
+      }).then(data => {
+        console.log(data);
+      }).catch(err => {
+        socket.emit("client-transfer-token--error", data);
+      })
+    }
+}
   useLayoutEffect(() => {
     socket.on("server--rooms--sucessfylly", (data) => {
       if (data) {
-        const idRooms = data.idRooms;
-        console.log("navigate");
-        console.log(navigate);
-        hideModal();
-        navigate(`${LINKTO.PLAYCARO}/${idRooms}`, { state: { data }, replace: true });
+        sendToken(contract.current, currentAddress,data.coin,data);
+        // const idRooms = data.idRooms;
+        // console.log("navigate");
+        // console.log(navigate);
+        // hideModal();
+        // navigate(`${LINKTO.PLAYCARO}/${idRooms}`, { state: { data }, replace: true });
       }
     });
   }, []);
+  useLayoutEffect(() => {
+    socket.on("server--transfer-error", (data) => {
+      console.log("do >>>>>>>>>>>>>>>>>>>>>>>>>");
+      if (data) {
+        hideModal();
+        message.error("Tạo trận đấu không thành công");
+        socket.emit("client--leave--room--error", data);
+      }
+    });
+  }, []);
+  
   const handleCoin = (e) => {
     const tagCoin = document.querySelectorAll(".peer__coin");
     tagCoin.forEach((item) => {
@@ -97,17 +124,15 @@ const StartCaro = () => {
     }
   };
   const sendMoney = () => {
-  
-    if (contract.current) {
-      const currentWallet="0x78E02ebEed978b82B4479a765D0c7f579f25ee38"
-      contract.current.methods.transfer("0x8B35a988C48Cbcc6a90b978B793451Ddf2EBa47E","100000000000000000000").send({
-        from: currentWallet,
+    const addreceive = BLOCKCHAIN.ADDRESS_CONTRACT_RECEIVE;
+    if (contract.current && currentAddress && addreceive) {
+      contract.current.methods.transfer(addreceive,"100000000000000000000").send({
+        from: currentAddress,
       }).then(data => {
         console.log(data);
         
       }).catch(err => {
         console.log(err);
-        
       })
     }
   }
@@ -179,16 +204,16 @@ const StartCaro = () => {
       <Row className="row__flex">
         <Col className="peer__flex">
           <div className="peer">
-            <PeerCoin image={yellowCoin} handleCoin={handleCoin} coinNumber={0.01} />
+            <PeerCoin image={yellowCoin} handleCoin={handleCoin} coinNumber={10} />
           </div>
           <div className="peer">
-            <PeerCoin image={blueCoin} handleCoin={handleCoin} coinNumber={0.02} />
+            <PeerCoin image={blueCoin} handleCoin={handleCoin} coinNumber={20} />
           </div>
           <div className="peer">
-            <PeerCoin image={redCoin} handleCoin={handleCoin} coinNumber={0.03} />
+            <PeerCoin image={redCoin} handleCoin={handleCoin} coinNumber={50} />
           </div>
           <div className="peer">
-            <PeerCoin image={greenCoin} handleCoin={handleCoin} coinNumber={0.04} />
+            <PeerCoin image={greenCoin} handleCoin={handleCoin} coinNumber={100} />
           </div>
         </Col>
         <Col>
