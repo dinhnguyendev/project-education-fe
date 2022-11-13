@@ -1,9 +1,15 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoadingPage from "../components/loadingPage/LoadingPage";
+import NotFound from "../components/notFound/NotFound";
 import { ROUTER } from "../constants/constants";
+import ManagerCaro from "../pages/admin/components/caro/ManagerCaro";
+
+import HomeManager from "../pages/admin/components/home/HomeManager";
+import User from "../pages/admin/components/user/User";
 import GameTurtle from "../pages/gameConRua/GameTurtle";
 const Home = lazy(() => import("../pages/home/Home"));
+const Admin = lazy(() => import("../pages/admin/Admin"));
 const GameBauCua = lazy(() => import("../pages/gameBauCua/GameBauCua"));
 const Login = lazy(() => import("./../pages/login/Login"));
 const Register = lazy(() => import("./../pages/register/Register"));
@@ -31,11 +37,16 @@ const RootRouter = () => {
             </Route>
           </Route>
           <Route path={ROUTER.AUTHORIZATION} element={<Authorization />}></Route>
+          <Route path={ROUTER.ADMIN} element={<Admin />}>
+            <Route path={ROUTER.CARO_MANAGER} element={<ManagerCaro />} />
+            <Route path={ROUTER.USER_MANAGER} element={<User />} />
+            <Route path={ROUTER.HOME_MANAGER} element={<HomeManager />} />
+          </Route>
           <Route path={ROUTER.AUTHENTICATION} element={<Authentication />}>
             <Route path={ROUTER.LOGIN} element={<Login />} />
             <Route path={ROUTER.REGISTER} element={<Register />} />
           </Route>
-          <Route path={ROUTER.NOTFOUND} element={"not found"} />
+          <Route path={ROUTER.NOTFOUND} element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </Suspense>

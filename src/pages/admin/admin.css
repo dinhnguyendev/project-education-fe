@@ -1,0 +1,28 @@
+aside.ant-layout-sider.ant-layout-sider-dark.ant-layout-sider-has-trigger {
+  /* background-color: white; */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.ant-menu {
+  /* background-color: rgba(43, 154, 255, 0.5); */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.logo__box {
+  height: 64px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(18, 3, 61);
+}
+header.ant-layout-header.site-layout-background {
+  background-color: rgb(18, 3, 61);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.logo {
+  width: 100%;
+  max-width: 169px;
+  height: 24px;
+}
+.ant-menu-item {
+  margin: 0px !important;
+}
