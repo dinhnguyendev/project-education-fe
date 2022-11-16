@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Card, Col, Row, Statistic, Select, Typography } from "antd";
+import { useSelector } from "react-redux";
 const { Text } = Typography;
-const InForToken = () => {
-  const handleCheckTotalToken = () => {};
+const InForToken = ({ contract, address }) => {
+  console.log(contract);
+  console.log(address);
+  const currentAddress = useSelector((state) => state.user.currentAddress);
+  const [totalPeer, setTotalPeer] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const handleCheckTotalToken = () => {
+    setLoading(true);
+    contract.methods
+      ?.checkTotal()
+      .call()
+      .then((total) => {
+        console.log(total);
+        setTotalPeer(total);
+        setLoading(false);
+      })
+      .catch((err) => {});
+  };
 
   return (
     <>
@@ -13,7 +30,7 @@ const InForToken = () => {
             <Card>
               <Statistic
                 title="Địa chỉ đồng Token"
-                value={"0xd9145cce52d3812f254917e481eb44e9943f39138"}
+                value={address}
                 precision={2}
                 valueStyle={{
                   color: "#cf1322",
@@ -28,10 +45,13 @@ const InForToken = () => {
           <div className="home__token__action__heading">Kiểm tram số token:</div>
           <div className="home__token__content">
             <div className="home__token__item">
-              <Button onClick={handleCheckTotalToken} type="primary">
+              <Button loading={loading} onClick={handleCheckTotalToken} type="primary">
                 Số Token hiện tại
               </Button>
-              <div className="home__token__item__total">500 peer</div>
+              <div className="home__token__item__total">
+                {totalPeer ? new Intl.NumberFormat().format(totalPeer / 1000000000000000000) : 0}
+                peer
+              </div>
             </div>
           </div>
         </div>

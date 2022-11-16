@@ -22,8 +22,18 @@
 .container__left__heading {
 }
 .container__left__title {
+  color: #333;
 }
 .container__left__time {
+}
+.container__left__heading__text{
+  color: black;
+  font-weight: 600;
+}
+.container__left__total{
+  color: red;
+  font-weight: 600;
+  font-size: 30px;
 }
 .container__left__time__heading {
 }

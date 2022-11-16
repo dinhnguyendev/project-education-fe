@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Col, Row, Statistic, Tabs } from "antd";
-const ConnectionCaro = () => {
+
+const Connection = () => {
   return (
     <div className="site-statistic-demo-card">
       <Row gutter={16}>
@@ -28,7 +29,6 @@ const ConnectionCaro = () => {
                 color: "#cf1322",
               }}
               className="connection"
-              // prefix={<ArrowDownOutlined />}
               suffix="user"
             />
           </Card>
@@ -38,4 +38,4 @@ const ConnectionCaro = () => {
   );
 };
 
-export default ConnectionCaro;
+export default Connection;

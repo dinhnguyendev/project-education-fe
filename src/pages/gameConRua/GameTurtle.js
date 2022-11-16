@@ -10,12 +10,14 @@ const GameTurtle = () => {
     socket.emit("join--room-turtle");
   }, []);
   return (
-    <div className="game__turtle__box">
-      <div className="game__turtle game__turtle__brg">
-        <TimerTurtle />
-        <GameContainer />
-        <Bet/>
+    <div className="turtle__big">
+      <div className="game__turtle__box">
+        <div className="game__turtle game__turtle__brg">
+          <TimerTurtle />
+          <GameContainer />
+        </div>
       </div>
+      <Bet />
     </div>
   );
 };

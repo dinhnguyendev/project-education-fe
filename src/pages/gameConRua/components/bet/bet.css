@@ -1,9 +1,37 @@
-.bet__games{
-    display: flex;
-    align-items: center;
-    justify-content: center
+.bet__box {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.bet__game__flex{
-    display: flex;
-    align-items: center;
+.bet__box__brg {
+  padding: 20px;
+  background-color: rgba(1, 1, 1, 0.4);
+  box-shadow: 0 7px 7px rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+  display: inline-block;
+  border-radius: 10px;
+}
+.bet__games {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bet__game__flex {
+  display: flex;
+  align-items: center;
+}
+.bet__game__submit {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bet__game__submit__btn {
+  /* padding: 10px 20px;
+  background-color: white;
+  border-radius: 5px; */
+  margin-top: 10px;
 }

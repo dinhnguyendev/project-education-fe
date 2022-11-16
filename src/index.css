@@ -46,3 +46,7 @@ button.ant-btn.ant-btn-primary {
 .ant-card-body {
   padding: 0px !important;
 }
+.connection {
+  box-shadow: 0 7px 7px rgba(0, 0, 0, 0.2);
+  padding: 10px !important;
+}

@@ -1,6 +1,9 @@
 import React from "react";
-import { Col, Row, Avatar } from "antd";
+import { Col, Row, Avatar, Button } from "antd";
 import "./containerHome.css";
+import { RightCircleOutlined, RightOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
+import { ROUTER } from "./../../constants/constants";
 const ContainerHome = () => {
   return (
     <div className="container">
@@ -10,13 +13,24 @@ const ContainerHome = () => {
             <Row className="container__left__top">
               <Col xl={{ span: 12 }}>
                 <div className="container__left__heading">
-                  <h3>PRIZE POOL UP TO</h3>
-                  <span>$2000</span>
+                  <h3 className="container__left__heading__text">Hãy đăng nhập</h3>
+                  <span className="container__left__total">10 Peer</span>
                 </div>
-                <div className="container__left__title">The best way to enjoy Peergame</div>
+                <div className="container__left__title">
+                  Nếu bạn chưa đăng nhập. Vui lòng đăng nhập để có thể nhận được 10 peer token miễn
+                  phí
+                </div>
                 <div className="container__left__time">
-                  <div className="container__left__time__heading">REMAINING TIME</div>
-                  <div className="container__left__time__content">hello</div>
+                  <div className="container__left__time__heading">
+                    vui lòng xem hướng dẫn <RightOutlined />
+                  </div>
+                  <div className="container__left__time__content">
+                    <Link to={ROUTER.HELPERS}>
+                      <Button Button icon={<RightCircleOutlined />} danger>
+                        Xem tại đây
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
               </Col>
               <Col xl={{ span: 12 }}>

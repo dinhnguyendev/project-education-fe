@@ -5,13 +5,14 @@
   padding: 20px;
   background-color: white;
   border-radius: 5px;
+  box-shadow: 0 7px 7px rgba(0, 0, 0, 0.2);
 }
 .row__box {
   margin-top: 10px;
 }
 .home__token__item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 .home__token__item__total {
   margin-left: 5px;
@@ -25,6 +26,7 @@
   border-radius: 5px;
   width: 100%;
   margin-top: 15px;
+  box-shadow: 0 7px 7px rgba(0, 0, 0, 0.2);
 }
 .home__token__content__withraw {
 }
@@ -32,4 +34,27 @@
 }
 section.ant-layout.site-layout {
   background-color: #f4f4f4 !important;
+}
+.info__contract {
+  margin-left: 20px;
+}
+.infor__contract__empty {
+  margin-left: 20px;
+}
+.home__token__content__send {
+  margin-top: 10px 5px;
+  display: flex;
+  align-items: center;
+}
+.home__token__total {
+  display: flex;
+  align-items: center;
+  margin: 10px 0px;
+}
+.home__token__total__number {
+  margin-left: 10px;
+  width: 200px;
+}
+.withdrawn__token {
+  margin-left: 10px;
 }

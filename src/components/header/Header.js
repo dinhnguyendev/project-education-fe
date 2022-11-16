@@ -26,7 +26,7 @@ import socket from "../../socket.io/socket.io";
 import MenuAccount from "../menu/MenuAccount";
 import { hadleLogout } from "../../actions/auth/authActions";
 import { useNavigate } from "react-router-dom";
-import { WalletOutlined } from "@ant-design/icons";
+import { WalletOutlined,GiftOutlined } from "@ant-design/icons";
 
 import {
   addWalletListener,
@@ -230,9 +230,11 @@ const Header = () => {
                 <Link to={LINKTO.LOGIN}>
                   <div className="heading__link__login">{t("login.heading")}</div>
                 </Link>
+                
               </div>
             ) : (
               <div className="header__account">
+                  <Button className="header__account__free" icon={<GiftOutlined />} danger type="primary">Lấy Peer miễn phí</Button>
                 <Avatar
                   src={
                     <Image

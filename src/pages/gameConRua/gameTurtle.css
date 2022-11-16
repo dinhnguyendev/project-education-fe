@@ -1,16 +1,19 @@
-.game__turtle__box{
-  background: url("https://images.template.net/104234/cartoon-ocean-background-c9t10.jpg");
+.turtle__big {
+  background-color: rgb(122, 209, 241);
+}
+
+.game__turtle__box {
+  height: 560px;
+  background-image: url("../../assets/image/brg_game_turtle.png");
   background-repeat: no-repeat;
-  background-position: center;
-  height: 100vh;
+  background-position: bottom;
   background-size: cover;
+  box-shadow: 0 7px 7px rgba(0, 0, 0, 0.2);
 }
 .game__turtle {
   margin: 0 auto;
   max-width: 1200px;
   width: 100%;
- 
 }
-.game__turtle__brg{
-  
+.game__turtle__brg {
 }

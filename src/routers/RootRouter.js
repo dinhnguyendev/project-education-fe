@@ -1,11 +1,13 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Helpers from "../components/helpers/Helpers";
 import LoadingPage from "../components/loadingPage/LoadingPage";
 import NotFound from "../components/notFound/NotFound";
 import { ROUTER } from "../constants/constants";
 import ManagerCaro from "../pages/admin/components/caro/ManagerCaro";
 
 import HomeManager from "../pages/admin/components/home/HomeManager";
+import TurtleManager from "../pages/admin/components/turtle/TurtleManager";
 import User from "../pages/admin/components/user/User";
 import GameTurtle from "../pages/gameConRua/GameTurtle";
 const Home = lazy(() => import("../pages/home/Home"));
@@ -41,12 +43,14 @@ const RootRouter = () => {
             <Route path={ROUTER.CARO_MANAGER} element={<ManagerCaro />} />
             <Route path={ROUTER.USER_MANAGER} element={<User />} />
             <Route path={ROUTER.HOME_MANAGER} element={<HomeManager />} />
+            <Route path={ROUTER.TURTLE_MANAGER} element={<TurtleManager />} />
           </Route>
           <Route path={ROUTER.AUTHENTICATION} element={<Authentication />}>
             <Route path={ROUTER.LOGIN} element={<Login />} />
             <Route path={ROUTER.REGISTER} element={<Register />} />
           </Route>
           <Route path={ROUTER.NOTFOUND} element={<NotFound />} />
+          <Route path={ROUTER.HELPERS} element={<Helpers />} />
         </Routes>
       </BrowserRouter>
     </Suspense>
