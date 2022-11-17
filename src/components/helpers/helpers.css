@@ -9,6 +9,17 @@
   margin: 0 auto;
   padding: 20px 0;
 }
+.helpers__back {
+  margin: 10px 5px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.helpers__back__icon {
+  font-size: 30px;
+  font-weight: 500;
+  margin-right: 8px;
+}
 .helper__heading {
   font-size: 30px;
   padding: 10px;

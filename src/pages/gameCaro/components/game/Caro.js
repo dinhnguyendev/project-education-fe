@@ -52,6 +52,8 @@ const GameCaro = () => {
       socket.emit("client--timer-update", data);
       if (data.phone !== user.phone) {
         setShow(true);
+      } else {
+        setShow(false);
       }
     }
   });

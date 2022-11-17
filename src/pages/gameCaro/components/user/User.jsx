@@ -32,8 +32,6 @@ const User = ({ player }) => {
             <Avatar src={me?.avatar} />
           </div>
           <div className="user__name user__center">{me?.username}</div>
-          <div className="user__name user__center">{me?.phone}</div>
-          <div className="user__token user__center">300 Peer</div>
           <div className="user__position user__center">Quan co:{player.isX ? "✖️" : "⭕"} </div>
         </div>
       </div>
@@ -49,8 +47,6 @@ const User = ({ player }) => {
             <Avatar src={players?.avatar} />
           </div>
           <div className="user__name user__center">{players?.username}</div>
-          <div className="user__name user__center">{players?.phone}</div>
-          <div className="user__token user__center">300 Peer</div>
           <div className="user__position user__center"> Quan co: {player.isX ? "⭕" : "✖️"}</div>
         </div>
       </div>

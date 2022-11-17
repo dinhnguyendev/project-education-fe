@@ -2,7 +2,6 @@
 }
 .container__flex {
   display: flex;
- 
 }
 .container__flex__item {
   padding: 10px;
@@ -26,11 +25,11 @@
 }
 .container__left__time {
 }
-.container__left__heading__text{
+.container__left__heading__text {
   color: black;
   font-weight: 600;
 }
-.container__left__total{
+.container__left__total {
   color: red;
   font-weight: 600;
   font-size: 30px;
@@ -44,9 +43,13 @@
   height: 100%;
 }
 .container__right {
-  padding: 40px;
+}
+.container__right__box {
+  margin-left: 10px;
+  padding: 30px;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 50px;
+  height: 100%;
 }
 .container__right__heading {
   font-size: 22px;

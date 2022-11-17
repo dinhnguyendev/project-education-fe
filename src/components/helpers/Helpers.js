@@ -1,15 +1,20 @@
 import React from "react";
 import "./helpers.css";
 import { Divider, Tag, Statistic, Typography } from "antd";
-import { LinkOutlined } from "@ant-design/icons";
+import { LinkOutlined, LeftCircleOutlined } from "@ant-design/icons";
 import Icon from "./../icon/Icon";
-import { BLOCKCHAIN } from "./../../constants/constants";
+import { BLOCKCHAIN, LINKTO } from "./../../constants/constants";
 import brg_helpers from "../../assets/image/brg_helpers.png";
+import { Link } from "react-router-dom";
 const { Paragraph } = Typography;
 const Helpers = () => {
   return (
     <div className="helpers__box">
       <div className="helpers">
+        <Link to={LINKTO.HOME} className="helpers__back">
+          <i className="far fa-arrow-alt-circle-left helpers__back__icon"></i>
+          <div className="helpers__back__text">Trở về</div>
+        </Link>
         <div className="helpers__inf">
           <Tag color="success">
             <div className="helper__heading">Lấy token miễn phí</div>

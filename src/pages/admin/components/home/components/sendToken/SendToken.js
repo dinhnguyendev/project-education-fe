@@ -110,7 +110,7 @@ const SendToken = () => {
               width: "100%",
             }}
             min={1}
-            max={1000}
+            max={10000}
             // defaultValue={}
             onChange={onChange}
             prefix={<QuestionCircleOutlined />}

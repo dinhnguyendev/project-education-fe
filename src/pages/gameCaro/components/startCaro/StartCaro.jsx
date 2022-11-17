@@ -19,14 +19,16 @@ import { handleNotification } from "./../../../../utils/notification";
 import handleContract from "../../../../utils/blockchain/handleContract";
 import { useEffect } from "react";
 import { useRef } from "react";
-import { BLOCKCHAIN } from './../../../../constants/constants';
-
+import { BLOCKCHAIN } from "./../../../../constants/constants";
 
 const StartCaro = () => {
   const user = useSelector((state) => state.user.login?.data);
   const currentAddress = useSelector((state) => state.user.currentAddress);
   const [coin, setCoin] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [totalUser, setTotalUser] = useState(0);
+  const [loadingCheck, setLoadingCheck] = useState(false);
+  const [loadingCreateGame, setLoadingCreateGame] = useState(false);
   const navigate = useNavigate();
   const contract = useRef();
   useEffect(() => {
@@ -46,22 +48,29 @@ const StartCaro = () => {
   const hideModal = () => {
     setLoading(false);
   };
+  const showModalCreateGame = () => {
+    setLoadingCreateGame(true);
+  };
+
+  const hideModalCreateGame = () => {
+    setLoadingCreateGame(false);
+  };
 
   const handleSearch = () => {
-    // if (!user) {
-    //   handleMessage("warning", "vui lòng đăng nhập");
-    //   return navigate(LINKTO.LOGIN);
-    // }
+    if (!user) {
+      handleMessage("warning", "vui lòng đăng nhập");
+      return navigate(LINKTO.LOGIN);
+    }
     if (coin == 0) {
       return handleMessage("warning", "vui lòng chọn số peer cược");
     }
-    // if (!currentAddress) {
-    //   return handleNotification(
-    //     "warning",
-    //     "Vui lòng kết nối với ví",
-    //     "kết nối với ví tiền nếu bạn muốn chơi"
-    //   );
-    // }
+    if (!currentAddress) {
+      return handleNotification(
+        "warning",
+        "Vui lòng kết nối với ví",
+        "kết nối với ví tiền nếu bạn muốn chơi"
+      );
+    }
     showModal();
     console.log("bat dau tom doi thu");
     console.log(user);
@@ -73,42 +82,61 @@ const StartCaro = () => {
 
     socket.emit("join-room", data);
   };
-  const sendToken = (contract, currentAddress, amount,data) => {
+  const sendToken = (contract, currentAddress, amount, data) => {
     console.log(data);
-    const addreceive = BLOCKCHAIN.ADDRESS_CONTRACT_RECEIVE;
+    const addreceive = BLOCKCHAIN.ADDRESS__SM__GAMES;
     if (contract && currentAddress && addreceive) {
-      contract.methods.transfer(addreceive,`${amount}000000000000000000`).send({
-        from: currentAddress,
-      }).then(data => {
-        console.log(data);
-      }).catch(err => {
-        socket.emit("client-transfer-token--error", data);
-      })
+      contract.methods
+        .transfer(addreceive, `${amount}000000000000000000`)
+        .send({
+          from: currentAddress,
+        })
+        .then((res) => {
+          console.log(data);
+          const matchs = {
+            ...data,
+            idUser: user?._id,
+            addressWallet: currentAddress,
+          };
+          socket.emit("client--send-token-success", matchs);
+        })
+        .catch((err) => {
+          socket.emit("client-transfer-token--error", data);
+        });
     }
-}
+  };
   useLayoutEffect(() => {
     socket.on("server--rooms--sucessfylly", (data) => {
       if (data) {
-        sendToken(contract.current, currentAddress,data.coin,data);
-        // const idRooms = data.idRooms;
-        // console.log("navigate");
-        // console.log(navigate);
-        // hideModal();
-        // navigate(`${LINKTO.PLAYCARO}/${idRooms}`, { state: { data }, replace: true });
+        console.log("data room successfully");
+        console.log(data);
+        sendToken(contract.current, currentAddress, data.coin, data);
+        hideModal();
+        showModalCreateGame();
+      }
+    });
+  }, []);
+  useEffect(() => {
+    socket.on("server--navigate--game-broad", (dataUser) => {
+      if (dataUser) {
+        const data = dataUser?.find((items) => items.idUser == user?._id);
+
+        const idRooms = data?.idRooms;
+        hideModalCreateGame();
+        navigate(`${LINKTO.PLAYCARO}/${idRooms}`, { state: { data }, replace: false });
       }
     });
   }, []);
   useLayoutEffect(() => {
     socket.on("server--transfer-error", (data) => {
-      console.log("do >>>>>>>>>>>>>>>>>>>>>>>>>");
       if (data) {
-        hideModal();
+        hideModalCreateGame();
         message.error("Tạo trận đấu không thành công");
         socket.emit("client--leave--room--error", data);
       }
     });
   }, []);
-  
+
   const handleCoin = (e) => {
     const tagCoin = document.querySelectorAll(".peer__coin");
     tagCoin.forEach((item) => {
@@ -123,19 +151,23 @@ const StartCaro = () => {
       hideModal();
     }
   };
-  const sendMoney = () => {
-    const addreceive = BLOCKCHAIN.ADDRESS_CONTRACT_RECEIVE;
-    if (contract.current && currentAddress && addreceive) {
-      contract.current.methods.transfer(addreceive,"100000000000000000000").send({
-        from: currentAddress,
-      }).then(data => {
-        console.log(data);
-        
-      }).catch(err => {
-        console.log(err);
-      })
+
+  const handleCheckToken = () => {
+    setLoadingCheck(true);
+    if (currentAddress) {
+      contract.current.methods
+        .balanceOf(currentAddress)
+        .call()
+        .then((total) => {
+          setTotalUser(total);
+        })
+        .catch((err) => {})
+        .finally(() => {
+          setLoadingCheck(false);
+        });
     }
-  }
+  };
+
   return (
     <div className="game__box">
       <Modal
@@ -171,6 +203,35 @@ const StartCaro = () => {
           />
         </p>
       </Modal>
+      <Modal
+        title={
+          <>
+            <script src="https://cdn.lordicon.com/xdjxvujz.js"></script>
+            <lord-icon
+              src="https://cdn.lordicon.com/mgmiqlge.json"
+              trigger="loop"
+              delay="50"
+              colors="primary:#3a3347,secondary:#f24c00,tertiary:#4bb3fd,quaternary:#ebe6ef"
+              style={{ width: "50px", height: "50px" }}
+            ></lord-icon>
+          </>
+        }
+        footer={<></>}
+        visible={loadingCreateGame}
+        closeIcon
+        cancelText="Hủy"
+      >
+        <p>
+          <Typewriter
+            options={{
+              strings: ["Đang tạo trận đấu ! Vui lòng đợi ..."],
+              autoStart: true,
+              loop: true,
+              deleteSpeed: "natural",
+            }}
+          />
+        </p>
+      </Modal>
       <div className="game">
         <div className="game__name">
           <div className="game__content">
@@ -181,19 +242,28 @@ const StartCaro = () => {
       </div>
 
       <Row className="profile__margin">
-          <Button onClick={()=>sendMoney()} className="button__cancel" danger>
-            chuyenn tien
-          </Button>
         <Col span={12}>
           <div className="profile">
             <div className="profile__item">
               <Avatar src="https://joeschmoe.io/api/v1/random" />
             </div>
             <div className="profile__item">
-              <h3 className="profile__name">Dinh Nguyen</h3>
+              <h3 className="profile__name">{user?.username}</h3>
             </div>
             <div className="profile__item">
-              <h3 className="profile__token">700 Peer</h3>
+              <div className="profile__item__check__token">
+                <Button
+                  onClick={() => handleCheckToken()}
+                  type="primary"
+                  loading={loadingCheck}
+                  ghost
+                >
+                  Kiểm tra token của bạn:
+                </Button>
+                <div className="profile__token">
+                  {totalUser ? totalUser / 1000000000000000000 : 0} Peer
+                </div>
+              </div>
             </div>
           </div>
         </Col>

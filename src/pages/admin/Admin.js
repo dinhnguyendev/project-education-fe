@@ -27,7 +27,6 @@ const Admin = () => {
   useEffect(() => {
     let paths = location.pathname;
     const activeNumber = CHECK__ACTIVE__MENU[paths];
-    console.log(activeNumber);
     setActive(activeNumber);
   }, [location]);
   return (

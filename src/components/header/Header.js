@@ -26,7 +26,7 @@ import socket from "../../socket.io/socket.io";
 import MenuAccount from "../menu/MenuAccount";
 import { hadleLogout } from "../../actions/auth/authActions";
 import { useNavigate } from "react-router-dom";
-import { WalletOutlined,GiftOutlined } from "@ant-design/icons";
+import { WalletOutlined, GiftOutlined } from "@ant-design/icons";
 
 import {
   addWalletListener,
@@ -37,6 +37,7 @@ import {
 import { handleNotification } from "./../../utils/notification";
 import { handlecurrentAddress } from "../../redux/userSlice";
 import { ConverAccoutWallet } from "../../utils/caro";
+import handleContract from "../../utils/blockchain/handleContract";
 
 const { Option } = Select;
 const Header = () => {
@@ -49,6 +50,23 @@ const Header = () => {
   const [placement, setPlacement] = useState("left");
   const [wallet, setWallet] = useState("");
   const [loading, setLoading] = useState(false);
+  const [loadingClaimToken, setLoadingClaimToken] = useState(false);
+  const contract = useRef();
+  useEffect(() => {
+    const contract_MM = new handleContract();
+    const createContract = contract_MM.createContractGameFree();
+    if (createContract) {
+      contract.current = createContract;
+      // createContract.methods
+      //   .checkUserClaim()
+      //   .call()
+      //   .then((data) => {
+      //     console.log(data);
+      //     console.log(data);
+      //   })
+      //   .catch((err) => {});
+    }
+  }, []);
   const showDrawer = () => {
     setVisible(true);
   };
@@ -116,8 +134,30 @@ const Header = () => {
       await hadleLogout(t, navigate, dispatch);
     }
   };
-  console.log("BLOCKCHAIN.CURRENACCOUNT");
-  console.log(wallet);
+  const handleClaimToken = () => {
+    setLoadingClaimToken(true);
+    if (contract && walletSave) {
+      contract.current.methods
+        .claim_TokenXu()
+        .send({
+          from: walletSave,
+        })
+        .then((data) => {
+          console.log(data);
+          message.success("Bạn đã nhận được Peer miễn phí");
+        })
+        .catch((err) => {
+          console.log(err);
+          message.error("Bạn đã từ chối !");
+        })
+        .finally(() => {
+          setLoadingClaimToken(false);
+        });
+    } else {
+      message.warning("Vui lòng kết nối với ví !");
+      setLoadingClaimToken(false);
+    }
+  };
   return (
     <Row>
       <div className="header">
@@ -175,9 +215,9 @@ const Header = () => {
                   </div>
                 </Drawer>
 
-                <div className="header__logo">
+                <Link to={LINKTO.HOME} className="header__logo">
                   <img className="header__logo__image" src={LogoGame} alt="" />
-                </div>
+                </Link>
               </div>
             </Col>
             {/* <Col
@@ -230,11 +270,19 @@ const Header = () => {
                 <Link to={LINKTO.LOGIN}>
                   <div className="heading__link__login">{t("login.heading")}</div>
                 </Link>
-                
               </div>
             ) : (
               <div className="header__account">
-                  <Button className="header__account__free" icon={<GiftOutlined />} danger type="primary">Lấy Peer miễn phí</Button>
+                <Button
+                  onClick={() => handleClaimToken()}
+                  className="header__account__free"
+                  icon={<GiftOutlined />}
+                  danger
+                  type="primary"
+                  loading={loadingClaimToken}
+                >
+                  Lấy Peer miễn phí
+                </Button>
                 <Avatar
                   src={
                     <Image
