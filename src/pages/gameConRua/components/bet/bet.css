@@ -14,6 +14,12 @@
   display: inline-block;
   border-radius: 10px;
 }
+.bet__box__brg__sand {
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 350px;
+  background-size: cover;
+}
 .bet__games {
   display: flex;
   align-items: center;

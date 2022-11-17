@@ -268,7 +268,7 @@ const StartCaro = () => {
           </div>
         </Col>
         <Col span={12}>
-          <div className="profile__loading">Dang tim doi thu...</div>
+          <div className="profile__loading">Chờ trận đấu</div>
         </Col>
       </Row>
       <Row className="row__flex">
@@ -288,7 +288,7 @@ const StartCaro = () => {
         </Col>
         <Col>
           <Button onClick={handleSearch} className="start__caro__button">
-            <span>Bat dau tim doi thu</span>
+            <span>Tìm đối thủ</span>
             <img src={iconStart} alt="" className="start__caro__image" />
           </Button>
         </Col>
