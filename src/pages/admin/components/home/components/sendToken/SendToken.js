@@ -95,7 +95,11 @@ const SendToken = () => {
               },
               {
                 value: BLOCKCHAIN.ADDRESS__SM__GAMES,
-                label: "contract lấy token game",
+                label: "contract lấy token game caro",
+              },
+              {
+                value: BLOCKCHAIN.ADDRESS__SM__GAMES__TURTLE,
+                label: "contract lấy token game con rùa",
               },
             ]}
           />

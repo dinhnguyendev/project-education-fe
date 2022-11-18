@@ -27,5 +27,13 @@ class handleContract {
     const contract_MN = new web3.eth.Contract(abi, addressSM);
     return contract_MN;
   };
+  createContractGameTurtle = () => {
+    const abi = BLOCKCHAIN.ABI__GAMES__TURTLE;
+    const addressSM = BLOCKCHAIN.ADDRESS__SM__GAMES__TURTLE;
+    const web3 = new Web3(window.ethereum);
+    window.ethereum.enable();
+    const contract_MN = new web3.eth.Contract(abi, addressSM);
+    return contract_MN;
+  };
 }
 export default handleContract;

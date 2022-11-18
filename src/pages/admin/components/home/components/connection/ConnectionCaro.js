@@ -1,40 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, Col, Row, Statistic, Tabs } from "antd";
+import ConnectionSystem from "../../../ultil/connectionSystem/ConnectionSystem";
+import socket from "../../../../../../socket.io/socket.io";
+import { useState } from "react";
 const ConnectionCaro = () => {
+  const [totalConnect, setTotalConnect] = useState(0);
+  useEffect(() => {
+    socket.on("server--connection--count", (total) => {
+      console.log(total);
+      setTotalConnect(() => total);
+    });
+  }, []);
   return (
-    <div className="site-statistic-demo-card">
-      <Row gutter={16}>
-        <Col span={12}>
-          <Card>
-            <Statistic
-              title="Số người đang chơi"
-              value={11.28}
-              precision={2}
-              valueStyle={{
-                color: "#3f8600",
-              }}
-              className="connection"
-              suffix="user"
-            />
-          </Card>
-        </Col>
-        <Col span={12}>
-          <Card>
-            <Statistic
-              title="Số người đang kết nối với hệ thống"
-              value={9.3}
-              precision={2}
-              valueStyle={{
-                color: "#cf1322",
-              }}
-              className="connection"
-              // prefix={<ArrowDownOutlined />}
-              suffix="user"
-            />
-          </Card>
-        </Col>
-      </Row>
-    </div>
+    <Col style={{ width: "100%" }}>
+      <Card>
+        <Statistic
+          title="Số người đang kết nối với hệ thống"
+          value={totalConnect}
+          valueStyle={{
+            color: "#cf1322",
+          }}
+          className="connection"
+          // prefix={<ArrowDownOutlined />}
+          suffix="user"
+        />
+      </Card>
+    </Col>
   );
 };
 

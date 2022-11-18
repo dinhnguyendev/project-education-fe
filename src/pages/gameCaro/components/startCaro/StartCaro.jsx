@@ -133,6 +133,7 @@ const StartCaro = () => {
         hideModalCreateGame();
         message.error("Tạo trận đấu không thành công");
         socket.emit("client--leave--room--error", data);
+        // window.ethereum.close();
       }
     });
   }, []);

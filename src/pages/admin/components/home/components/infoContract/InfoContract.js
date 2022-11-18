@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card, Col, Row, Statistic, Select, Typography } from "antd";
 const { Text } = Typography;
 const InfoContract = ({ contract, address, inf }) => {
@@ -15,7 +15,9 @@ const InfoContract = ({ contract, address, inf }) => {
       })
       .catch((err) => {});
   };
-
+  useEffect(() => {
+    setTotalPeer(0);
+  }, [inf]);
   return (
     <>
       {inf ? (
