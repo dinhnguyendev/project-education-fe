@@ -1,0 +1,30 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  margin-top: 10px;
+  float: right;
+}
+.pagination__left {
+  background-color: #f5f5f5;
+  cursor: pointer;
+  border: 1px solid rgba(1, 1, 1, 0.4);
+  border-radius: 5px;
+  padding: 0px 10px;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.pagination__left:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.pagination__number {
+  padding: 0px 20px;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.pagination__left {
+}

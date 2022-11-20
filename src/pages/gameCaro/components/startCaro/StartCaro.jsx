@@ -5,7 +5,7 @@ import iconStart from "../../../../assets/image/start-caro.png";
 import iconName from "../../../../assets/image/name-game.png";
 import socket from "../../../../socket.io/socket.io";
 import { useSelector } from "react-redux";
-import { useLayoutEffect } from "react";
+
 import { useNavigate } from "react-router";
 import { LINKTO } from "../../../../constants/constants";
 import PeerCoin from "../../../../components/peerGame/PeerCoin";
@@ -20,6 +20,7 @@ import handleContract from "../../../../utils/blockchain/handleContract";
 import { useEffect } from "react";
 import { useRef } from "react";
 import { BLOCKCHAIN } from "./../../../../constants/constants";
+import { handleConnected } from "../../../../socket.io/handleConnecion";
 
 const StartCaro = () => {
   const user = useSelector((state) => state.user.login?.data);
@@ -31,6 +32,11 @@ const StartCaro = () => {
   const [loadingCreateGame, setLoadingCreateGame] = useState(false);
   const navigate = useNavigate();
   const contract = useRef();
+
+  console.log("check 1", socket.connected);
+  if (!socket.connected) {
+    handleConnected();
+  }
   useEffect(() => {
     const contract_MM = new handleContract();
     console.log(contract_MM);
@@ -105,7 +111,7 @@ const StartCaro = () => {
         });
     }
   };
-  useLayoutEffect(() => {
+  useEffect(() => {
     socket.on("server--rooms--sucessfylly", (data) => {
       if (data) {
         console.log("data room successfully");
@@ -127,12 +133,12 @@ const StartCaro = () => {
       }
     });
   }, []);
-  useLayoutEffect(() => {
+  useEffect(() => {
     socket.on("server--transfer-error", (data) => {
       if (data) {
         hideModalCreateGame();
-        message.error("Tạo trận đấu không thành công");
         socket.emit("client--leave--room--error", data);
+        handleNotification("error", "Tạo trận đấu không thành công", "Do bạn có người từ chối");
         // window.ethereum.close();
       }
     });
@@ -154,8 +160,8 @@ const StartCaro = () => {
   };
 
   const handleCheckToken = () => {
-    setLoadingCheck(true);
     if (currentAddress) {
+      setLoadingCheck(true);
       contract.current.methods
         .balanceOf(currentAddress)
         .call()

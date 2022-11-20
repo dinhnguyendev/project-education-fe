@@ -5,6 +5,8 @@ import { Card, Col, Row, Statistic, Tabs } from "antd";
 import ConnectionCaro from "./components/connection/ConnectionCaro";
 import Icon from "../../../../components/icon/Icon";
 import TokenManager from "./components/token/TokenManager";
+import HistoryTransaction from "../../../../components/historyTransactions/HistoryTransaction";
+import { BLOCKCHAIN } from "../../../../constants/constants";
 
 const HomeManager = () => {
   return (
@@ -31,7 +33,7 @@ const HomeManager = () => {
           }
           key="2"
         >
-          Lịch sử giao dịch
+          {/* <HistoryTransaction addressContract={BLOCKCHAIN.ADDRESS__SM__PEER} /> */}
         </Tabs.TabPane>
         <Tabs.TabPane tab="Tab 3" key="3">
           Content of Tab Pane 3

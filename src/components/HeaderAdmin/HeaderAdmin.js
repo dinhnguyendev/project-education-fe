@@ -120,7 +120,7 @@ const HeaderAdmin = () => {
   console.log(wallet);
   return (
     <Row>
-      <div style={{ height: "64px" }} className="header">
+      <div style={{ height: "64px" }} className="header__admin">
         <Col></Col>
         <Col>
           <div className="header__right">

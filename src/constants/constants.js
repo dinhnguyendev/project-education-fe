@@ -822,6 +822,7 @@ export const BLOCKCHAIN = {
   ADDRESS_CONTRACT_RECEIVE: "0x906A717Bd3A8ce16Be5Cae78d71994f667Cd09a5",
   ADDRESS_ADMIN: "0x78E02ebEed978b82B4479a765D0c7f579f25ee38",
 };
+
 export const ERRORS = {
   CODE: {
     ERRORS__BLOCKCHAIN__REJECT: 4001,
@@ -832,4 +833,8 @@ export const CHECK__ACTIVE__MENU = {
   "/cms/caro-manager": "2",
   "/cms/turtle-manager": "3",
   "/cms/user-manager": "4",
+};
+export const API__URL = {
+  HISTOY__TRANSACTION:
+    "https://api-goerli.etherscan.io/api?module=account&startblock=0&endblock=999999999&sort=desc&apikey=YourApiKeyToken&action=tokentx&address=",
 };

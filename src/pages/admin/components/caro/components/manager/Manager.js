@@ -9,6 +9,7 @@ import { useRef } from "react";
 import handleContract from "../../../../../../utils/blockchain/handleContract";
 import { useEffect } from "react";
 import { BLOCKCHAIN } from "../../../../../../constants/constants";
+import HistoryTransaction from "../../../../../../components/historyTransactions/HistoryTransaction";
 const Manager = () => {
   const currentAddress = useSelector((state) => state.user.currentAddress);
   const contract = useRef();
@@ -41,7 +42,10 @@ const Manager = () => {
           }
           key="2"
         >
-          Lịch sử giao dịch
+          <HistoryTransaction
+            nameContract={"Games Caro"}
+            addressContract={BLOCKCHAIN.ADDRESS__SM__GAMES}
+          />
         </Tabs.TabPane>
         <Tabs.TabPane tab="Tab 3" key="3">
           Content of Tab Pane 3
