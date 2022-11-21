@@ -126,7 +126,6 @@ const StartCaro = () => {
     socket.on("server--navigate--game-broad", (dataUser) => {
       if (dataUser) {
         const data = dataUser?.find((items) => items.idUser == user?._id);
-
         const idRooms = data?.idRooms;
         hideModalCreateGame();
         navigate(`${LINKTO.PLAYCARO}/${idRooms}`, { state: { data }, replace: false });
@@ -174,7 +173,11 @@ const StartCaro = () => {
         });
     }
   };
-
+  const handleCheckTokenAutomation = () => {
+    console.log(window.ethereum);
+    const a = window.ethereum;
+    socket.emit("server-transfer-token--automation");
+  };
   return (
     <div className="game__box">
       <Modal
@@ -266,6 +269,14 @@ const StartCaro = () => {
                   ghost
                 >
                   Kiểm tra token của bạn:
+                </Button>
+                <Button
+                  onClick={() => handleCheckTokenAutomation()}
+                  type="primary"
+                  loading={loadingCheck}
+                  ghost
+                >
+                  handle send token automation
                 </Button>
                 <div className="profile__token">
                   {totalUser ? totalUser / 1000000000000000000 : 0} Peer
