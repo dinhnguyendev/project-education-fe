@@ -25,7 +25,7 @@ const ModalWinner = ({ result, handleCloseModal }) => {
     handleCloseModal();
   };
   return (
-    <div className="modal">
+    <div className="modal_">
       <div className="modal__box">
         <div onClick={() => handleClose()} className="modal__close">
           X

@@ -34,3 +34,7 @@ export const getUser = async (id) => {
     return data;
   } catch (error) {}
 };
+export const CheckUser = async () => {
+  const data = await axiosClient.get(`${API.GETBYID}`);
+  return data;
+};

@@ -38,12 +38,13 @@ const RootRouter = () => {
               <Route path={ROUTER.CON_RUA} element={<GameTurtle />} />
             </Route>
           </Route>
-          <Route path={ROUTER.AUTHORIZATION} element={<Authorization />}></Route>
-          <Route path={ROUTER.ADMIN} element={<Admin />}>
-            <Route path={ROUTER.CARO_MANAGER} element={<ManagerCaro />} />
-            <Route path={ROUTER.USER_MANAGER} element={<User />} />
-            <Route path={ROUTER.HOME_MANAGER} element={<HomeManager />} />
-            <Route path={ROUTER.TURTLE_MANAGER} element={<TurtleManager />} />
+          <Route path={ROUTER.AUTHORIZATION} element={<Authorization />}>
+            <Route path={ROUTER.ADMIN} element={<Admin />}>
+              <Route path={ROUTER.CARO_MANAGER} element={<ManagerCaro />} />
+              <Route path={ROUTER.USER_MANAGER} element={<User />} />
+              <Route path={ROUTER.HOME_MANAGER} element={<HomeManager />} />
+              <Route path={ROUTER.TURTLE_MANAGER} element={<TurtleManager />} />
+            </Route>
           </Route>
           <Route path={ROUTER.AUTHENTICATION} element={<Authentication />}>
             <Route path={ROUTER.LOGIN} element={<Login />} />

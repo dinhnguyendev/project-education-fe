@@ -1,14 +1,15 @@
 .chat {
   /* flex: 1; */
-  margin-left: 15px;
+  /* margin-left: 15px; */
 }
 .chat__controller {
   border-radius: 10px;
   background-color: white;
+  padding: 10px;
 }
 .chat__box {
-  height: 500px;
-  width: 400px;
+  height: 400px;
+  width: 100%;
   min-height: 300px;
   min-width: 200px;
   word-wrap: break-word;

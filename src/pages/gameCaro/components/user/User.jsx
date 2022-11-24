@@ -12,18 +12,11 @@ const User = ({ player }) => {
     if (id) {
       getUserById(id)
         .then((data) => {
-          console.log("user>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-          console.log(data);
           setPlayers(data?.data);
         })
         .catch((err) => {});
     }
   }, [player]);
-  console.log("me");
-  console.log(me);
-  console.log("player");
-  console.log(player);
-
   return (
     <div className="user">
       <div className="user__profile">
@@ -32,13 +25,13 @@ const User = ({ player }) => {
             <Avatar src={me?.avatar} />
           </div>
           <div className="user__name user__center">{me?.username}</div>
-          <div className="user__position user__center">Quan co:{player.isX ? "✖️" : "⭕"} </div>
+          <div className="user__position user__center">Quan co:{player?.isX ? "✖️" : "⭕"} </div>
         </div>
       </div>
       <div className="user__sum">
         <div className="user__sum__item">
           <div className="user__sum__icon user__center">VS</div>
-          <div className="user__sum__token user__center">600 peer</div>
+          <div className="user__sum__token user__center">{player?.totalCoin} Peer</div>
         </div>
       </div>
       <div className="user__profile">
@@ -47,7 +40,7 @@ const User = ({ player }) => {
             <Avatar src={players?.avatar} />
           </div>
           <div className="user__name user__center">{players?.username}</div>
-          <div className="user__position user__center"> Quan co: {player.isX ? "⭕" : "✖️"}</div>
+          <div className="user__position user__center"> Quan co: {player?.isX ? "⭕" : "✖️"}</div>
         </div>
       </div>
     </div>

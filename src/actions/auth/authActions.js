@@ -3,6 +3,7 @@ import axiosClient from "../../services/axiosClient";
 import { message } from "antd";
 import { getUser, login, logout, register } from "../../services/authService";
 import { handlecurrentAddress, logoutActionRedux } from "../../redux/userSlice";
+import { CheckUser } from "./../../services/authService";
 export const handleRegister = async (values, setLoading, t, navigate) => {
   try {
     setLoading(true);
@@ -55,6 +56,14 @@ export const hadleLogout = async (t, navigate, dispatch) => {
 export const getUserById = async (id) => {
   try {
     const respon = await getUser(id);
+    if (respon) {
+      return respon;
+    }
+  } catch (err) {}
+};
+export const checkUserByToken = async () => {
+  try {
+    const respon = await CheckUser();
     if (respon) {
       return respon;
     }

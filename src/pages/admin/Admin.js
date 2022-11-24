@@ -18,17 +18,20 @@ import HeaderAdmin from "../../components/HeaderAdmin/HeaderAdmin";
 import IconAntd from "../../components/iconAndt/IconAntd";
 import { useLocation } from "react-router";
 import { CHECK__ACTIVE__MENU } from "../../constants/constants";
+import { useSelector } from "react-redux";
 const { Content, Footer, Sider } = Layout;
 
 const Admin = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [active, setActive] = useState(1);
   let location = useLocation();
+
   useEffect(() => {
     let paths = location.pathname;
     const activeNumber = CHECK__ACTIVE__MENU[paths];
     setActive(activeNumber);
   }, [location]);
+
   return (
     <div className="admin">
       <Layout

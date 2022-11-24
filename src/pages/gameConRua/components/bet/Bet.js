@@ -7,12 +7,18 @@ import "./bet.css";
 import handleContract from "../../../../utils/blockchain/handleContract";
 import { BLOCKCHAIN, ERRORS } from "../../../../constants/constants";
 import { useSelector } from "react-redux";
-const Bet = () => {
+const Bet = ({ idRooms }) => {
   const [active, setActive] = useState(0);
   const [coin, setCoin] = useState(0);
   const [loading, setLoading] = useState(false);
   const [disableBet, setDisableBet] = useState(false);
   const contract = useRef();
+  console.log(idRooms);
+  console.log(idRooms);
+  console.log(idRooms);
+  console.log(idRooms);
+  console.log(idRooms);
+  console.log(idRooms);
   const currentAddress = useSelector((state) => state.user.currentAddress);
   useEffect(() => {
     const contract_MM = new handleContract();
@@ -51,6 +57,7 @@ const Bet = () => {
       .then((data) => {
         console.log(data);
         message.success(`Bạn đã cược thành công ${coin} Peer`);
+
         setDisableBet(true);
       })
       .catch((err) => {

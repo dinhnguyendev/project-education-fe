@@ -1,4 +1,6 @@
+import { isEqual } from "lodash";
 import React from "react";
+import { memo } from "react";
 import "./cells.css";
 const Cells = ({ x, y, isClicked, Ischeck, handleClick }) => {
   const getValueInCell = () => {
@@ -15,5 +17,7 @@ const Cells = ({ x, y, isClicked, Ischeck, handleClick }) => {
     </div>
   );
 };
-
-export default Cells;
+const conditions = (pre, next) => {
+  return isEqual(pre.Ischeck, next.Ischeck);
+};
+export default memo(Cells, conditions);

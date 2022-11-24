@@ -1,5 +1,6 @@
 import { message } from "antd";
 import { useEffect } from "react";
+import { useRef } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router";
@@ -11,8 +12,7 @@ import Row from "../row/Row";
 import "./squares.css";
 const Squares = (props) => {
   const { user, dataLocation, boardData } = props;
-  console.log(dataLocation);
-  console.log(user);
+  const isWaitting = useRef(dataLocation?.isMyTurn);
   const [game, SetGame] = useState({
     id: dataLocation?.id,
     room: dataLocation?.idRooms,
@@ -22,22 +22,26 @@ const Squares = (props) => {
     showNotification: false,
     textNotification: [],
   });
-  console.log(game.boardData);
+
   socket.on("server--update-check", (data) => {
-    console.log("data server--update-check");
     let updateGameBoardData = game.boardData;
     updateGameBoardData[data.y][data.x].isClicked = true;
     updateGameBoardData[data.y][data.x].isX = data.isX;
     updateGameBoardData[data.y][data.x].Ischeck = data.isX;
     let isMyTurn = false;
+    let isCheckWatting = false;
     if (user.phone == data.phone) {
       isMyTurn = true;
+      isCheckWatting = true;
     }
+    isWaitting.current = isCheckWatting;
     SetGame({ boardData: updateGameBoardData, isMyTurn });
+    console.log("server--update-check" + isWaitting.current);
   });
 
   socket.on("server--watting--end", (data) => {
     if (data == user.phone) {
+      isWaitting.current = false;
       SetGame({
         isMyTurn: false,
         boardData: game.boardData,
@@ -49,9 +53,8 @@ const Squares = (props) => {
         phone: user.phone,
         room: dataLocation.idRooms,
       };
-      // console.log("socket.emit('client--timer-update', request)");
-      // console.log(request);
       socket.emit("client--timer-update", request);
+      isWaitting.current = true;
       SetGame({
         isMyTurn: true,
         boardData: game.boardData,
@@ -61,19 +64,24 @@ const Squares = (props) => {
     }
   });
   const handleClick = (x, y) => {
-    console.log("handleClick");
-    if (game.isMyTurn) {
+    console.log("handleClick" + isWaitting.current);
+    if (isWaitting.current) {
       return message.warning("đợi đối thủ");
     } else {
       let req = {
         id: dataLocation.id,
         x,
         y,
-        isMyTurn: game.isMyTurn,
+        isMyTurn: isWaitting.current,
         isX: dataLocation.isX,
         oppID: dataLocation.oppID,
         room: dataLocation.idRooms,
+        idRooms: dataLocation.idRooms,
         phone: user.phone,
+        idUser: dataLocation?.idUser,
+        addressWallet: dataLocation?.addressWallet,
+        coin: dataLocation?.coin,
+        totalCoin: dataLocation?.totalCoin,
       };
       socket.emit("update--check--caro", req);
     }

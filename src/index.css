@@ -50,3 +50,6 @@ button.ant-btn.ant-btn-primary {
   box-shadow: 0 7px 7px rgba(0, 0, 0, 0.2);
   padding: 10px !important;
 }
+.ant-collapse-content-box {
+  background-color: #f2f2f2 !important;
+}

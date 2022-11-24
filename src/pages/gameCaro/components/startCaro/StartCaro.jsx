@@ -35,7 +35,7 @@ const StartCaro = () => {
 
   console.log("check 1", socket.connected);
   if (!socket.connected) {
-    handleConnected();
+    socket = handleConnected();
   }
   useEffect(() => {
     const contract_MM = new handleContract();
@@ -116,7 +116,13 @@ const StartCaro = () => {
       if (data) {
         console.log("data room successfully");
         console.log(data);
-        sendToken(contract.current, currentAddress, data.coin, data);
+        // sendToken(contract.current, currentAddress, data.coin, data);
+        const matchs = {
+          ...data,
+          idUser: user?._id,
+          addressWallet: currentAddress,
+        };
+        socket.emit("client--send-token-success", matchs);
         hideModal();
         showModalCreateGame();
       }
@@ -292,16 +298,16 @@ const StartCaro = () => {
       <Row className="row__flex">
         <Col className="peer__flex">
           <div className="peer">
-            <PeerCoin image={yellowCoin} handleCoin={handleCoin} coinNumber={10} />
+            <PeerCoin image={yellowCoin} handleCoin={handleCoin} coinNumber={0.05} />
           </div>
           <div className="peer">
-            <PeerCoin image={blueCoin} handleCoin={handleCoin} coinNumber={20} />
+            <PeerCoin image={blueCoin} handleCoin={handleCoin} coinNumber={0.1} />
           </div>
           <div className="peer">
-            <PeerCoin image={redCoin} handleCoin={handleCoin} coinNumber={50} />
+            <PeerCoin image={redCoin} handleCoin={handleCoin} coinNumber={0.15} />
           </div>
           <div className="peer">
-            <PeerCoin image={greenCoin} handleCoin={handleCoin} coinNumber={100} />
+            <PeerCoin image={greenCoin} handleCoin={handleCoin} coinNumber={0.2} />
           </div>
         </Col>
         <Col>

@@ -1,0 +1,49 @@
+.modal__winner {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  background-color: rgba(1, 1, 1, 0.5);
+  color: black;
+}
+.modal__winner__box {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.5);
+}
+.modal__winner__box__heading {
+  display: flex;
+  align-items: center;
+}
+.modal__winner__heading {
+  font-size: 40px;
+  font-weight: 600;
+  color: green;
+}
+.modal__winner__container__bet {
+  display: flex;
+  align-items: center;
+}
+.modal__winner__container__bet__number {
+  margin-left: 5px;
+}
+.modal__winner__box__container__infor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.modal__winner__button {
+  float: right;
+  margin-top: 20px;
+}
+.modal__winner__button__back {
+  margin-right: 5px;
+}
+.modal__winner__heading__color {
+  color: red;
+}
