@@ -12,10 +12,15 @@ import blueFlag from "../../../../assets/image/tutrle/blue-flag.svg";
 import TimerRun from "../timerRun/TimerRun";
 import socket from "../../../../socket.io/socket.io";
 import ModalWinner from "../modal/ModalWinner";
+import { useNavigate } from "react-router";
+import { LINKTO } from "./../../../../constants/constants";
 const GameContainer = () => {
   const [yellowTurtleState, setYellowTurtle] = useState(yellowTurtle);
   const [blueTurtleState, setBlueTurtle] = useState(blueTurtle);
   const [pinkTurtleState, setPinkTurtle] = useState(pinkTurtle);
+  const [yellowRunPx, setYellowRunPx] = useState();
+  const [blueRunPx, setBlueRunPx] = useState();
+  const [pinkRunPx, setPinkRunPx] = useState();
   const [result, setResult] = useState();
   const [modal, setModal] = useState(false);
   let WIN_I;
@@ -27,7 +32,7 @@ const GameContainer = () => {
   const minCurrent = 5;
   const maxCurrent = 30;
   const currentStart = 40;
-
+  const navigate = useNavigate();
   function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
   }
@@ -44,100 +49,28 @@ const GameContainer = () => {
     }, 500);
     return () => clearInterval(id);
   }, []);
-  const handleRunByMillisecondsTutleYellow = () => {
-    let responTotal = 0;
-    const idInterval = setInterval(() => {
-      const resRunBytimmer = getRandomInt(minCurrent, maxCurrent);
-      responTotal = responTotal + resRunBytimmer;
-      const elementYellow = document.querySelector(".run__svg--yellow");
-      const currentLeft = elementYellow.id;
-      const currentRun = +currentLeft + resRunBytimmer;
-      elementYellow.setAttribute("id", `${currentRun}`);
-      elementYellow.style.left = `${currentRun}px`;
-      if (responTotal >= currentD) {
-        if (!WIN_I) {
-          WIN_I = 1;
-          console.log("nhat : " + WIN_I);
-        } else if (!WIN_II) {
-          WIN_II = 1;
-          console.log("nhi : " + WIN_II);
-        } else {
-          WIN_III = 1;
-          console.log("ba : " + WIN_III);
-          currentResult.current = {
-            WIN_I,
-            WIN_II,
-            WIN_III,
-          };
-          setModal(() => true);
-        }
+  const handleRunYellow = (resRunBytimmer) => {
+    const elementYellow = document.querySelector(".run__svg--yellow");
+    const currentLeft = elementYellow.id;
+    const currentRun = +currentLeft + resRunBytimmer;
+    elementYellow.setAttribute("id", `${currentRun}`);
+    elementYellow.style.left = `${currentRun}px`;
+  };
+  const handleRunBlue = (resRunBytimmer) => {
+    const elementYellow = document.querySelector(".run__svg--blue");
+    const currentLeft = elementYellow.id;
+    const currentRun = +currentLeft + resRunBytimmer;
+    elementYellow.setAttribute("id", `${currentRun}`);
+    elementYellow.style.left = `${currentRun}px`;
+  };
+  const handleRunPink = (resRunBytimmer) => {
+    const elementYellow = document.querySelector(".run__svg--pink");
+    const currentLeft = elementYellow.id;
+    const currentRun = +currentLeft + resRunBytimmer;
+    elementYellow.setAttribute("id", `${currentRun}`);
+    elementYellow.style.left = `${currentRun}px`;
+  };
 
-        clearInterval(idInterval);
-      }
-    }, 500);
-  };
-  const handleRunByMillisecondsTutlePink = () => {
-    let responTotal = 0;
-    const idInterval = setInterval(() => {
-      const resRunBytimmer = getRandomInt(minCurrent, maxCurrent);
-      responTotal = responTotal + resRunBytimmer;
-      const elementYellow = document.querySelector(".run__svg--pink");
-      const currentLeft = elementYellow.id;
-      const currentRun = +currentLeft + resRunBytimmer;
-      elementYellow.setAttribute("id", `${currentRun}`);
-      elementYellow.style.left = `${currentRun}px`;
-      if (responTotal >= currentD) {
-        if (!WIN_I) {
-          WIN_I = 2;
-          console.log("nhat : " + WIN_I);
-        } else if (!WIN_II) {
-          WIN_II = 2;
-          console.log("nhi : " + WIN_II);
-        } else {
-          WIN_III = 2;
-          console.log("ba : " + WIN_III);
-          currentResult.current = {
-            WIN_I,
-            WIN_II,
-            WIN_III,
-          };
-          setModal(() => true);
-        }
-        clearInterval(idInterval);
-      }
-    }, 500);
-  };
-  const handleRunByMillisecondsTutleBlue = () => {
-    let responTotal = 0;
-    const idInterval = setInterval(() => {
-      const resRunBytimmer = getRandomInt(minCurrent, maxCurrent);
-      responTotal = responTotal + resRunBytimmer;
-      const elementYellow = document.querySelector(".run__svg--blue");
-      const currentLeft = elementYellow.id;
-      const currentRun = +currentLeft + resRunBytimmer;
-      elementYellow.setAttribute("id", `${currentRun}`);
-      elementYellow.style.left = `${currentRun}px`;
-      if (responTotal >= currentD) {
-        if (!WIN_I) {
-          WIN_I = 3;
-          console.log("nhat : " + WIN_I);
-        } else if (!WIN_II) {
-          WIN_II = 3;
-          console.log("nhi : " + WIN_II);
-        } else {
-          WIN_III = 3;
-          console.log("ba : " + WIN_III);
-          currentResult.current = {
-            WIN_I,
-            WIN_II,
-            WIN_III,
-          };
-          setModal(() => true);
-        }
-        clearInterval(idInterval);
-      }
-    }, 500);
-  };
   const handleStartTutleYellow = () => {
     const idInterval = setInterval(() => {
       const elementYellow = document.querySelector(".run__svg--yellow");
@@ -180,30 +113,49 @@ const GameContainer = () => {
       }
     }, 500);
   };
-  const handleRunByMilliseconds = () => {
-    handleRunByMillisecondsTutleBlue();
-    handleRunByMillisecondsTutlePink();
-    handleRunByMillisecondsTutleYellow();
-  };
+
   const handleRunStart = () => {
     handleStartTutleBlue();
     handleStartTutlePink();
     handleStartTutleYellow();
   };
   useEffect(() => {
-    socket.on("turtle-next", () => {
-      handleRunByMilliseconds();
+    socket.on("turtle-next--yellow", (resRunBytimmer) => {
+      handleRunYellow(resRunBytimmer);
+    });
+    socket.on("turtle-next--blue", (resRunBytimmer) => {
+      handleRunBlue(resRunBytimmer);
+    });
+    socket.on("turtle-next--pink", (resRunBytimmer) => {
+      handleRunPink(resRunBytimmer);
+    });
+  }, []);
+  useEffect(() => {
+    socket.on("turtle-winner", (data) => {
+      currentResult.current = data;
+      handleOpenModal();
+      setTimeout(() => {
+        handleCloseModal();
+        handleRunStart();
+        setTimeout(() => {
+          socket.emit("join--room-turtle");
+        }, 2500);
+      }, 3000);
     });
   }, []);
   const handleCloseModal = () => {
     setModal(() => false);
   };
+  const handleOpenModal = () => {
+    setModal(() => true);
+  };
+  const handlePlayNow = () => {
+    navigate(LINKTO.TURTLE);
+  };
   return (
     <div className="game__fine">
       {modal && <ModalWinner result={currentResult} handleCloseModal={handleCloseModal} />}
       <div className="game__turtle__overflow">
-        <button onClick={() => handleRunByMilliseconds()}>click run</button>
-        <button onClick={() => handleRunStart()}>click overflow</button>
         <div className="game__turtle">
           <TimerRun />
           <div className="game__turtle__item">

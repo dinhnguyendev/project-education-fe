@@ -7,14 +7,21 @@ import Bet from "./components/bet/Bet";
 
 const GameTurtle = () => {
   const [idRooms, setIdRooms] = useState("");
+  const [disable, setDisable] = useState(false);
+  socket.on("server--join--room-uid", (data) => {
+    setIdRooms(data);
+  });
   useEffect(() => {
     socket.emit("join--room-turtle");
   }, []);
   useEffect(() => {
-    socket.on("server--join--room-uid", (data) => {
-      setIdRooms(data);
+    socket.on("server--turtle--idrooms", (rooms) => {
+      console.log("rooms");
+      console.log(rooms);
+      setDisable(true);
     });
   }, []);
+
   return (
     <div className="turtle__big">
       <div className="game__turtle__box">
@@ -23,7 +30,7 @@ const GameTurtle = () => {
           <GameContainer />
         </div>
       </div>
-      <Bet idRooms={idRooms} />
+      <Bet disable={disable} idRooms={idRooms} />
     </div>
   );
 };

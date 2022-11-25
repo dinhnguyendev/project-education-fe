@@ -7,10 +7,10 @@ import blueTurtleRun from "../../../../assets/image/tutrle/blueTurleRun.svg";
 import pinkTurtle from "../../../../assets/image/tutrle/pinkTurle.svg";
 import pinkTurtleRun from "../../../../assets/image/tutrle/pinkTurleRun.svg";
 import { memo } from "react";
+import { isEqual } from "lodash";
 const ModalWinner = ({ result, handleCloseModal }) => {
-  const { WIN_I, WIN_II, WIN_III } = result.current;
-  console.log(result.current);
-  console.log(WIN_I, WIN_II, WIN_III);
+  const { WIN_I, WIN_II, WIN_III } = result?.current;
+
   const colorIcon = {
     1: yellowTurtleRun,
     2: pinkTurtleRun,
@@ -25,7 +25,7 @@ const ModalWinner = ({ result, handleCloseModal }) => {
     handleCloseModal();
   };
   return (
-    <div className="modal_">
+    <div className="modal">
       <div className="modal__box">
         <div onClick={() => handleClose()} className="modal__close">
           X
@@ -65,5 +65,7 @@ const ModalWinner = ({ result, handleCloseModal }) => {
     </div>
   );
 };
-
-export default memo(ModalWinner);
+const conditions = (pre, next) => {
+  return isEqual(pre.result.current, next.result.current);
+};
+export default memo(ModalWinner, conditions);

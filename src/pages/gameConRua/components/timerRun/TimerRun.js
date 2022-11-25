@@ -7,12 +7,11 @@ const TimerRun = () => {
     setTimer(count);
   });
   useEffect(() => {
-    if (timer == 0) {
+    if (timer == 1) {
       setTimer("Run");
-      setTimeout(() => {
-        setTimer();
-        socket.emit("turtle-run-game");
-      }, 1000);
+    }
+    if (timer == 0) {
+      setTimer();
     }
   }, [timer]);
   return (

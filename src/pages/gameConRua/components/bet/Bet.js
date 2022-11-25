@@ -7,7 +7,7 @@ import "./bet.css";
 import handleContract from "../../../../utils/blockchain/handleContract";
 import { BLOCKCHAIN, ERRORS } from "../../../../constants/constants";
 import { useSelector } from "react-redux";
-const Bet = ({ idRooms }) => {
+const Bet = ({ idRooms, disable }) => {
   const [active, setActive] = useState(0);
   const [coin, setCoin] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -30,6 +30,9 @@ const Bet = ({ idRooms }) => {
     }
     console.log(contract.current);
   }, []);
+  useEffect(() => {
+    setDisableBet(disable);
+  }, [disable]);
   const handleChangeBet = (bet) => {
     setActive(bet);
     console.log(bet);

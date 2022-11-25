@@ -17,7 +17,6 @@ const TimerTurtle = () => {
   };
   return (
     <div className="timer__flex">
-      <button onClick={() => handle()}>ádasdsadasd</button>
       <div className="timer">
         <div className="timer__heading">Thời gian: </div>
         <div className="timer__flex">
