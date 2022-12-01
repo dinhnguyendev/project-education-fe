@@ -1,15 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row, Avatar, Button } from "antd";
-import "./containerHome.css";
+import One from "../../assets/image/1.png";
+import Two from "../../assets/image/2.png";
+import Three from "../../assets/image/3.png";
+import StarEmoij from "../../assets/image/star.png";
 import { RightCircleOutlined, RightOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { ROUTER } from "./../../constants/constants";
+import { handleLeaderBoardsAction } from "../../actions/game/gameActions";
+import "./containerHome.css";
 const ContainerHome = () => {
+  const [leaderBoards, setLeaderBoards] = useState([]);
+  useEffect(() => {
+    handleLeaderBoardsAction()
+      .then((data) => {
+        setLeaderBoards(data?.data);
+      })
+      .catch((err) => {});
+  }, []);
+  const checkIcon = {
+    0: One,
+    1: Two,
+    2: Three,
+  };
+  // console.log(checkIcon);
   return (
     <div className="container">
       <Row className="container__flex">
         <Col xl={{ span: 11 }} lg={{ span: 24 }} className="container__left">
-          <div>
+          <div className="container__left__box">
             <Row className="container__left__top">
               <Col xl={{ span: 12 }}>
                 <div className="container__left__heading">
@@ -51,17 +70,27 @@ const ContainerHome = () => {
           <div className="container__right__box">
             <h3 className="container__right__heading">Top Winners</h3>
             <div className="container__right__list">
-              <div className="container__right__item">
-                <div className="container__right__item__name">
-                  <Avatar src="https://joeschmoe.io/api/v1/random" />
-                  <div className="container__right__item__user">DinhNguyen</div>
-                </div>
-                <img
-                  src="https://peergame.com/assets/images/1st-fab2f10306197b44da5c1e963ea5836e.png"
-                  className="container__right__item__icon"
-                />
-                <div className="container__right__item__money">$789</div>
-              </div>
+              {leaderBoards &&
+                leaderBoards?.map((items, i) => {
+                  return (
+                    <div className="container__right__item">
+                      <div className="container__right__item__name">
+                        <Avatar src={items?.idUser?.avatar} />
+                        <div className="container__right__item__user">
+                          {items?.idUser?.username}
+                        </div>
+                      </div>
+                      <div className="flex__image">
+                        {checkIcon[i] ? (
+                          <img src={checkIcon[i]} className="container__right__item__icon" />
+                        ) : (
+                          <img src={StarEmoij} className="container__right__item__icon" />
+                        )}
+                      </div>
+                      <div className="container__right__item__money">{items?.totalCoin} Peer</div>
+                    </div>
+                  );
+                })}
             </div>
           </div>
         </Col>

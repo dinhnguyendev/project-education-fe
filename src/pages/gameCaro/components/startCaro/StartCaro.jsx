@@ -35,7 +35,7 @@ const StartCaro = () => {
 
   console.log("check 1", socket.connected);
   if (!socket.connected) {
-    socket = handleConnected();
+    handleConnected();
   }
   useEffect(() => {
     const contract_MM = new handleContract();

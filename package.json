@@ -10,6 +10,8 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^4.22.4",
     "axios": "^0.27.2",
+    "big-integer": "^1.6.51",
+    "crypto-js": "^4.1.1",
     "i18next": "^21.9.0",
     "i18next-browser-languagedetector": "^6.1.5",
     "i18next-http-backend": "^1.4.1",

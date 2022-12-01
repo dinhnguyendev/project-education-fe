@@ -10,7 +10,7 @@ var socket = io.connect(DOMAIN, {
   reconnection: true,
   reconnectionDelay: 500,
   reconnectionDelayMax: 1000,
-  reconnectionAttempts: 5,
+  reconnectionAttempts: 50,
 });
 
 export default socket;

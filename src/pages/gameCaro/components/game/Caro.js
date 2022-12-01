@@ -32,9 +32,11 @@ const GameCaro = () => {
   console.log("location>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
   console.log(location);
   const user = useSelector((state) => state.user.login?.data);
-
   useEffect(() => {
     socket.emit("client--join-rooms", dataLocation?.idRooms);
+    return () => {
+      socket.emit("client--leave--room--by-id", dataLocation?.idRooms);
+    };
   }, []);
   useEffect(() => {
     const boardData = initBoardData(50, 50);

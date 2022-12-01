@@ -35,6 +35,12 @@ export const API = {
   LOGIN: "/auth/login",
   LOGOUT: "/auth/logout",
   GETBYID: "/auth/get",
+  GAMETURLE: {
+    CREATE: "/games/turtle/create",
+  },
+  GAME: {
+    LEADERBROADS: "/games/leaderboards",
+  },
 };
 export const KEY = {
   LOOUT: "logout",

@@ -25,3 +25,15 @@
 .timer__color {
   color: red;
 }
+.timer__count {
+  font-family: "Gill Sans ExtraBoldDisplay", sans-serif;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 20px;
+  font-size: 60px;
+  line-height: 60px;
+  font-weight: 700;
+  margin: 10px 0px;
+  color: black;
+  min-width: 115px;
+}

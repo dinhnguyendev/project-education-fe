@@ -14,6 +14,7 @@ import socket from "../../../../socket.io/socket.io";
 import ModalWinner from "../modal/ModalWinner";
 import { useNavigate } from "react-router";
 import { LINKTO } from "./../../../../constants/constants";
+import { useSearchParams } from "react-router-dom";
 const GameContainer = () => {
   const [yellowTurtleState, setYellowTurtle] = useState(yellowTurtle);
   const [blueTurtleState, setBlueTurtle] = useState(blueTurtle);
@@ -23,6 +24,9 @@ const GameContainer = () => {
   const [pinkRunPx, setPinkRunPx] = useState();
   const [result, setResult] = useState();
   const [modal, setModal] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams("");
+  let serchParamssss = useRef();
+  serchParamssss.current = searchParams.get("idRooms");
   let WIN_I;
   let WIN_II;
   let WIN_III;
@@ -123,9 +127,13 @@ const GameContainer = () => {
     socket.on("turtle-next--yellow", (resRunBytimmer) => {
       handleRunYellow(resRunBytimmer);
     });
+  }, []);
+  useEffect(() => {
     socket.on("turtle-next--blue", (resRunBytimmer) => {
       handleRunBlue(resRunBytimmer);
     });
+  }, []);
+  useEffect(() => {
     socket.on("turtle-next--pink", (resRunBytimmer) => {
       handleRunPink(resRunBytimmer);
     });
@@ -133,14 +141,8 @@ const GameContainer = () => {
   useEffect(() => {
     socket.on("turtle-winner", (data) => {
       currentResult.current = data;
+
       handleOpenModal();
-      setTimeout(() => {
-        handleCloseModal();
-        handleRunStart();
-        setTimeout(() => {
-          socket.emit("join--room-turtle");
-        }, 2500);
-      }, 3000);
     });
   }, []);
   const handleCloseModal = () => {
@@ -154,7 +156,13 @@ const GameContainer = () => {
   };
   return (
     <div className="game__fine">
-      {modal && <ModalWinner result={currentResult} handleCloseModal={handleCloseModal} />}
+      {modal && (
+        <ModalWinner
+          handleRunStart={handleRunStart}
+          result={currentResult}
+          handleCloseModal={handleCloseModal}
+        />
+      )}
       <div className="game__turtle__overflow">
         <div className="game__turtle">
           <TimerRun />

@@ -12,7 +12,7 @@ export const handleConnected = () => {
     reconnection: true,
     reconnectionDelay: 500,
     reconnectionDelayMax: 1000,
-    reconnectionAttempts: 5,
+    reconnectionAttempts: 50,
   });
   return socket;
 };
