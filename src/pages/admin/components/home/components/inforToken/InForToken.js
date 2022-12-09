@@ -1,13 +1,18 @@
 import React, { useState } from "react";
-import { Button, Card, Col, Row, Statistic, Select, Typography } from "antd";
+import { Button, Card, Col, Row, Statistic, Select, Typography, InputNumber, message } from "antd";
+import { DollarCircleOutlined, QuestionCircleOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
+import "./infoToken.css";
+import BigNumber from "big-number";
 const { Text } = Typography;
-const InForToken = ({ contract, address }) => {
+const InForToken = ({ contract, address, isWithraw }) => {
   console.log(contract);
   console.log(address);
   const currentAddress = useSelector((state) => state.user.currentAddress);
   const [totalPeer, setTotalPeer] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [loadingWithdraw, setLoadingWithdraw] = useState(false);
+  const [total, setTotal] = useState();
   const handleCheckTotalToken = () => {
     setLoading(true);
     contract.methods
@@ -20,7 +25,37 @@ const InForToken = ({ contract, address }) => {
       })
       .catch((err) => {});
   };
-
+  const handleWithdrawnToken = () => {
+    if (total) {
+      const coinsss = BigNumber(1000000000000000000 * +total);
+      let amount = "";
+      for (let i = coinsss.number.length - 1; i >= 0; i--) {
+        amount = amount + coinsss.number[i];
+      }
+      setLoadingWithdraw(true);
+      contract.methods
+        ?.wirthraw(amount)
+        .send({
+          from: currentAddress,
+        })
+        .then((data) => {
+          console.log(data);
+          message.success(`Bạn đã rút ${total} Peer token thành công`);
+          // setTotalPeer(total);
+          // setLoading(false);
+        })
+        .catch((err) => {
+          message.error("Lỗi giao dịch");
+        })
+        .finally(() => {
+          setLoadingWithdraw(false);
+        });
+    }
+  };
+  const onChange = (value) => {
+    console.log("changed", value);
+    setTotal(value);
+  };
   return (
     <>
       <div className="token__caro__information">
@@ -53,6 +88,40 @@ const InForToken = ({ contract, address }) => {
                 peer
               </div>
             </div>
+            {isWithraw ? (
+              <div className="withdrawn__token__games">
+                <div className="withdrawn__token__games__flex">
+                  <div className="withdrawn__token__games__heading">Nhập số token cần rút: </div>
+                  <div className="withdrawn__token__games__input">
+                    <InputNumber
+                      style={{
+                        width: "100%",
+                      }}
+                      min={0.01}
+                      max={10000}
+                      // defaultValue={}
+                      onChange={onChange}
+                      prefix={<QuestionCircleOutlined />}
+                      allowClear={true}
+                    />
+                  </div>
+                </div>
+                <div className="withdrawn__token__games__button">
+                  <Button
+                    onClick={handleWithdrawnToken}
+                    disabled={loadingWithdraw}
+                    icon={<DollarCircleOutlined />}
+                    type="primary"
+                    danger
+                    loading={loadingWithdraw}
+                  >
+                    Rút token
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>

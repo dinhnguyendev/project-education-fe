@@ -35,7 +35,7 @@ const GameTurtle = () => {
     <div className="turtle__big">
       <div className="game__turtle__box">
         <div className="game__turtle game__turtle__brg">
-          <Button
+          {/* <Button
             onClick={() =>
               socket.emit("turtle--token--winner", {
                 idRooms: "ff983a35-8efc-43ba-9010-23a0a4eac63e",
@@ -44,7 +44,7 @@ const GameTurtle = () => {
             }
           >
             handle
-          </Button>
+          </Button> */}
           <TimerTurtle />
           <GameContainer />
         </div>

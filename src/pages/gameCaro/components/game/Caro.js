@@ -26,6 +26,8 @@ const GameCaro = () => {
   const [show, setShow] = useState(false);
   const location = useLocation();
   const isFirstStartGameClock = useRef(true);
+  const dataWinner = useRef(true);
+  dataWinner.current = location.state.data;
   console.log("location>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>1111111");
   const dataLocation = location.state.data;
   console.log(dataLocation);
@@ -39,7 +41,7 @@ const GameCaro = () => {
     };
   }, []);
   useEffect(() => {
-    const boardData = initBoardData(50, 50);
+    const boardData = initBoardData(40, 40);
     setboardDataGame(boardData);
     if (isFirstStartGameClock) {
       if (dataLocation?.isMyTurn) {
@@ -74,8 +76,8 @@ const GameCaro = () => {
     socket.on("server--winner--game-caro", (data) => {
       console.log("server--winner--game-caro");
       console.log(data);
+      socket.emit("client--leave--room--by-id", data?.idRooms);
       const ischeckUser = data?.phone == user?.phone;
-
       setDataGames(data);
       if (ischeckUser) {
         setWinner(true);
@@ -115,8 +117,8 @@ const GameCaro = () => {
           </div>
         </div>
       )}
-      {winner && dataLocation && <ModalGameCaroWinner dataGames={dataLocation} />}
-      {failure && dataLocation && <ModalGameCaroFailure dataGames={dataLocation} />}
+      {winner && dataGames && <ModalGameCaroWinner dataGames={dataGames} />}
+      {failure && dataGames && <ModalGameCaroFailure dataGames={dataGames} />}
     </div>
   );
 };

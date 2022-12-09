@@ -25,6 +25,11 @@
   font-weight: 600;
   color: green;
 }
+.modal__heading__fufail {
+  font-size: 40px;
+  font-weight: 600;
+  color: red;
+}
 .modal__winner__container__bet {
   display: flex;
   align-items: center;

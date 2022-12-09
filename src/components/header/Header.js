@@ -38,6 +38,7 @@ import { handleNotification } from "./../../utils/notification";
 import { handlecurrentAddress } from "../../redux/userSlice";
 import { ConverAccoutWallet } from "../../utils/caro";
 import handleContract from "../../utils/blockchain/handleContract";
+import { getRandomInt } from "../../pages/admin/components/ultil";
 
 const { Option } = Select;
 const Header = () => {
@@ -52,6 +53,8 @@ const Header = () => {
   const [loading, setLoading] = useState(false);
   const [loadingClaimToken, setLoadingClaimToken] = useState(false);
   const contract = useRef();
+  const avartars = useRef();
+  avartars.current = getRandomInt(20, 40);
   useEffect(() => {
     const contract_MM = new handleContract();
     const createContract = contract_MM.createContractGameFree();
@@ -286,9 +289,11 @@ const Header = () => {
                 <Avatar
                   src={
                     <Image
-                      src={user.avatar}
+                      src={`https://peergame.com/assets/images/avatar/avatar-${avartars.current}.png`}
                       style={{
                         width: 32,
+                        height: 32,
+                        objectFit: "cover",
                         backgroundColor: "#fff",
                       }}
                     />

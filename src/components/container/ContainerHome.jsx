@@ -9,8 +9,11 @@ import { Link } from "react-router-dom";
 import { ROUTER } from "./../../constants/constants";
 import { handleLeaderBoardsAction } from "../../actions/game/gameActions";
 import "./containerHome.css";
+import { useRef } from "react";
+import { getRandomInt } from "../../pages/admin/components/ultil";
 const ContainerHome = () => {
   const [leaderBoards, setLeaderBoards] = useState([]);
+
   useEffect(() => {
     handleLeaderBoardsAction()
       .then((data) => {
@@ -72,10 +75,13 @@ const ContainerHome = () => {
             <div className="container__right__list">
               {leaderBoards &&
                 leaderBoards?.map((items, i) => {
+                  const avartars = getRandomInt(20, 40);
                   return (
                     <div className="container__right__item">
                       <div className="container__right__item__name">
-                        <Avatar src={items?.idUser?.avatar} />
+                        <Avatar
+                          src={`https://peergame.com/assets/images/avatar/avatar-${avartars}.png`}
+                        />
                         <div className="container__right__item__user">
                           {items?.idUser?.username}
                         </div>

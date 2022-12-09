@@ -59,11 +59,11 @@ const Admin = () => {
               <span>Con Rùa</span>
               <Link to="turtle-manager" />
             </Menu.Item>
-            <Menu.Item key="4">
+            {/* <Menu.Item key="4">
               <DesktopOutlined />
               <span>User</span>
               <Link to="user-manager" />
-            </Menu.Item>
+            </Menu.Item> */}
           </Menu>
         </Sider>
         <Layout className="site-layout">

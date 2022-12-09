@@ -31,7 +31,11 @@ const Manager = () => {
           }
           key="1"
         >
-          <InForToken contract={contract.current} address={BLOCKCHAIN.ADDRESS__SM__GAMES} />
+          <InForToken
+            contract={contract.current}
+            address={BLOCKCHAIN.ADDRESS__SM__GAMES}
+            isWithraw={true}
+          />
         </Tabs.TabPane>
         <Tabs.TabPane
           tab={
@@ -46,9 +50,6 @@ const Manager = () => {
             nameContract={"Games Caro"}
             addressContract={BLOCKCHAIN.ADDRESS__SM__GAMES}
           />
-        </Tabs.TabPane>
-        <Tabs.TabPane tab="Tab 3" key="3">
-          Content of Tab Pane 3
         </Tabs.TabPane>
       </Tabs>
     </div>

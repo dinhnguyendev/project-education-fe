@@ -4,7 +4,7 @@ import { Divider, Tag, Button } from "antd";
 import { useNavigate } from "react-router";
 import { LINKTO } from "./../../constants/constants";
 const ModalGameCaroFailure = ({ dataGames }) => {
-  const { coin, totalCoin } = { dataGames };
+  const { coin, totalCoin } = dataGames;
   const navigate = useNavigate();
   const handelPlay = () => {
     navigate(LINKTO.STARTCARO);
@@ -22,7 +22,7 @@ const ModalGameCaroFailure = ({ dataGames }) => {
             style={{ width: "150px", height: "150px" }}
           ></lord-icon>
           <div className=" modal__winner__heading__color">
-            <div className="modal__winner__heading">Thật buồn ! Bạn đã thất bại ở trận này</div>
+            <div className="modal__heading__fufail">Thật buồn ! Bạn đã thất bại ở trận này</div>
             <Tag color="warning">Cố lên bạn nhé</Tag>
           </div>
         </div>

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import { LINKTO } from "./../../constants/constants";
 const ModalGameCaroWinner = ({ dataGames }) => {
   console.log(dataGames);
-  const { coin, coinWinner, totalCoin } = { dataGames };
+  const { coin, totalCoin, coinWinner } = dataGames;
   const navigate = useNavigate();
   const handelPlay = () => {
     navigate(LINKTO.STARTCARO);
@@ -42,7 +42,7 @@ const ModalGameCaroWinner = ({ dataGames }) => {
               <div className="modal__winner__container__bet__number">{totalCoin} Peer</div>
             </div>
             <div className="modal__winner__box__container__text">
-              Bạn sẽ nhận được {coinWinner} Peer
+              Bạn sẽ nhận được ~ {coinWinner.toFixed(5)}... Peer
             </div>
             <Tag color="warning">Bạn sẽ bị trừ 10% phí giao dịch trong mỗi trận đấu</Tag>
           </div>

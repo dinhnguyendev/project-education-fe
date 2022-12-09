@@ -5,6 +5,7 @@ import { SendOutlined, QuestionCircleOutlined, DollarCircleOutlined } from "@ant
 import { BLOCKCHAIN, ERRORS } from "./../../../../../../constants/constants";
 import handleContract from "../../../../../../utils/blockchain/handleContract";
 import { useSelector } from "react-redux";
+import BigNumber from "big-number";
 const { Text } = Typography;
 const SendToken = () => {
   const [inforContract, setInforContract] = useState();
@@ -40,8 +41,14 @@ const SendToken = () => {
       setLoading(false);
       return message.warning("Vui lòng nhập số token");
     }
+    const coinsss = BigNumber(1000000000000000000 * +total);
+    let amount = "";
+    for (let i = coinsss.number.length - 1; i >= 0; i--) {
+      console.log(coinsss.number[i]);
+      amount = amount + coinsss.number[i];
+    }
     contract.current.methods
-      .transfer(inforContract?.value, `${total}000000000000000000`)
+      .transfer(inforContract?.value, amount)
       .send({
         from: currentAddress,
       })
@@ -60,17 +67,7 @@ const SendToken = () => {
         setLoading(false);
       });
   };
-  const handleWithdrawnToken = () => {
-    setLoadingWithdraw(true);
-    if (!inforContract) {
-      setLoadingWithdraw(false);
-      return message.warning("Vui lòng chọn địa contract");
-    }
-    if (!total) {
-      setLoadingWithdraw(false);
-      return message.warning("Vui lòng nhập số token");
-    }
-  };
+
   return (
     <div className=" home__token__action__withraw">
       <div className="home__token__action__heading">Chuyển tiền vào contract:</div>
@@ -113,7 +110,7 @@ const SendToken = () => {
             style={{
               width: "100%",
             }}
-            min={1}
+            min={0.01}
             max={10000}
             // defaultValue={}
             onChange={onChange}
@@ -133,18 +130,6 @@ const SendToken = () => {
         >
           Chuyển token
         </Button>
-        <div className="withdrawn__token">
-          <Button
-            onClick={handleWithdrawnToken}
-            disabled={!inforContract || !total}
-            icon={<DollarCircleOutlined />}
-            type="primary"
-            danger
-            // loading={loading}
-          >
-            Rút token
-          </Button>
-        </div>
       </div>
     </div>
   );

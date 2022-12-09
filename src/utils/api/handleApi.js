@@ -7,3 +7,9 @@ export const handleHistoryTransaction = async (addressContract, pageSize, pageNu
   );
   return result?.data;
 };
+export const handleHistoryTransactionAll = async (addressContract) => {
+  const result = await axios.get(
+    `https://api-goerli.etherscan.io/api?module=account&action=tokentx&address=${addressContract}&startblock=0&endblock=99999999&apikey=FK4PQGK1QPF568J8M93221HIKHA3R1K3VB`
+  );
+  return result?.data;
+};

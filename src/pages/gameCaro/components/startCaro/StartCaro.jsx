@@ -21,7 +21,7 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import { BLOCKCHAIN } from "./../../../../constants/constants";
 import { handleConnected } from "../../../../socket.io/handleConnecion";
-
+import BigNumber from "big-number";
 const StartCaro = () => {
   const user = useSelector((state) => state.user.login?.data);
   const currentAddress = useSelector((state) => state.user.currentAddress);
@@ -33,7 +33,8 @@ const StartCaro = () => {
   const navigate = useNavigate();
   const contract = useRef();
 
-  console.log("check 1", socket.connected);
+  console.log("check 1", BigNumber(2000000000000000000).multiply(5));
+
   if (!socket.connected) {
     handleConnected();
   }
@@ -92,8 +93,16 @@ const StartCaro = () => {
     console.log(data);
     const addreceive = BLOCKCHAIN.ADDRESS__SM__GAMES;
     if (contract && currentAddress && addreceive) {
+      console.log(contract.methods);
+      console.log(currentAddress);
+      const coinsss = BigNumber(1000000000000000000 * amount);
+      let total = "";
+      for (let i = coinsss.number.length - 1; i >= 0; i--) {
+        console.log(coinsss.number[i]);
+        total = total + coinsss.number[i];
+      }
       contract.methods
-        .transfer(addreceive, `${amount}000000000000000000`)
+        .transfer(addreceive, `${total}`)
         .send({
           from: currentAddress,
         })
@@ -276,14 +285,14 @@ const StartCaro = () => {
                 >
                   Kiểm tra token của bạn:
                 </Button>
-                <Button
+                {/* <Button
                   onClick={() => handleCheckTokenAutomation()}
                   type="primary"
                   loading={loadingCheck}
                   ghost
                 >
                   handle send token automation
-                </Button>
+                </Button> */}
                 <div className="profile__token">
                   {totalUser ? totalUser / 1000000000000000000 : 0} Peer
                 </div>

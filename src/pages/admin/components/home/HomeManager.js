@@ -33,10 +33,10 @@ const HomeManager = () => {
           }
           key="2"
         >
-          {/* <HistoryTransaction addressContract={BLOCKCHAIN.ADDRESS__SM__PEER} /> */}
-        </Tabs.TabPane>
-        <Tabs.TabPane tab="Tab 3" key="3">
-          Content of Tab Pane 3
+          <HistoryTransaction
+            nameContract={"Peer token"}
+            addressContract={BLOCKCHAIN.ADDRESS_ADMIN}
+          />
         </Tabs.TabPane>
       </Tabs>
     </div>

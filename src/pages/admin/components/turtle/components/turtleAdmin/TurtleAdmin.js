@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import handleContract from "../../../../../../utils/blockchain/handleContract";
 import { BLOCKCHAIN } from "../../../../../../constants/constants";
 import GamesTurtle from "../game/GamesTurtle";
+import HistoryTransaction from "./../../../../../../components/historyTransactions/HistoryTransaction";
 const TurtleAdmin = () => {
   const currentAddress = useSelector((state) => state.user.currentAddress);
   const contract = useRef();
@@ -29,7 +30,11 @@ const TurtleAdmin = () => {
           }
           key="1"
         >
-          <InForToken contract={contract.current} address={BLOCKCHAIN.ADDRESS__SM__GAMES__TURTLE} />
+          <InForToken
+            contract={contract.current}
+            address={BLOCKCHAIN.ADDRESS__SM__GAMES__TURTLE}
+            isWithraw={true}
+          />
         </Tabs.TabPane>
         <Tabs.TabPane
           tab={
@@ -40,7 +45,10 @@ const TurtleAdmin = () => {
           }
           key="2"
         >
-          Lịch sử giao dịch
+          <HistoryTransaction
+            nameContract={"Games con rùa"}
+            addressContract={BLOCKCHAIN.ADDRESS__SM__GAMES__TURTLE}
+          />
         </Tabs.TabPane>
         <Tabs.TabPane tab="Tab 3" key="3">
           <GamesTurtle />

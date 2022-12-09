@@ -143,6 +143,7 @@ const GameContainer = () => {
       currentResult.current = data;
 
       handleOpenModal();
+      socket.emit("client--leave--room--by-id", data?.idRooms);
     });
   }, []);
   const handleCloseModal = () => {

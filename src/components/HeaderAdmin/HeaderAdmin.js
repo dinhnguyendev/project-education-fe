@@ -37,6 +37,7 @@ import {
 import { handleNotification } from "./../../utils/notification";
 import { handlecurrentAddress } from "../../redux/userSlice";
 import { ConverAccoutWallet } from "../../utils/caro";
+import { getRandomInt } from "../../pages/admin/components/ultil";
 
 const { Option } = Select;
 const HeaderAdmin = () => {
@@ -49,6 +50,8 @@ const HeaderAdmin = () => {
   const [placement, setPlacement] = useState("left");
   const [wallet, setWallet] = useState("");
   const [loading, setLoading] = useState(false);
+  const avartars = useRef();
+  avartars.current = getRandomInt(20, 40);
   const showDrawer = () => {
     setVisible(true);
   };
@@ -155,7 +158,7 @@ const HeaderAdmin = () => {
                 <Avatar
                   src={
                     <Image
-                      src={user.avatar}
+                      src={`https://peergame.com/assets/images/avatar/avatar-${avartars.current}.png`}
                       style={{
                         width: 32,
                         backgroundColor: "#fff",

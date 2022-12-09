@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { handleHistoryTransaction } from "../../utils/api/handleApi";
+import { handleHistoryTransaction, handleHistoryTransactionAll } from "../../utils/api/handleApi";
 import { Pagination, Table, Tag } from "antd";
 import { useState } from "react";
 import { CONTRACT__NAME } from "../../constants/contract";
@@ -15,6 +15,7 @@ const HistoryTransaction = ({ addressContract, nameContract }) => {
   const [dataTable, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [disable, setDisable] = useState(false);
+  const [totalPage, setTotalPage] = useState(0);
   let [searchParams, setSearchParams] = useSearchParams();
   const parsed = queryString.parse(window.location.search);
   let navigate = useNavigate();
@@ -44,13 +45,27 @@ const HistoryTransaction = ({ addressContract, nameContract }) => {
     {
       title: "Ví nhận",
       dataIndex: "to",
+      width: 150,
       render: (text) => {
         return <Tag color="green">{text}</Tag>;
       },
     },
     {
+      title: "Link Liên kết",
+      dataIndex: "hash",
+      width: 150,
+      render: (text) => {
+        return (
+          <a href={"https://goerli.etherscan.io/tx/" + text} color="blue">
+            Link liên kết
+          </a>
+        );
+      },
+    },
+    {
       title: "Peer token",
       dataIndex: "value",
+      width: 200,
       render: (value) => {
         if (value) {
           const data = +value / 1000000000000000000;
@@ -64,15 +79,13 @@ const HistoryTransaction = ({ addressContract, nameContract }) => {
       },
     },
   ];
-  console.log(searchParams);
+
   useEffect(() => {
     if (isEmpty(parsed)) {
-      console.log("data");
       const data = queryString.stringify(paramDefault);
       console.log(data);
       navigate(window.location.pathname + "?" + data);
     } else {
-      console.log("dooooooooo");
       const pageSize = searchParams.get("pageSize");
       const pageNumber = searchParams.get("pageNumber");
       if (pageSize && pageNumber) {
@@ -83,6 +96,12 @@ const HistoryTransaction = ({ addressContract, nameContract }) => {
     }
   }, [searchParams]);
   const getList = (pageSize, pageNumber) => {
+    handleHistoryTransactionAll(addressContract)
+      .then((data) => {
+        const totalPage = data?.result?.length;
+        setTotalPage(+totalPage);
+      })
+      .catch((err) => {});
     handleHistoryTransaction(addressContract, pageSize, pageNumber)
       .then((data) => {
         if (data?.result.length > 0) {
@@ -113,19 +132,34 @@ const HistoryTransaction = ({ addressContract, nameContract }) => {
     console.log(data);
     navigate(window.location.pathname + "?" + data);
   };
+  const changePage = (page) => {
+    const pageSize = searchParams.get("pageSize");
+    const pageNumber = searchParams.get("pageNumber");
+    let objectURL;
 
+    objectURL = {
+      pageNumber: page,
+      pageSize: pageSize,
+    };
+    const data = queryString.stringify(objectURL);
+
+    navigate(window.location.pathname + "?" + data);
+  };
   return (
     <div>
       <Table
         columns={columns}
         dataSource={dataTable?.result}
         loading={loading}
-        // pagination={
-
-        // }
+        pagination={{
+          total: totalPage,
+          onChange: (page) => {
+            changePage(page);
+          },
+        }}
       />
 
-      <div className="pagination">
+      {/* <div className="pagination">
         <div className="pagination__left" onClick={() => handleChangePage(false)}>
           <LeftOutlined />
         </div>
@@ -133,7 +167,7 @@ const HistoryTransaction = ({ addressContract, nameContract }) => {
         <div className="pagination__left" onClick={() => handleChangePage(true)}>
           <RightOutlined />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -1,0 +1,16 @@
+.withdrawn__token__games {
+  width: 50%;
+  margin-top: 20px;
+}
+.withdrawn__token__games__flex {
+  display: inline-flex;
+  align-items: center;
+}
+.withdrawn__token__games__heading {
+  margin-right: 10px;
+}
+.withdrawn__token__games__input {
+}
+.withdrawn__token__games__button {
+  margin-top: 10px;
+}
