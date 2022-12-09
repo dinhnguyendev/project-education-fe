@@ -31,14 +31,22 @@ const GameCaro = () => {
   console.log("location>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>1111111");
   const dataLocation = location.state.data;
   console.log(dataLocation);
-  console.log("location>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
   console.log(location);
   const user = useSelector((state) => state.user.login?.data);
   useEffect(() => {
-    socket.emit("client--join-rooms", dataLocation?.idRooms);
+    // socket.emit("client--join-rooms", dataLocation?.idRooms);
+    console.log("check rooms playing>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    socket.emit("check--rooms--playing", dataLocation?.idRooms);
+
     return () => {
       socket.emit("client--leave--room--by-id", dataLocation?.idRooms);
     };
+  }, []);
+  useEffect(() => {
+    console.log("check--rooms--playing--success>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    socket.on("check--rooms--playing--success", (data) => {
+      console.log(data);
+    });
   }, []);
   useEffect(() => {
     const boardData = initBoardData(40, 40);
